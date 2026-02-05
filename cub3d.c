@@ -6,7 +6,14 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:44:51 by schabboe          #+#    #+#             */
-/*   Updated: 2026/02/05 12:44:57 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/02/05 13:03:54 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
+
+int	main(void)
+{
+	printf("test\n");
+	return(0);
+}

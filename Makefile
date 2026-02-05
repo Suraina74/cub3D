@@ -33,7 +33,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@rm -rf $(MLX_DIR)/build
-	@rm -f $(LIBFT_DIR)/cub3d.a
+	@rm -f $(LIBFT_DIR)/libft.a
 
 re: clean all
 
