@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/05 15:15:20 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/06 15:37:16 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,32 @@
 # include <stdio.h>
 # include "LIBFT/libft.h"
 
-struct	s_maze_map
+typedef struct	s_parse
+{
+	char	NO;
+	char	SO;
+	char	WE;
+	char	EA;
+	char	C;
+	char	F;
+	int		wall;
+	int		floor;
+	int		empty;
+}				t_parse;
+
+typedef struct	s_maze_map
 {
 	char	**map;
-}		t_maze_map;
+	int		width;
+	int		height;
+}				t_maze_map;
+
+typedef struct	s_player 
+{
+	int	dir_x;
+	int	dir_y;
+}				t_player;
+
+int	map_cpy(t_maze_map *map, char *filename);
 
 #endif
