@@ -32,6 +32,7 @@ int	main(int argc, char **argv)
 		return (write(2, "Invalid map!\n", 13), 1);
 	free (file_type);
 	map.filename = argv[1];
-	get_map_size(&map);
+	if (cpy_map_size(&map))
+		return (1);
 	return (0);
 }

@@ -23,26 +23,49 @@
 int	fill_metadata(t_maze_map *map)
 {
 	size_t	i;
-	size_t	j;
 
 	i = 0;
-	j = 0;
 	while (i < map->width)
 	{
-		while (j < 	map->height)
-		{
-			if (ft_strncmp(map->map[i], "NO", 2))
-				// map->parsed.C = map->map[i][j];
-			printf("%s\n", map->map[i]);
-			j++;
-		}
+			if (ft_strncmp(map->cpy_map[i], "NO", 2))
+			{
+				while (map->cpy_map[i] == ' ')
+					i++;
+				map->parsed.NO = map->map[i];
+			}
+			printf("%s\n", map->cpy_map[i]);
 		i++;
 	}
 	printf("%c\n", map->parsed.C);
 	return (0);
 }
 
-int	get_map_size(t_maze_map *map)
+int validate_texture(t_maze_map *map)
+{
+	int	texture;
+	
+	texture = open(map->parsed.NO, O_RDONLY);
+	if (texture == -1)
+		return (ft_putendl_fd("North texture doesn't exist", 2), 1);
+	texture = open(map->parsed.SO, O_RDONLY);
+	if (texture == -1)
+		return (ft_putendl_fd("South texture doesn't exist", 2), 1);
+	texture = open(map->parsed.EA, O_RDONLY);
+	if (texture == -1)
+		return (ft_putendl_fd("East texture doesn't exist", 2), 1);
+	texture = open(map->parsed.WE, O_RDONLY);
+	if (texture == -1)
+		return (ft_putendl_fd("West texture doesn't exist", 2), 1);
+}
+
+int validate_rgb(t_maze_map *map)
+{
+	ft_atoi(map->parsed.F[0]);
+	if (map->parsed.F[0] > 255 || map->parsed.F[0] < 0)
+		return (ft_putendl_fd("RGB value not in 0-255 range", 2), 1);
+}
+
+int	cpy_map_size(t_maze_map *map)
 {
 	int			fd;
 	char		*line;
@@ -69,14 +92,19 @@ int	get_map_size(t_maze_map *map)
 	return (0);
 }
 
-// int get_playable_map()
-// {
-// }
-
 // int skip_metadata(t_parse *data, t_maze_map *map)
 // {
 // 	if (map->map != data->C || map->map != data->F || map->map != data->NO \
 // 		|| map->map != data->SO || map->map != data->WE || map->map != data->EA)
 // 	{
 // 	}
+// }
+
+
+// int get_map_size()
+// {
+// }
+
+// int get_playable_map()
+// {
 // }

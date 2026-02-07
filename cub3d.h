@@ -49,7 +49,7 @@ typedef struct	s_player
 	int			dir_y;
 }				t_player;
 
-int	get_map_size(t_maze_map *map);
+int	cpy_map_size(t_maze_map *map);
 int	cpy_map(t_maze_map *map);
 
 #endif
