@@ -27,9 +27,9 @@ int	cpy_map(t_maze_map *map)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		map->map[i] = line;
-		// printf("%s", map->map[i]);
+		map->cpy_map[i] = line;
+		// printf("%s", map->cpy_map[i]);
 	}
-	map->map = NULL;
+	map->cpy_map = NULL;
 	return (0);
 }

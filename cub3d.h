@@ -22,20 +22,21 @@
 
 typedef struct	s_parse
 {
-	char	NO;
-	char	SO;
-	char	WE;
-	char	EA;
-	char	C;
-	char	F;
-	int		wall;
-	int		floor;
-	int		empty;
+	char	*NO;
+	char	*SO;
+	char	*WE;
+	char	*EA;
+	char	*C;
+	char	*F;
+	int		*wall;
+	int		*floor;
+	int		*empty;
 }				t_parse;
 
 typedef struct	s_maze_map
 {
 	char			*filename;
+	char			*cpy;
 	char			**map;
 	size_t			width;
 	size_t			height;

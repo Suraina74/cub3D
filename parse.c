@@ -12,10 +12,12 @@
 
 #include "cub3d.h"
 
-//cpy map to a 2d array -> done ✅
-//fill metadata struct and check if it is matches C F NO SO EA WE -> wip
+//cpy map to a 1d array -> done ✅
+//once we are SURE that the map is validated we put the map into a 2d array
 //loop over map to skip metadata -> wip
 //find width and height of the actual playable map
+//split 1d array map into cols/rows and add it into map->map from map->cpy_map
+//fill metadata struct and check if it is matches C F NO SO EA WE -> wip
 //change gnl to not remove \n
 
 int	fill_metadata(t_maze_map *map)
@@ -57,8 +59,8 @@ int	get_map_size(t_maze_map *map)
 		map->width = ft_strlen(line);
 		map->height++;
 	}
-	map->map = malloc((map->width * map->height) * sizeof(char *));
-	if (!map->map)
+	map->cpy_map = malloc((map->width * map->height) * sizeof(char *));
+	if (!map->cpy_map)
 		return (close(fd), 1);
 	if (cpy_map(map))
 		return (1);
