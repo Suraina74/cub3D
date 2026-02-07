@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/07 12:56:56 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/07 14:37:25 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	main(int argc, char **argv)
 {
-	int		len_arg;
-	int		i;
-	char	*file_type;
-	t_maze_map map;
+	int			len_arg;
+	int			i;
+	char		*file_type;
+	t_maze_map	map;
 
 	if (argc < 2)
 		return (write(2, "Map is not provided!\n", 21), 1);
@@ -31,7 +31,6 @@ int	main(int argc, char **argv)
 	if (ft_strncmp(file_type, ".cub", 4) != 0)
 		return (write(2, "Invalid map!\n", 13), 1);
 	free (file_type);
-	// Bij openen van map kijken of het een map is die bestaat.
 	map.filename = argv[1];
 	get_map_size(&map);
 	return (0);

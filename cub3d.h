@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/07 14:24:58 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/07 14:57:20 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@ typedef struct	s_parse
 
 typedef struct	s_maze_map
 {
-	char		*filename;
-	char		**map;
-	size_t		width;
-	size_t		height;
+	char			*filename;
+	char			**map;
+	size_t			width;
+	size_t			height;
+	t_parse			parsed;
 }				t_maze_map;
 
 typedef struct	s_player 
 {
-	int	dir_x;
-	int	dir_y;
+	int			dir_x;
+	int			dir_y;
 }				t_player;
-
 
 int	get_map_size(t_maze_map *map);
 int	cpy_map(t_maze_map *map);
