@@ -6,22 +6,32 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/06 15:36:27 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/07 13:23:01 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	map_cpy(t_maze_map *map, char *filename)
+//cpy map to a 2d array
+//loop over map to skip metadata
+//fill metadata struct
+//find width and height of the map
+
+// int skip_metadata(t_parse *data, t_maze_map *map)
+// {
+// 	if (map->map != data->C || map->map != data->F || map->map != data->NO \
+// 		|| map->map != data->SO || map->map != data->WE || map->map != data->EA)
+// 	{
+// 		get_map_size(map);
+// 	}
+// }
+
+int	get_map_size(t_maze_map *map)
 {
 	int			fd;
 	char		*line;
-	size_t		count_width;
-	size_t		count_height;
-
-	count_width = 0;
-	count_height = 0;
-	fd = open(filename, O_RDONLY);
+	map->height = 0;
+	fd = open(map->filename, O_RDONLY);
 	if (fd == -1)
 		return (1);
 	while (1)
@@ -29,15 +39,31 @@ int	map_cpy(t_maze_map *map, char *filename)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		count_width = ft_strlen(line);
-		map->width = count_width;
-		count_height++;
+		printf("line: %s", line);
+		map->width = ft_strlen(line);
+		map->height++;
 	}
-	map->height = count_height;
 	map->map = malloc((map->width * map->height) * sizeof(char));
 	if (!map->map)
-	{
-		close(fd);
-		return (NULL);
-	}
+		return (close(fd), 1);
+	return (0);
 }
+
+// int cpy_map()
+// {
+
+// }
+
+// int check_map(t_maze_map *map)
+// {
+// 	int i = 0;
+// 	while (i < map->height)
+// 	{
+// 		int j = 0;
+// 		while (j < map->width)
+// 		{
+// 			map->map[0][0] = j;
+// 		}
+// 		i++;
+// 	}
+// }
