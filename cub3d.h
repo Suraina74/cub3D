@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/07 12:56:41 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/07 14:24:58 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ typedef struct	s_player
 
 
 int	get_map_size(t_maze_map *map);
+int	cpy_map(t_maze_map *map);
 
 #endif
