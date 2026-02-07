@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/07 13:23:01 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/07 13:45:56 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	get_map_size(t_maze_map *map)
 	int			fd;
 	char		*line;
 	map->height = 0;
+	int i =0 ;
 	fd = open(map->filename, O_RDONLY);
 	if (fd == -1)
 		return (1);
@@ -39,13 +40,23 @@ int	get_map_size(t_maze_map *map)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		printf("line: %s", line);
 		map->width = ft_strlen(line);
 		map->height++;
 	}
-	map->map = malloc((map->width * map->height) * sizeof(char));
+	map->map = malloc((map->width * map->height) * sizeof(char *));
 	if (!map->map)
 		return (close(fd), 1);
+	fd = open(map->filename, O_RDONLY);
+	if (fd == -1)
+		return (1);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		map->map[i] = line;
+		printf("%s", map->map[i]);
+	}
 	return (0);
 }
 
