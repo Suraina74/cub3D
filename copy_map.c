@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/07 12:50:38 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/10 09:46:56 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/10 11:59:56 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ int	cpy_map(t_maze_map *map)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		map->cpy_map = line;
-		printf("%s", map->cpy_map);
+		map->cpy_map[i] = line;
+		i++;
 	}
-	map->cpy_map = NULL;
 	return (0);
 }
