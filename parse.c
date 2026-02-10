@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/07 15:04:03 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/10 09:46:30 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,25 @@
 //fill metadata struct and check if it is matches C F NO SO EA WE -> wip
 //change gnl to not remove \n
 
-int	fill_metadata(t_maze_map *map)
-{
-	size_t	i;
+// int	fill_metadata(t_maze_map *map)
+// {
+// 	size_t	i;
 
-	i = 0;
-	while (i < map->width)
-	{
-			if (ft_strncmp(map->cpy_map[i], "NO", 2))
-			{
-				while (map->cpy_map[i] == ' ')
-					i++;
-				map->parsed.NO = map->map[i];
-			}
-			printf("%s\n", map->cpy_map[i]);
-		i++;
-	}
-	printf("%c\n", map->parsed.C);
-	return (0);
-}
+// 	i = 0;
+// 	while (i < map->width)
+// 	{
+// 			if (ft_strncmp(map->cpy_map[i], "NO", 2))
+// 			{
+// 				while (map->cpy_map[i] == ' ')
+// 					i++;
+// 				map->parsed.NO = map->map[i];
+// 			}
+// 			printf("%s\n", map->cpy_map[i]);
+// 		i++;
+// 	}
+// 	printf("%c\n", map->parsed.C);
+// 	return (0);
+// }
 
 int validate_texture(t_maze_map *map)
 {
@@ -56,14 +56,15 @@ int validate_texture(t_maze_map *map)
 	texture = open(map->parsed.WE, O_RDONLY);
 	if (texture == -1)
 		return (ft_putendl_fd("West texture doesn't exist", 2), 1);
+	return (0);
 }
 
-int validate_rgb(t_maze_map *map)
-{
-	ft_atoi(map->parsed.F[0]);
-	if (map->parsed.F[0] > 255 || map->parsed.F[0] < 0)
-		return (ft_putendl_fd("RGB value not in 0-255 range", 2), 1);
-}
+// int validate_rgb(t_maze_map *map)
+// {
+// 	ft_atoi(map->parsed.F[0]);
+// 	if (map->parsed.F[0] > 255 || map->parsed.F[0] < 0)
+// 		return (ft_putendl_fd("RGB value not in 0-255 range", 2), 1);
+// }
 
 int	cpy_map_size(t_maze_map *map)
 {
@@ -87,8 +88,8 @@ int	cpy_map_size(t_maze_map *map)
 		return (close(fd), 1);
 	if (cpy_map(map))
 		return (1);
-	if (fill_metadata(map))
-		return (1);
+	// if (fill_metadata(map))
+	// 	return (1);
 	return (0);
 }
 
