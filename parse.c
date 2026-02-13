@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/10 12:43:30 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/13 09:29:53 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 //what makes a valid map?
 	//if the meta data is the first thing and the map comes second
 	//if the NO SO EA WE C F textures/colors are at the top of the map
-	//if all the textures are there then fill metadata struct and check if it is matches C F NO SO EA WE
+	//if there ARE NO SO WE EA textures at the top
+	//if all the textures are there then fill metadata struct ✅
 	//theres ONLY spaces in the map NO tabs
 	//if the map used 1s and 0s and a N E W S point for the player start
 //loop over map to skip metadata
@@ -51,14 +52,33 @@ int	valid_character(t_maze_map *map)
 
 	i = 0;
 	j = 0;
+	while (map->cpy_map[i][j] == ' ')
+		j++;
 	while (map->cpy_map[i])
 	{
-		if (map->cpy_map[i][j] == ' ')
-		{
-			j++;
-		}
-		if (map->cpy_map[i][j] == '1' || map->cpy_map[i][j] == '0' \
-			|| ft_strncmp(map->cpy_map[i], "NO", 2)||ft_strncmp(map->cpy_map[i], "SO", 2) \
+		if (map->cpy_map[i][j] == '1' || map->cpy_map[i][j] == '0'  || map->cpy_map[i][j] == ' ' || map->cpy_map[i][j] == 'N' || map->cpy_map[i][j] == 'S' || map->cpy_map[i][j] == 'W' || map->cpy_map[i][j] == 'E')
+			printf("valid map\n");
+		else
+			return (ft_putendl_fd("Error: Invalid character in map", 2), 1);
+		i++;
+	}
+	return (0);
+}
+
+//this can be done better
+int	fill_metadata(t_maze_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (map->cpy_map[i][j] == ' ')
+		j++;
+	while (map->cpy_map[i])
+	{
+		if (map->cpy_map[i][j] == '1' || map->cpy_map[i][j] == '0'  || map->cpy_map[i][j] == ' ' \
+			|| ft_strncmp(map->cpy_map[i], "NO", 2) ||ft_strncmp(map->cpy_map[i], "SO", 2) \
 			|| ft_strncmp(map->cpy_map[i], "EA", 2) || ft_strncmp(map->cpy_map[i], "WE", 2))
 			{
 				if (ft_strncmp(map->cpy_map[i], "NO", 2) == 0)
@@ -71,24 +91,16 @@ int	valid_character(t_maze_map *map)
 					map->parsed.EA = map->cpy_map[i];
 			}
 		else
-			return (ft_putendl_fd("Error: Invalid character in map", 2), 1);
+			return (ft_putendl_fd("Error: Texture missing", 2), 1);
 		i++;
 	}
-		printf("in struct NO: %s", map->parsed.NO);
-		printf("in struct SO: %s", map->parsed.SO);
-		printf("in struct WE: %s", map->parsed.WE);
-		printf("in struct EA: %s", map->parsed.EA);
+		// printf("in struct NO: %s", map->parsed.NO);
+		// printf("in struct SO: %s", map->parsed.SO);
+		// printf("in struct WE: %s", map->parsed.WE);
+		// printf("in struct EA: %s", map->parsed.EA);
 	return (0);
 }
 
-//loops tru the map correctly...
-// int valid_character(t_maze_map *map)
-// {
-// 	int i = 0;
-// 	while (map->cpy_map[i])
-// 		printf("%s", map->cpy_map[i++]);
-// 	return (0);
-// }
 
 int	cpy_map_size(t_maze_map *map)
 {
@@ -111,6 +123,8 @@ int	cpy_map_size(t_maze_map *map)
 	if (!map->cpy_map)
 		return (close(fd), 1);
 	if (cpy_map(map))
+		return (1);
+	if (fill_metadata(map))
 		return (1);
 	if (valid_character(map))
 		return (1);
