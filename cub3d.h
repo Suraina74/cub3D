@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/13 12:55:53 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
+/*   Updated: 2026/02/13 13:30:21 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,42 @@ typedef struct s_map
 	t_parse		parsed;
 }					t_map;
 
-typedef struct	s_maze
-{
-	char	*filename;
-	t_map	map;
-}				t_maze;
-
 typedef struct	s_player 
 {
-	int			dir_x;
-	int			dir_y;
-}				t_player;
+	int	start_x;
+	int	start_y;
+	int	x_pos;
+	int	y_pos;
+	int	vof;
+	int	viewing_angle;
+}					t_player;
+
+typedef struct	s_raycast
+{
+	int	ray_degree;
+	int	angle_increment;
+	int	distance_to_wall;
+	int	x_intersect;
+	int	y_intersect;
+	int	x_grid_coordinate;
+	
+}					t_raycast;
+
+typedef struct	s_projection
+{
+	int	width;
+	int	length;
+	int	half_width;
+	int	player_to_projection_plane;
+}					t_projection;
+
+typedef struct	s_maze
+{
+	char		*filename;
+	t_map		map;
+	mlx_t		*mlx;
+	t_player	player;
+}					t_maze;
 
 int		cpy_map_size(t_maze *map);
 int		cpy_of_map(t_maze *map);
