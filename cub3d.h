@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/13 10:54:16 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/13 12:55:53 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,22 @@ typedef struct	s_parse
 	int		*empty;
 }				t_parse;
 
-typedef struct	s_maze_map
+typedef struct s_map
 {
-	char			*filename;
-	char			**cpy_map;
-	char			**map;
-	size_t			cpy_width;
-	size_t			cpy_height;
-	size_t			width;
-	size_t			height;
-	t_parse			parsed;
-}				t_maze_map;
+	char		**cpy_map;
+	char		**map;
+	size_t		cpy_width;
+	size_t		cpy_height;
+	size_t		width;
+	size_t		height;
+	t_parse		parsed;
+}					t_map;
+
+typedef struct	s_maze
+{
+	char	*filename;
+	t_map	map;
+}				t_maze;
 
 typedef struct	s_player 
 {
@@ -51,8 +56,8 @@ typedef struct	s_player
 	int			dir_y;
 }				t_player;
 
-int		cpy_map_size(t_maze_map *map);
-int		cpy_of_map(t_maze_map *map);
+int		cpy_map_size(t_maze *map);
+int		cpy_of_map(t_maze *map);
 void	ft_d_free(char **arr);
 
 #endif

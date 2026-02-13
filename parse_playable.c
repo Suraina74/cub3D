@@ -6,27 +6,27 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/13 10:28:25 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/13 13:03:43 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	valid_map_character(t_maze_map *map)
+int	valid_map_character(t_maze *maze)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (map->cpy_map[i][j] == ' ')
+	while (maze->map.cpy_map[i][j] == ' ')
 		j++;
-	while (map->cpy_map[i])
+	while (maze->map.cpy_map[i])
 	{
-		if (map->cpy_map[i][j] == '1' || map->cpy_map[i][j] == '0'  || \
-			map->cpy_map[i][j] == ' ' || map->cpy_map[i][j] == 'N' || \
-			map->cpy_map[i][j] == 'S' || map->cpy_map[i][j] == 'W' || \
-			map->cpy_map[i][j] == 'E')
+		if (maze->map.cpy_map[i][j] == '1' || maze->map.cpy_map[i][j] == '0'  || \
+			maze->map.cpy_map[i][j] == ' ' || maze->map.cpy_map[i][j] == 'N' || \
+			maze->map.cpy_map[i][j] == 'S' || maze->map.cpy_map[i][j] == 'W' || \
+			maze->map.cpy_map[i][j] == 'E')
 			printf("valid map\n");
 		else
 			return (ft_putendl_fd("Error: Invalid character in map", 2), 1);
