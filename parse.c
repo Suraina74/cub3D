@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/13 10:26:11 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/13 12:35:12 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,69 +28,36 @@
 
 int validate_texture(t_maze_map *map)
 {
-	int	texture;
 	
-	texture = open(map->parsed.NO, O_RDONLY);
-	if (texture == -1)
-		return (ft_putendl_fd("North texture doesn't exist", 2), 1);
-	texture = open(map->parsed.SO, O_RDONLY);
-	if (texture == -1)
-		return (ft_putendl_fd("South texture doesn't exist", 2), 1);
-	texture = open(map->parsed.EA, O_RDONLY);
-	if (texture == -1)
-		return (ft_putendl_fd("East texture doesn't exist", 2), 1);
-	texture = open(map->parsed.WE, O_RDONLY);
-	if (texture == -1)
-		return (ft_putendl_fd("West texture doesn't exist", 2), 1);
-	return (0);
-}
-
-int	valid_character(t_maze_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (map->cpy_map[i][j] == ' ')
-		j++;
-	while (map->cpy_map[i])
-	{
-		if (map->cpy_map[i][j] == '1' || map->cpy_map[i][j] == '0' \
-		|| map->cpy_map[i][j] == ' ' || map->cpy_map[i][j] == 'N' \
-		|| map->cpy_map[i][j] == 'S' || map->cpy_map[i][j] == 'W' \
-		|| map->cpy_map[i][j] == 'E')
-			printf("valid map\n");
-		else
-			return (ft_putendl_fd("Error: Invalid character in map", 2), 1);
-		i++;
-	}
+	mlx_load_png(map->parsed.NO);
+	mlx_load_png(map->parsed.SO);
+	mlx_load_png(map->parsed.EA);
+	mlx_load_png(map->parsed.WE);
+	if (!map->parsed.NO || !map->parsed.SO || !map->parsed.EA \
+	|| !map->parsed.WE)
+		return (ft_putendl_fd("texture failed", 2), 1);
 	return (0);
 }
 
 static void fill_texture(char *s, char *texture, char **d)
 {
 	char **get_texture;
-
+	
 	if (ft_strncmp(s, texture, 2) == 0)
 	{
 		get_texture = ft_split(s, ' ');
-		*d = get_texture[1];	
+		*d = get_texture[1];
 	}
 }
 
 int	fill_metadata(t_maze_map *map)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	while (map->cpy_map[i][j] == ' ')
-		j++;
 	while (map->cpy_map[i])
 	{
-		if (ft_strncmp(map->cpy_map[i], "NO", 2) ||ft_strncmp(map->cpy_map[i], "SO", 2) \
+		if (ft_strncmp(map->cpy_map[i], "NO", 2) || ft_strncmp(map->cpy_map[i], "SO", 2) \
 			|| ft_strncmp(map->cpy_map[i], "EA", 2) || ft_strncmp(map->cpy_map[i], "WE", 2))
 			{
 				fill_texture(map->cpy_map[i], "NO", &map->parsed.NO);
@@ -103,9 +70,11 @@ int	fill_metadata(t_maze_map *map)
 		i++;
 	}
 		printf("in struct NO: %s", map->parsed.NO);
-		printf("in struct SO: %s", map->parsed.SO);
-		printf("in struct WE: %s", map->parsed.WE);
-		printf("in struct EA: %s", map->parsed.EA);
+		// printf("in struct SO: %s", map->parsed.SO);
+		// printf("in struct WE: %s", map->parsed.WE);
+		// printf("in struct EA: %s", map->parsed.EA);
+	if (validate_texture(map))
+		return (1);
 	return (0);
 }
 
@@ -130,33 +99,9 @@ int	cpy_map_size(t_maze_map *map)
 	map->cpy_map = malloc((map->cpy_width * map->cpy_height) * sizeof(char *));
 	if (!map->cpy_map)
 		return (close(fd), 1);
-	if (cpy_map(map))
-		return (1);
+	if (cpy_of_map(map))
+		return (free(map->cpy_map), 1);
 	if (fill_metadata(map))
 		return (1);
-
 	return (0);
 }
-
-// int validate_rgb(t_maze_map *map)
-// {
-// 	ft_atoi(map->parsed.F[0]);
-// 	if (map->parsed.F[0] > 255 || map->parsed.F[0] < 0)
-// 		return (ft_putendl_fd("RGB value not in 0-255 range", 2), 1);
-// }
-
-// int skip_metadata(t_parse *data, t_maze_map *map)
-// {
-// 	if (map->map != data->C || map->map != data->F || map->map != data->NO \
-// 		|| map->map != data->SO || map->map != data->WE || map->map != data->EA)
-// 	{
-// 	}
-// }
-
-// int get_map_size()
-// {
-// }
-
-// int get_playable_map()
-// {
-// }

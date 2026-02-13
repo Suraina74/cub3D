@@ -6,13 +6,13 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/07 12:50:38 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/10 11:59:56 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/13 10:54:06 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	cpy_map(t_maze_map *map)
+int	cpy_of_map(t_maze_map *map)
 {
 	int		i;
 	int		fd;
