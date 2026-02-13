@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/02/13 13:30:21 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/02/13 13:37:35 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct	s_raycast
 	int	x_intersect;
 	int	y_intersect;
 	int	x_grid_coordinate;
+	int	y_grid_coordinate;
 	
 }					t_raycast;
 

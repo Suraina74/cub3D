@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/13 13:04:46 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/06 15:15:21 by ksoedama          #+#    #+#             */
+/*   Updated: 2026/02/13 15:58:26 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,6 @@ int	fill_metadata(t_maze *maze)
 			return (ft_putendl_fd("Error: Texture missing", 2), 1);
 		i++;
 	}
-		printf("in struct NO: %s", maze->map.parsed.NO);
-		printf("in struct SO: %s", maze->map.parsed.SO);
-		printf("in struct WE: %s", maze->map.parsed.WE);
-		printf("in struct EA: %s", maze->map.parsed.EA);
 	if (validate_texture(maze))
 		return (1);
 	return (0);

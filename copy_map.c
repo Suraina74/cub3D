@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   copy_map.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/07 12:50:38 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/13 13:02:39 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   copy_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/07 12:50:38 by ksoedama          #+#    #+#             */
+/*   Updated: 2026/02/13 15:57:04 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	cpy_of_map(t_maze *maze)
 {
 	int		i;
+	int		j;
 	int		fd;
 	char	*line;
 
@@ -27,6 +28,13 @@ int	cpy_of_map(t_maze *maze)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
+	j = 0;
+	while (line[j])
+	{
+		if (line[j] == '\n')
+			line[j] = '\0';
+		j++;
+	}
 		maze->map.cpy_map[i] = line;
 		i++;
 	}
