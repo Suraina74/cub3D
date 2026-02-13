@@ -6,29 +6,14 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/13 12:35:12 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/13 12:43:17 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//cpy map to a 1d array -> done ✅
-//what makes a valid map?
-	//if the meta data is the first thing and the map comes second
-	//if the NO SO EA WE C F textures/colors are at the top of the map
-	//if there ARE NO SO WE EA textures at the top
-	//if all the textures are there then fill metadata struct ✅
-	//theres ONLY spaces in the map NO tabs
-	//if the map used 1s and 0s and a N E W S point for the player start
-//loop over map to skip metadata
-//once we are SURE that the map is validated we put the map into a 2d array
-//find width and height of the actual playable map
-//split 1d array map into cols/rows and add it into map->map from map->cpy_map
-//change gnl to not remove \n
-
 int validate_texture(t_maze_map *map)
 {
-	
 	mlx_load_png(map->parsed.NO);
 	mlx_load_png(map->parsed.SO);
 	mlx_load_png(map->parsed.EA);
