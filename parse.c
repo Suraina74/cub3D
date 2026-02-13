@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/13 09:29:53 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/13 10:26:11 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ int	valid_character(t_maze_map *map)
 		j++;
 	while (map->cpy_map[i])
 	{
-		if (map->cpy_map[i][j] == '1' || map->cpy_map[i][j] == '0'  || map->cpy_map[i][j] == ' ' || map->cpy_map[i][j] == 'N' || map->cpy_map[i][j] == 'S' || map->cpy_map[i][j] == 'W' || map->cpy_map[i][j] == 'E')
+		if (map->cpy_map[i][j] == '1' || map->cpy_map[i][j] == '0' \
+		|| map->cpy_map[i][j] == ' ' || map->cpy_map[i][j] == 'N' \
+		|| map->cpy_map[i][j] == 'S' || map->cpy_map[i][j] == 'W' \
+		|| map->cpy_map[i][j] == 'E')
 			printf("valid map\n");
 		else
 			return (ft_putendl_fd("Error: Invalid character in map", 2), 1);
@@ -65,7 +68,17 @@ int	valid_character(t_maze_map *map)
 	return (0);
 }
 
-//this can be done better
+static void fill_texture(char *s, char *texture, char **d)
+{
+	char **get_texture;
+
+	if (ft_strncmp(s, texture, 2) == 0)
+	{
+		get_texture = ft_split(s, ' ');
+		*d = get_texture[1];	
+	}
+}
+
 int	fill_metadata(t_maze_map *map)
 {
 	int	i;
@@ -77,27 +90,22 @@ int	fill_metadata(t_maze_map *map)
 		j++;
 	while (map->cpy_map[i])
 	{
-		if (map->cpy_map[i][j] == '1' || map->cpy_map[i][j] == '0'  || map->cpy_map[i][j] == ' ' \
-			|| ft_strncmp(map->cpy_map[i], "NO", 2) ||ft_strncmp(map->cpy_map[i], "SO", 2) \
+		if (ft_strncmp(map->cpy_map[i], "NO", 2) ||ft_strncmp(map->cpy_map[i], "SO", 2) \
 			|| ft_strncmp(map->cpy_map[i], "EA", 2) || ft_strncmp(map->cpy_map[i], "WE", 2))
 			{
-				if (ft_strncmp(map->cpy_map[i], "NO", 2) == 0)
-					map->parsed.NO = map->cpy_map[i];
-				if (ft_strncmp(map->cpy_map[i], "SO", 2) == 0)
-					map->parsed.SO = map->cpy_map[i];
-				if (ft_strncmp(map->cpy_map[i], "WE", 2) == 0)
-					map->parsed.WE = map->cpy_map[i];
-				if (ft_strncmp(map->cpy_map[i], "EA", 2) == 0)
-					map->parsed.EA = map->cpy_map[i];
+				fill_texture(map->cpy_map[i], "NO", &map->parsed.NO);
+				fill_texture(map->cpy_map[i], "SO", &map->parsed.SO);
+				fill_texture(map->cpy_map[i], "WE", &map->parsed.WE);
+				fill_texture(map->cpy_map[i], "EA", &map->parsed.EA);
 			}
 		else
 			return (ft_putendl_fd("Error: Texture missing", 2), 1);
 		i++;
 	}
-		// printf("in struct NO: %s", map->parsed.NO);
-		// printf("in struct SO: %s", map->parsed.SO);
-		// printf("in struct WE: %s", map->parsed.WE);
-		// printf("in struct EA: %s", map->parsed.EA);
+		printf("in struct NO: %s", map->parsed.NO);
+		printf("in struct SO: %s", map->parsed.SO);
+		printf("in struct WE: %s", map->parsed.WE);
+		printf("in struct EA: %s", map->parsed.EA);
 	return (0);
 }
 
@@ -126,8 +134,7 @@ int	cpy_map_size(t_maze_map *map)
 		return (1);
 	if (fill_metadata(map))
 		return (1);
-	if (valid_character(map))
-		return (1);
+
 	return (0);
 }
 

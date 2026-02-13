@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/10 11:54:10 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/13 10:02:26 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ typedef struct	s_player
 	int			dir_y;
 }				t_player;
 
-int	cpy_map_size(t_maze_map *map);
-int	cpy_map(t_maze_map *map);
+int		cpy_map_size(t_maze_map *map);
+int		cpy_map(t_maze_map *map);
+void	ft_d_free(char **arr);
 
 #endif
