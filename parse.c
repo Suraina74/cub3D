@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/13 16:06:23 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/13 16:32:03 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ int validate_texture(t_maze *maze)
 		return (ft_putendl_fd("West texture is wrong", 2), 1);
 
 	// mlx_image_t	*img_north = mlx_texture_to_image(maze->mlx, north);
+	// mlx_image_to_window(maze->mlx, img_north, 300, 300);
+	// mlx_delete_image(maze->mlx, img_north);
+
 	// mlx_image_t	*img_south = mlx_texture_to_image(maze->mlx, south);
 	// mlx_image_t	*img_east = mlx_texture_to_image(maze->mlx, east);
 	// mlx_image_t	*img_west = mlx_texture_to_image(maze->mlx, west);
