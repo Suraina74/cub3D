@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/13 13:05:01 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/13 16:08:50 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,10 @@ int	main(int argc, char **argv)
 	maze.filename = argv[1];
 	if (cpy_map_size(&maze))
 		return (1);
+	maze.mlx = mlx_init(WIDTH, HEIGHT, "cubed", true);
+	if (!maze.mlx)
+		return(1);
+	mlx_loop(maze.mlx);
+	mlx_terminate(maze.mlx);
 	return (0);
 }
