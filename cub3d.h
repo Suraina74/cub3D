@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/02/17 16:47:17 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:14:58 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <math.h>
 # include "LIBFT/libft.h"
 
-# define WIDTH 640
-# define HEIGHT 640
+# define WIDTH 320 // Means 320 rays to cast.
+# define HEIGHT 200
 
 typedef struct	s_parse
 {
@@ -78,8 +78,8 @@ typedef struct	s_raycast
 				
 typedef struct	s_projection
 {
-	int	width;
-	int	length;
+	// int	width;
+	// int	length;
 	// int	half_width;
 	int	distance_to_plane;
 }					t_projection;

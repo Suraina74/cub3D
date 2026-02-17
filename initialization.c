@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:42:35 by schabboe          #+#    #+#             */
-/*   Updated: 2026/02/17 16:44:50 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:14:46 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	init_player(t_maze *maze)
 
 void	init_projection_plane(t_maze *maze)
 {
-	maze->projection_plane.width = 320; // Means 320 rays to cast.
-	maze->projection_plane.length = 200;
+	// maze->projection_plane.width = 320; // Means 320 rays to cast.
+	// maze->projection_plane.length = 200;
 	maze->projection_plane.distance_to_plane = 160 / tan(30); // distance from player to projection plane
 }
 
