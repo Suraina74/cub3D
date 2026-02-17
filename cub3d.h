@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/17 15:26:35 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
+/*   Updated: 2026/02/17 16:47:17 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,16 @@ typedef struct s_map
 
 typedef struct	s_player 
 {
-	int	start_x;
-	int	start_y;
-	int	x_pos;
-	int	y_pos;
+	// int	start_grid_x;
+	// int	start_grid_y;
+	// int	start_pixel_x;
+	// int	start_pixel_y;
+	int	grid_pos_x;
+	int	grid_pos_y;
+	int	pixel_pos_x;
+	int	pixel_pos_y;
 	int	vof;
+	int	height;
 	int	viewing_angle;
 }					t_player;
 
@@ -65,13 +70,12 @@ typedef struct	s_raycast
 	int	ray_degree;
 	int	angle_increment;
 	int	distance_to_wall;
-	int	x_intersect;
-	int	y_intersect;
-	int	x_grid_coordinate;
-	int	y_grid_coordinate;
-	
-}					t_raycast;
-
+	int	x_grid_intersect;
+	int	y_grid_intersect;
+	int	pixel_x;
+	int	pixel_y;
+}				t_raycast;
+				
 typedef struct	s_projection
 {
 	int	width;
