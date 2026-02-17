@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/17 14:39:34 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/17 15:23:58 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	// printf("so: %s\n", maze.map.parsed.SO);
 	// printf("we: %s\n", maze.map.parsed.WE);
 	// printf("ea: %s\n", maze.map.parsed.EA);
-	// printf("r: %i g: %i b: %i\n", maze.map.parsed.rgb_floor[0], maze.map.parsed.rgb_floor[1],maze.map.parsed.rgb_floor[2]);
-	// printf("r: %i g: %i b: %i\n", maze.map.parsed.rgb_ceiling[0],maze.map.parsed.rgb_ceiling[1],maze.map.parsed.rgb_ceiling[2]);
+	printf("r: %i g: %i b: %i\n", maze.map.parsed.rgb_floor[0], maze.map.parsed.rgb_floor[1],maze.map.parsed.rgb_floor[2]);
+	printf("r: %i g: %i b: %i\n", maze.map.parsed.rgb_ceiling[0],maze.map.parsed.rgb_ceiling[1],maze.map.parsed.rgb_ceiling[2]);
 	return (0);
 }

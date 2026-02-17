@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/17 14:34:13 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/17 15:16:24 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,15 @@ int	fill_metadata(t_maze *maze)
 		if (floor)
 		{
 			maze->map.parsed.F = split_rgb(floor);
+			if (fill_rgb(maze->map.parsed.F) == NULL)
+				return (1);
 			maze->map.parsed.rgb_floor = fill_rgb(maze->map.parsed.F);
 		}
 		if (ceiling)
 		{
 			maze->map.parsed.C = split_rgb(ceiling);
+			if (fill_rgb(maze->map.parsed.C) == NULL)
+				return (1);
 			maze->map.parsed.rgb_ceiling = fill_rgb(maze->map.parsed.C);
 		}
 		if (ft_strncmp(maze->map.cpy_map[i], "NO", 2) || ft_strncmp(maze->map.cpy_map[i], "SO", 2) \
@@ -109,6 +113,6 @@ int	cpy_map_size(t_maze *maze)
 	if (cpy_of_map(maze))
 		return (free(maze->map.cpy_map), 1);
 	if (fill_metadata(maze))
-		return (1);
+		return (free(maze->map.cpy_map), 1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/17 14:07:14 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/17 15:26:35 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ void	ft_d_free(char **arr);
 int		validate_rgb(t_maze *maze);
 char	*split_rgb(char *s);
 int		*fill_rgb(char *s);
+int		ft_digit_check(char *str);
 
 #endif
