@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/02/17 17:05:06 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:16:29 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void raycasting(t_maze *maze)
     // Eerste ray:
     first_ray = maze->player.viewing_angle - (maze->player.vof / 2);
     i = 1;
-    while (i < maze->projection_plane.width)
+    while (i < WIDTH)
     {
         maze->raycast.ray_degree = first_ray + maze->raycast.angle_increment;
         i++;
