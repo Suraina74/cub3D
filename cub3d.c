@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/13 16:08:50 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/17 14:39:34 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	main(int argc, char **argv)
 {
-	int			i;
 	int			len_arg;
 	char		*file_type;
 	t_maze		maze;
@@ -24,7 +23,6 @@ int	main(int argc, char **argv)
 	if (argc > 2)
 		return (write(2, "Too many arguments!\n", 20), 1);
 	len_arg = ft_strlen(argv[1]);
-	i = len_arg;
 	file_type = ft_substr(argv[1], (len_arg - 4), 4);
 	if (file_type == NULL)
 		return (1);
@@ -39,5 +37,12 @@ int	main(int argc, char **argv)
 		return(1);
 	mlx_loop(maze.mlx);
 	mlx_terminate(maze.mlx);
+	//filled metadata in struct
+	// printf("no: %s\n", maze.map.parsed.NO);
+	// printf("so: %s\n", maze.map.parsed.SO);
+	// printf("we: %s\n", maze.map.parsed.WE);
+	// printf("ea: %s\n", maze.map.parsed.EA);
+	// printf("r: %i g: %i b: %i\n", maze.map.parsed.rgb_floor[0], maze.map.parsed.rgb_floor[1],maze.map.parsed.rgb_floor[2]);
+	// printf("r: %i g: %i b: %i\n", maze.map.parsed.rgb_ceiling[0],maze.map.parsed.rgb_ceiling[1],maze.map.parsed.rgb_ceiling[2]);
 	return (0);
 }
