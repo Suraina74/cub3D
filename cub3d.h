@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/17 12:24:24 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
+/*   Updated: 2026/02/17 14:04:34 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <math.h>
 # include "LIBFT/libft.h"
 
 # define WIDTH 640
@@ -75,16 +76,18 @@ typedef struct	s_projection
 {
 	int	width;
 	int	length;
-	int	half_width;
-	int	player_to_projection_plane;
+	// int	half_width;
+	int	distance_to_plane;
 }					t_projection;
 
 typedef struct	s_maze
 {
-	char		*filename;
-	t_map		map;
-	mlx_t		*mlx;
-	t_player	player;
+	char			*filename;
+	t_map			map;
+	mlx_t			*mlx;
+	t_player		player;
+	t_raycast		raycast;
+	t_projection	projection_plane;
 }					t_maze;
 
 int		cpy_map_size(t_maze *map);
