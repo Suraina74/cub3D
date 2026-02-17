@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/13 16:32:03 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/17 13:23:45 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,47 +21,62 @@ int validate_texture(t_maze *maze)
 
 	north = mlx_load_png(maze->map.parsed.NO);
 	if (!north)
-		return (ft_putendl_fd("North texture is wrong", 2), 1);
+		return (ft_putendl_fd("North texture error", 2), 1);
 	south = mlx_load_png(maze->map.parsed.SO);
 	if (!south)
-		return (ft_putendl_fd("South texture is wrong", 2), 1);
+		return (ft_putendl_fd("South texture error", 2), 1);
 	east = mlx_load_png(maze->map.parsed.EA);
 	if (!east)
-		return (ft_putendl_fd("East texture is wrong", 2), 1);
+		return (ft_putendl_fd("East texture error", 2), 1);
 	west = mlx_load_png(maze->map.parsed.WE);
 	if (!west)
-		return (ft_putendl_fd("West texture is wrong", 2), 1);
-
-	// mlx_image_t	*img_north = mlx_texture_to_image(maze->mlx, north);
-	// mlx_image_to_window(maze->mlx, img_north, 300, 300);
-	// mlx_delete_image(maze->mlx, img_north);
-
-	// mlx_image_t	*img_south = mlx_texture_to_image(maze->mlx, south);
-	// mlx_image_t	*img_east = mlx_texture_to_image(maze->mlx, east);
-	// mlx_image_t	*img_west = mlx_texture_to_image(maze->mlx, west);
-	// if (!img_north || !img_south || !img_east || !img_west)
-	// 	return (ft_putendl_fd("Img convert went wrong", 2), 1);
+		return (ft_putendl_fd("West texture error", 2), 1);
 	return (0);
 }
 
-static void fill_texture(char *s, char *texture, char **d)
+static void fill_texture(char *s, char *dir, char **d)
 {
 	char **get_texture;
 	
-	if (ft_strncmp(s, texture, 2) == 0)
+	if (ft_strncmp(s, dir, 2) == 0)
 	{
 		get_texture = ft_split(s, ' ');
 		*d = get_texture[1];
 	}
 }
 
+// char *fill_rgb(char *s)
+// {
+// 	int i = 0;
+// 	while (s[i])
+// 	{
+// 		char **split_spaces = ft_split(s, ' ');
+// 		if (!split_spaces)
+// 			return (NULL);
+// 		char **split_comma = ft_split(s, ',');
+// 		if (!split_comma)
+// 			return (NULL);
+// 		i++;
+// 	}
+// 	return (s);
+	
+// }
+
 int	fill_metadata(t_maze *maze)
 {
 	int	i;
+	char *floor;
+	char *ceiling;
 
 	i = 0;
 	while (maze->map.cpy_map[i])
 	{
+		// floor = ft_strchr(maze->map.cpy_map[i], 'F');
+		// ceiling = ft_strchr(maze->map.cpy_map[i], 'C');
+		// if (floor)
+		// 	maze->map.parsed.C = fill_rgb(floor);
+		// if (ceiling)
+		// 	fill_rgb(ceiling);
 		if (ft_strncmp(maze->map.cpy_map[i], "NO", 2) || ft_strncmp(maze->map.cpy_map[i], "SO", 2) \
 			|| ft_strncmp(maze->map.cpy_map[i], "EA", 2) || ft_strncmp(maze->map.cpy_map[i], "WE", 2))
 		{
@@ -69,11 +84,6 @@ int	fill_metadata(t_maze *maze)
 			fill_texture(maze->map.cpy_map[i], "SO", &maze->map.parsed.SO);
 			fill_texture(maze->map.cpy_map[i], "WE", &maze->map.parsed.WE);
 			fill_texture(maze->map.cpy_map[i], "EA", &maze->map.parsed.EA);
-		}
-		else if (ft_strchr(maze->map.cpy_map[i], 'F') || ft_strchr(maze->map.cpy_map[i], 'C'))
-		{
-			char *help = ft_strchr(maze->map.cpy_map[i], 'F');
-			printf("heres the floor: %s", help);
 		}
 		else
 			return (ft_putendl_fd("Error: Texture missing", 2), 1);

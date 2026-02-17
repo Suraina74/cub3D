@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/13 16:08:00 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/17 12:24:24 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct	s_parse
 	char	*EA;
 	char	*C;
 	char	*F;
+	int		*rgb_floor;
+	int		*rgb_ceiling;
 	int		*wall;
 	int		*floor;
 	int		*empty;
