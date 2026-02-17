@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/17 13:23:45 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/17 13:45:32 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,38 +45,27 @@ static void fill_texture(char *s, char *dir, char **d)
 	}
 }
 
-// char *fill_rgb(char *s)
-// {
-// 	int i = 0;
-// 	while (s[i])
-// 	{
-// 		char **split_spaces = ft_split(s, ' ');
-// 		if (!split_spaces)
-// 			return (NULL);
-// 		char **split_comma = ft_split(s, ',');
-// 		if (!split_comma)
-// 			return (NULL);
-// 		i++;
-// 	}
-// 	return (s);
-	
-// }
-
 int	fill_metadata(t_maze *maze)
 {
-	int	i;
-	char *floor;
-	char *ceiling;
+	int		i;
+	char	*floor;
+	char	*ceiling;
 
 	i = 0;
 	while (maze->map.cpy_map[i])
 	{
-		// floor = ft_strchr(maze->map.cpy_map[i], 'F');
-		// ceiling = ft_strchr(maze->map.cpy_map[i], 'C');
-		// if (floor)
-		// 	maze->map.parsed.C = fill_rgb(floor);
-		// if (ceiling)
-		// 	fill_rgb(ceiling);
+		floor = ft_strchr(maze->map.cpy_map[i], 'F');
+		ceiling = ft_strchr(maze->map.cpy_map[i], 'C');
+		if (floor)
+		{
+			maze->map.parsed.F = split_rgb(floor);
+			// maze->map.parsed.rgb_floor = fill_rgb(maze->map.parsed.F);
+		}
+		if (ceiling)
+		{
+			maze->map.parsed.C = split_rgb(ceiling);
+			// maze->map.parsed.rgb_ceiling = fill_rgb(maze->map.parsed.C);
+		}
 		if (ft_strncmp(maze->map.cpy_map[i], "NO", 2) || ft_strncmp(maze->map.cpy_map[i], "SO", 2) \
 			|| ft_strncmp(maze->map.cpy_map[i], "EA", 2) || ft_strncmp(maze->map.cpy_map[i], "WE", 2))
 		{
@@ -90,6 +79,8 @@ int	fill_metadata(t_maze *maze)
 		i++;
 	}
 	if (validate_texture(maze))
+		return (1);
+	if (validate_rgb(maze))
 		return (1);
 	return (0);
 }

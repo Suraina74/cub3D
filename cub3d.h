@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/02/17 14:04:34 by schabboe         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3d.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
+/*   Updated: 2026/02/17 14:07:14 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,8 @@ typedef struct	s_maze
 int		cpy_map_size(t_maze *map);
 int		cpy_of_map(t_maze *map);
 void	ft_d_free(char **arr);
+int		validate_rgb(t_maze *maze);
+char	*split_rgb(char *s);
+int		*fill_rgb(char *s);
 
 #endif

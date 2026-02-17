@@ -6,31 +6,45 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 10:28:57 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/13 10:29:08 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/17 14:07:03 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// int validate_rgb(t_maze_map *map)
-// {
-// 	ft_atoi(map->parsed.F[0]);
-// 	if (map->parsed.F[0] > 255 || map->parsed.F[0] < 0)
-// 		return (ft_putendl_fd("RGB value not in 0-255 range", 2), 1);
-// }
+char	*split_rgb(char *s)
+{
+	char	**split_spaces;
 
-// int skip_metadata(t_parse *data, t_maze_map *map)
-// {
-// 	if (map->map != data->C || map->map != data->F || map->map != data->NO \
-// 		|| map->map != data->SO || map->map != data->WE || map->map != data->EA)
-// 	{
-// 	}
-// }
+	split_spaces = ft_split(s, ' ');
+	if (!split_spaces)
+		return (NULL);
+	return (split_spaces[1]);
+}
 
-// int get_map_size()
-// {
-// }
+int	*fill_rgb(char *s)
+{
+	char	**split_comma;
+	int		arr[3];
 
-// int get_playable_map()
-// {
-// }
+	split_comma = ft_split(s, ',');
+	if (!split_comma)
+		return (NULL);
+	arr[0] = ft_atoi(split_comma[0]);
+	arr[1] = ft_atoi(split_comma[1]);
+	arr[2] = ft_atoi(split_comma[2]);
+	return (arr);
+}
+
+int	validate_rgb(t_maze *maze)
+{
+	if ((maze->map.parsed.rgb_floor[0] > 255 || maze->map.parsed.rgb_floor[0] < 0)
+		|| (maze->map.parsed.rgb_floor[1] > 255 || maze->map.parsed.rgb_floor[1] < 0)
+		|| (maze->map.parsed.rgb_floor[2] > 255 || maze->map.parsed.rgb_floor[2] < 0))
+		return (ft_putendl_fd("floor RGB value not in 0-255 range", 2), 1);
+	if ((maze->map.parsed.rgb_ceiling[0] > 255 || maze->map.parsed.rgb_ceiling[0] < 0)
+		|| (maze->map.parsed.rgb_ceiling[1] > 255 || maze->map.parsed.rgb_ceiling[1] < 0)
+		|| (maze->map.parsed.rgb_ceiling[2] > 255 || maze->map.parsed.rgb_ceiling[2] < 0))
+		return (ft_putendl_fd("floor RGB value not in 0-255 range", 2), 1);
+	return (0);
+}

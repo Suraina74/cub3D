@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/13 13:03:43 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/17 13:41:59 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ int	valid_map_character(t_maze *maze)
 	return (0);
 }
 
-// int skip_meta_data()
+// int skip_metadata(t_parse *data, t_maze_map *map)
 // {
+// 	if (map->map != data->C || map->map != data->F || map->map != data->NO \
+// 		|| map->map != data->SO || map->map != data->WE || map->map != data->EA)
+// 	{
+// 	}
 // }
 
 // int map_size()
