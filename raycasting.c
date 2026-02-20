@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/02/17 17:16:29 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/02/20 18:54:12 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,15 @@ void raycasting(t_maze *maze)
     // So that it starts in the middle of a block of 64 by 64
     pixels_x = grid_x * 64 + 32;
     pixels_y = grid_y * 64 + 32;
-    // Eerste ray:
+    // Degree van eerste ray:
     first_ray = maze->player.viewing_angle - (maze->player.vof / 2);
+    // Horizontal intersections:
+    
+    
+    // Vertical intersections:
+    
+
+
     i = 1;
     while (i < WIDTH)
     {

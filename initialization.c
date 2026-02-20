@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:42:35 by schabboe          #+#    #+#             */
-/*   Updated: 2026/02/17 17:14:46 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/02/20 16:39:08 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void    init_raycast_variables(t_maze *maze)
 	// And if a wall is found on an intersection, the closer distance (between horizontal and vertical) to the intersection point is chosen.
 	
     maze->raycast.ray_degree = 0; // degree of most left ray = viewing angle - vof/2
-	// See if angle of the ray is facing upward or downward. Upward if between 0 and 180 degrees and downward if between 180 and 360 degrees.
+	// See if angle of the ray is facing upward or downward. Downward if between 0 and 180 degrees and upward if between 180 and 360 degrees.
 	// The calculation of the intersection is calculated differently depending on an upward or downward facing ray.
 	
     maze->raycast.angle_increment = 60/320; // ray degree wordt dan, ray degree + angle increment.
