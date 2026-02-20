@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/02/17 17:14:58 by schabboe         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3d.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
+/*   Updated: 2026/02/20 14:17:07 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct	s_parse
 	int		*wall;
 	int		*floor;
 	int		*empty;
+	char	player;
 }				t_parse;
 
 typedef struct s_map
@@ -101,5 +102,6 @@ int		validate_rgb(t_maze *maze);
 char	*split_rgb(char *s);
 int		*fill_rgb(char *s);
 int		ft_digit_check(char *str);
+int	valid_map_character(t_maze *maze);
 
 #endif

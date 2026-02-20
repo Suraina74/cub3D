@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/17 15:16:24 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/20 13:58:18 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	fill_metadata(t_maze *maze)
 			return (ft_putendl_fd("Error: Texture missing", 2), 1);
 		i++;
 	}
+	if (maze->map.parsed.rgb_floor == NULL || maze->map.parsed.rgb_ceiling == NULL || maze->map.parsed.NO == NULL || maze->map.parsed.SO == NULL || maze->map.parsed.EA == NULL || maze->map.parsed.WE == NULL)
+		return (ft_putendl_fd("Texture or color missing", 2), 1);
 	if (validate_texture(maze))
 		return (1);
 	if (validate_rgb(maze))
