@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 15:15:21 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/20 13:58:18 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/20 18:46:46 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int	fill_metadata(t_maze *maze)
 	}
 	if (maze->map.parsed.rgb_floor == NULL || maze->map.parsed.rgb_ceiling == NULL || maze->map.parsed.NO == NULL || maze->map.parsed.SO == NULL || maze->map.parsed.EA == NULL || maze->map.parsed.WE == NULL)
 		return (ft_putendl_fd("Texture or color missing", 2), 1);
-	if (validate_texture(maze))
-		return (1);
+	// if (validate_texture(maze))
+	// 	return (1);
 	if (validate_rgb(maze))
 		return (1);
 	return (0);
@@ -97,7 +97,8 @@ int	cpy_map_size(t_maze *maze)
 	int			fd;
 	char		*line;
 
-	maze->map.height = 0;
+	maze->map.cpy_height = 0;
+
 	fd = open(maze->filename, O_RDONLY);
 	if (fd == -1)
 		return (ft_putendl_fd("Map doesn't exist", 2), 1);
@@ -106,12 +107,12 @@ int	cpy_map_size(t_maze *maze)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		maze->map.cpy_width = ft_strlen(line);
 		maze->map.cpy_height++;
 	}
-	maze->map.cpy_map = malloc((maze->map.cpy_width * maze->map.cpy_height) * sizeof(char *));
+	close(fd);
+	maze->map.cpy_map = malloc((maze->map.cpy_height + 1) * sizeof(char *));
 	if (!maze->map.cpy_map)
-		return (close(fd), 1);
+		return (1);
 	if (cpy_of_map(maze))
 		return (free(maze->map.cpy_map), 1);
 	if (fill_metadata(maze))
