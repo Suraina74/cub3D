@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/07 12:50:38 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/20 18:51:41 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/23 14:05:29 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	cpy_of_map(t_maze *maze)
 {
 	int		col;
-
 	int		fd;
 	char	*line;
 

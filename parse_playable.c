@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/20 18:50:24 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/23 15:08:39 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	is_metadata(t_maze *maze, int *cols_skip)
 	while (maze->map.cpy_map[col])
 	{
 		row = 0;
-		if ((ft_strncmp(maze->map.cpy_map[col], "NO", 2) == 0) || 
-			(ft_strncmp(maze->map.cpy_map[col], "SO", 2) == 0) || 
+		if ((ft_strncmp(maze->map.cpy_map[col], "NO", 2) == 0) ||
+			(ft_strncmp(maze->map.cpy_map[col], "SO", 2) == 0) ||
 			(ft_strncmp(maze->map.cpy_map[col], "WE", 2) == 0) ||
-			(ft_strncmp(maze->map.cpy_map[col], "EA", 2) == 0) || 
+			(ft_strncmp(maze->map.cpy_map[col], "EA", 2) == 0) ||
 			maze->map.cpy_map[col][row] == '\n' || 
 			maze->map.cpy_map[col][row] == 'C' || 
 			maze->map.cpy_map[col][row] == 'F')
@@ -57,7 +57,7 @@ int	valid_map_character(t_maze *maze)
 			if (c == '0' || c == '1' || c == 'E' || c == 'N' || c == 'S' || c == 'W' || c == ' ' || c == '\n')
 				row++;
 			else
-				return (ft_putendl_fd("Invalid character in map", 2), 1);	
+				return (ft_putendl_fd("Invalid character in map", 2), 1);
 		}
 		col++;
 	}

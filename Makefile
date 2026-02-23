@@ -6,7 +6,7 @@ LIBFT_DIR = ./LIBFT
 
 HEADER = -I $(MLX_DIR)/include -I $(LIBFT_DIR)
 LIBS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
-CFILES = cub3d.c parse.c copy_map.c utils.c parse_playable.c parse_input.c
+CFILES = cub3d.c parse.c utils.c parse_playable.c parse_rgb.c parse_new.c
 OFILES = $(CFILES:.c=.o)
 
 all: libmlx libft $(NAME)

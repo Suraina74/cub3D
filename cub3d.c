@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/20 14:34:09 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/23 16:54:26 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int	main(int argc, char **argv)
 		return (write(2, "Invalid map!\n", 13), 1);
 	free (file_type);
 	maze.filename = argv[1];
-	if (cpy_map_size(&maze))
-		return (1);
-	if (valid_map_character(&maze))
+	if (read_map(&maze))
 		return (1);
 	maze.mlx = mlx_init(WIDTH, HEIGHT, "cubed", true);
 	if (!maze.mlx)
