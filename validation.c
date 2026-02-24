@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/24 15:43:33 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/24 16:56:55 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	valid_map_character(t_maze *maze)
 	char c;
 
 	col = 0;
+	maze->map.parsed.player = 0;
 	while (maze->map.parsed.map_data[col])
 	{
 		row = 0;
@@ -48,13 +49,17 @@ int	valid_map_character(t_maze *maze)
 		{
 			c = maze->map.parsed.map_data[col][row];
 			if (c == '0' || c == '1' || c == 'N' || c == 'E' || c == 'W' || c == 'S' || c == ' ' || c == '\n' || 'c' == '\0')
+			{
+				if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
+					maze->map.parsed.player = c;
 				row++;
+			}
 			else
 				return (ft_putendl_fd("Invalid character in map", 2), 1);
 		}
 		col++;
 	}
-	if (maze->map.parsed.player == 0)
-		printf("no player found\n");
+	if (!maze->map.parsed.player)
+		return (ft_putendl_fd("No player found", 2), 1);
 	return (0);
 }
