@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/23 16:55:34 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/24 14:45:14 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,16 @@ typedef struct	s_maze
 	t_projection	projection_plane;
 }					t_maze;
 
+//UTILS
 void	ft_d_free(char **arr);
+//RGB
 int		validate_rgb(t_maze *maze);
 char	*split_rgb(char *s);
 int		*fill_rgb(char *s);
 int		ft_digit_check(char *str);
-int	valid_map_character(t_maze *maze);
-
-int	read_map(t_maze *maze);
-int	fill_metadata(t_maze *maze, char *metadata, int fd);
-int validate_texture(t_maze *maze);
+//Parse
+int		valid_map_character(t_maze *maze);
+int		read_map(t_maze *maze);
+int 	validate_texture(t_maze *maze);
 
 #endif

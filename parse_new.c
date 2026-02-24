@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/23 16:59:14 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/24 14:43:26 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int fill_map(t_maze *maze, char *metadata, int fd)
 	return (0);
 }
 
-int	fill_metadata(t_maze *maze, char *metadata, int fd)
+static int	fill_metadata(t_maze *maze, char *metadata, int fd)
 {
 	char	*floor;
 	char	*ceiling;
