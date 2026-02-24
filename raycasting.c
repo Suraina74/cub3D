@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/02/20 18:54:12 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/02/24 17:44:52 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,36 @@ void raycasting(t_maze *maze)
     pixels_y = grid_y * 64 + 32;
     // Degree van eerste ray:
     first_ray = maze->player.viewing_angle - (maze->player.vof / 2);
+
     // Horizontal intersections:
+
+    // See if angle of the ray is facing upward or downward. Downward if between 0 and 180 degrees and upward if between 180 and 360 degrees.
+	// The calculation of the intersection is calculated differently depending on an upward or downward facing ray.
+
+    // Ray is facing up
+    if (first_ray >= 180 && first_ray < 360)
+    {
+        // Find first intersection point
+        
+        // Find Ya
+        // Find Xa
+        // Check grid at intersection point to see if there is a wall.
+        // If there is a wall, stop and calculate the distance.
+        // If there is no wall, then go to next intersection point: Xnew=Xold+Xa, and Ynew=Yold+Ya.
+    }
+
+    // Ray is facing down
+    if (first_ray >= 0 && first_ray < 180)
+    {
+        // Find first intersection point
+
+        // Find Ya
+        // Find Xa
+        // Check grid at intersection point to see if there is a wall.
+        // If there is a wall, stop and calculate the distance.
+        // If there is no wall, then go to next intersection point: Xnew=Xold+Xa, and Ynew=Yold+Ya.
+    }
+
     
     
     // Vertical intersections:
