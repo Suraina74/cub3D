@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/24 14:43:26 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/24 15:14:19 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@ static void	fill_texture(char *s, char *dir, char **d)
 
 static int fill_map(t_maze *maze, char *metadata, int fd)
 {
+	size_t	index_end;
 	size_t	map_end;
 	ssize_t tmp;
-	size_t index_end;
 	char buff[1024];
 
-	
 	maze->map.parsed.map_data = NULL;
 	ft_strlcpy(buff, metadata, ft_strlen(metadata) + 1);
 	map_end = ft_strlcat(buff, "\n", 1024);
@@ -99,7 +98,8 @@ int	read_map(t_maze *maze)
 		if (line == NULL)
 			break ;
 		metadata = ft_strtrim(line, "\n");
-		fill_metadata(maze, metadata, fd);
+		if (fill_metadata(maze, metadata, fd))
+			return (1);
 		free(line);
 	}
 	if (maze->map.parsed.rgb_floor == NULL || maze->map.parsed.rgb_ceiling == NULL || maze->map.parsed.NO == NULL || maze->map.parsed.SO == NULL || maze->map.parsed.EA == NULL || maze->map.parsed.WE == NULL)
@@ -107,6 +107,8 @@ int	read_map(t_maze *maze)
 	if (validate_texture(maze))
 		return (1);
 	if (validate_rgb(maze))
+		return (1);
+	if (valid_map_character(maze))
 		return (1);
 	return (0);
 }

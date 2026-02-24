@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 10:28:57 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/23 15:43:24 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/24 15:09:34 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	validate_rgb(t_maze *maze)
 			return (ft_putendl_fd("Error: Floor RGB value not in 0-255 range", 2), 1);
 		if (maze->map.parsed.rgb_ceiling[i] > 255 || maze->map.parsed.rgb_ceiling[i] < 0)
 			return (ft_putendl_fd("Error: Ceiling RGB value not in 0-255 range", 2), 1);
-		i++;	
+		i++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/24 14:51:09 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/24 15:13:03 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	main(int argc, char **argv)
 	maze.filename = argv[1];
 	if (read_map(&maze))
 		return (1);
-	// int i = 0;
-	// while (maze.map.parsed.map_data[i])
-	// {
-	// 	printf("%s\n", maze.map.parsed.map_data[i]);
-	// 	i++;
-	// }
+	int i = 0;
+	while (maze.map.parsed.map_data[i])
+	{
+		printf("%s\n", maze.map.parsed.map_data[i]);
+		i++;
+	}
 	maze.mlx = mlx_init(WIDTH, HEIGHT, "cubed", true);
 	if (!maze.mlx)
 		return(1);

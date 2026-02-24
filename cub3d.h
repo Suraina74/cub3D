@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/24 14:45:14 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/24 15:33:50 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,11 @@ typedef struct	s_parse
 	char	*F;
 	int		*rgb_floor;
 	int		*rgb_ceiling;
-	int		*wall;
-	int		*floor;
-	int		*empty;
 	char	player;
 }				t_parse;
 
 typedef struct s_map
 {
-	char		**cpy_map;
-	char		**map;
 	size_t		cpy_width;
 	size_t		cpy_height;
 	size_t		width;

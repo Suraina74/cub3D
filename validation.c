@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/24 14:47:55 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/24 15:43:33 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,13 @@ int	valid_map_character(t_maze *maze)
 	char c;
 
 	col = 0;
-	while (maze->map.cpy_map[col])
+	while (maze->map.parsed.map_data[col])
 	{
 		row = 0;
-		c = maze->map.cpy_map[col][row];
-		while (maze->map.cpy_map[col][row])
+		while (maze->map.parsed.map_data[col][row])
 		{
-			printf("%c", maze->map.cpy_map[col][row]);
-			if (c == '0' || c == '1' || c == 'E' || c == 'N' || c == 'S' || c == 'W' || c == ' ' || c == '\n')
+			c = maze->map.parsed.map_data[col][row];
+			if (c == '0' || c == '1' || c == 'N' || c == 'E' || c == 'W' || c == 'S' || c == ' ' || c == '\n' || 'c' == '\0')
 				row++;
 			else
 				return (ft_putendl_fd("Invalid character in map", 2), 1);
