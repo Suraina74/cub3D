@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/25 09:44:54 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/25 11:57:16 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ typedef struct	s_parse
 
 typedef struct s_map
 {
-	size_t		cpy_width;
-	size_t		cpy_height;
 	size_t		width;
 	size_t		height;
 	t_parse		parsed;
@@ -101,9 +99,9 @@ int		*fill_rgb(char *s);
 int		ft_digit_check(char *str);
 
 //Parse
-int		valid_map_character(t_maze *maze);
 int		read_map(t_maze *maze);
+int		validate_map(t_maze *maze);
 int 	validate_texture(t_maze *maze);
-void	flood_fill(t_maze *maze, int x, int y);
+void	flood_fill(t_maze *maze, size_t x, size_t y);
 
 #endif

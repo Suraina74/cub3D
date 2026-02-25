@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/25 10:00:01 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/25 11:19:45 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (ft_strncmp(file_type, ".cub", 4) != 0)
 		return (write(2, "Invalid map!\n", 13), 1);
-	free (file_type);
+	free(file_type);
 	maze.filename = argv[1];
 	if (read_map(&maze))
 		return (1);

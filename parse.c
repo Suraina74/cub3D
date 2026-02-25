@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_new.c                                        :+:    :+:            */
+/*   parse.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/24 15:14:19 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/25 10:29:30 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	read_map(t_maze *maze)
 		return (1);
 	if (validate_rgb(maze))
 		return (1);
-	if (valid_map_character(maze))
+	if (validate_map(maze))
 		return (1);
 	return (0);
 }

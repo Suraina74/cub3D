@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/25 09:54:48 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/25 11:58:37 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int validate_texture(t_maze *maze)
 	return (0);
 }
 
-int	valid_map_character(t_maze *maze)
+static int	valid_map_character(t_maze *maze)
 {
 	int	row;
 	int	col;
@@ -55,6 +55,9 @@ int	valid_map_character(t_maze *maze)
 				if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
 				{
 					maze->map.parsed.player = c;
+					//map starts counting from 0 so coords 0,0 is the star
+					maze->player.grid_pos_x = col;
+					maze->player.grid_pos_y = row;
 					p_cnt++;
 				}
 				row++;
@@ -63,10 +66,21 @@ int	valid_map_character(t_maze *maze)
 				return (ft_putendl_fd("Invalid character in map", 2), 1);
 		}
 		col++;
+		maze->map.width = row;
+		maze->map.height = col;
 	}
 	if (!maze->map.parsed.player)
 		return (ft_putendl_fd("Map needs to have one player", 2), 1);
 	if (p_cnt > 1)
 		return (ft_putendl_fd("Map can only have one player", 2), 1);
+	return (0);
+}
+
+
+int validate_map(t_maze *maze)
+{
+	if (valid_map_character(maze))
+		return (1);
+	flood_fill(maze, maze->player.grid_pos_x, maze->player.grid_pos_y);
 	return (0);
 }
