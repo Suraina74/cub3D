@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/25 10:29:30 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/25 12:27:33 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int fill_map(t_maze *maze, char *metadata, int fd)
 	return (0);
 }
 
-static int	fill_metadata(t_maze *maze, char *metadata, int fd)
+static int	fill_metadata(t_maze *maze, char *metadata, int fd, int *track_metadata)
 {
 	char	*floor;
 	char	*ceiling;
@@ -55,6 +55,7 @@ static int	fill_metadata(t_maze *maze, char *metadata, int fd)
 		if (fill_rgb(maze->map.parsed.F) == NULL)
 			return (1);
 		maze->map.parsed.rgb_floor = fill_rgb(maze->map.parsed.F);
+		(*track_metadata)++;
 	}
 	else if (ceiling)
 	{
@@ -62,14 +63,16 @@ static int	fill_metadata(t_maze *maze, char *metadata, int fd)
 		if (fill_rgb(maze->map.parsed.C) == NULL)
 			return (1);
 		maze->map.parsed.rgb_ceiling = fill_rgb(maze->map.parsed.C);
+		(*track_metadata)++;
 	}
-	else if (ft_strncmp(metadata, "NO", 2) == 0|| ft_strncmp(metadata, "SO", 2) == 0\
-		|| ft_strncmp(metadata, "EA", 2) == 0|| ft_strncmp(metadata, "WE", 2) == 0)
+	else if (ft_strncmp(metadata, "NO", 2) == 0 || ft_strncmp(metadata, "SO", 2) == 0 \
+		|| ft_strncmp(metadata, "EA", 2) == 0 || ft_strncmp(metadata, "WE", 2) == 0)
 	{
 		fill_texture(metadata, "NO", &maze->map.parsed.NO);
 		fill_texture(metadata, "SO", &maze->map.parsed.SO);
 		fill_texture(metadata, "WE", &maze->map.parsed.WE);
 		fill_texture(metadata, "EA", &maze->map.parsed.EA);
+		(*track_metadata)++;
 	}
 	else if (metadata[0] != '\n' && metadata[0] != '\0')
 	{
@@ -85,7 +88,9 @@ int	read_map(t_maze *maze)
 	char 	*metadata;
 	char 	*line;
 	size_t	map_start;
+	int		track_metadata;
 
+	track_metadata = 0;
 	map_start = 0;
 	line = NULL;
 	metadata = NULL;
@@ -98,12 +103,14 @@ int	read_map(t_maze *maze)
 		if (line == NULL)
 			break ;
 		metadata = ft_strtrim(line, "\n");
-		if (fill_metadata(maze, metadata, fd))
+		if (fill_metadata(maze, metadata, fd, &track_metadata))
 			return (1);
 		free(line);
 	}
 	if (maze->map.parsed.rgb_floor == NULL || maze->map.parsed.rgb_ceiling == NULL || maze->map.parsed.NO == NULL || maze->map.parsed.SO == NULL || maze->map.parsed.EA == NULL || maze->map.parsed.WE == NULL)
 		return (ft_putendl_fd("Texture or color missing", 2), 1);
+	if (track_metadata != 6)
+		return (ft_putendl_fd("Duplicate metadata", 2), 1);
 	if (validate_texture(maze))
 		return (1);
 	if (validate_rgb(maze))
