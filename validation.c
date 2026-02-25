@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/24 16:56:55 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/25 09:54:48 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ int	valid_map_character(t_maze *maze)
 {
 	int	row;
 	int	col;
+	int p_cnt;
 	char c;
 
+	p_cnt = 0;
 	col = 0;
 	maze->map.parsed.player = 0;
 	while (maze->map.parsed.map_data[col])
@@ -51,7 +53,10 @@ int	valid_map_character(t_maze *maze)
 			if (c == '0' || c == '1' || c == 'N' || c == 'E' || c == 'W' || c == 'S' || c == ' ' || c == '\n' || 'c' == '\0')
 			{
 				if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
+				{
 					maze->map.parsed.player = c;
+					p_cnt++;
+				}
 				row++;
 			}
 			else
@@ -60,6 +65,8 @@ int	valid_map_character(t_maze *maze)
 		col++;
 	}
 	if (!maze->map.parsed.player)
-		return (ft_putendl_fd("No player found", 2), 1);
+		return (ft_putendl_fd("Map needs to have one player", 2), 1);
+	if (p_cnt > 1)
+		return (ft_putendl_fd("Map can only have one player", 2), 1);
 	return (0);
 }
