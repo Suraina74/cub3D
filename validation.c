@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/25 11:58:37 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/25 12:06:21 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ int validate_map(t_maze *maze)
 {
 	if (valid_map_character(maze))
 		return (1);
-	flood_fill(maze, maze->player.grid_pos_x, maze->player.grid_pos_y);
+	// flood_fill(maze, maze->player.grid_pos_x, maze->player.grid_pos_y);
 	return (0);
 }
