@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/26 12:59:57 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/26 14:00:04 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ int validate_texture(t_maze *maze)
 
 	north = mlx_load_png(maze->map.parsed.NO);
 	if (!north)
-		return (ft_putendl_fd("North texture error", 2), 1);
+		return (ft_putendl_fd("North texture error", 2), FAILURE);
 	south = mlx_load_png(maze->map.parsed.SO);
 	if (!south)
-		return (ft_putendl_fd("South texture error", 2), 1);
+		return (ft_putendl_fd("South texture error", 2), FAILURE);
 	east = mlx_load_png(maze->map.parsed.EA);
 	if (!east)
-		return (ft_putendl_fd("East texture error", 2), 1);
+		return (ft_putendl_fd("East texture error", 2), FAILURE);
 	west = mlx_load_png(maze->map.parsed.WE);
 	if (!west)
-		return (ft_putendl_fd("West texture error", 2), 1);
-	return (0);
+		return (ft_putendl_fd("West texture error", 2), FAILURE);
+	return (SUCCESS);
 }
 
 static int	valid_map_character(t_maze *maze)
@@ -62,17 +62,17 @@ static int	valid_map_character(t_maze *maze)
 				row++;
 			}
 			else
-				return (ft_putendl_fd("Invalid character in map", 2), 1);
+				return (ft_putendl_fd("Invalid character in map", 2), FAILURE);
 		}
 		col++;
 		maze->map.width = row;
 		maze->map.height = col;
 	}
 	if (!maze->map.parsed.player)
-		return (ft_putendl_fd("Map needs to have one player", 2), 1);
+		return (ft_putendl_fd("Map needs to have one player", 2), FAILURE);
 	if (p_cnt > 1)
-		return (ft_putendl_fd("Map can only have one player", 2), 1);
-	return (0);
+		return (ft_putendl_fd("Map can only have one player", 2), FAILURE);
+	return (SUCCESS);
 }
 
 int validate_map(t_maze *maze)
@@ -82,7 +82,7 @@ int validate_map(t_maze *maze)
 	if (flood_fill(maze, maze->player.grid_pos_x, maze->player.grid_pos_y))
 	{
 		ft_putendl_fd("Map is not enclosed", 2);
-		return (1);
+		return (FAILURE);
 	}
-	return (0);
+	return (SUCCESS);
 }

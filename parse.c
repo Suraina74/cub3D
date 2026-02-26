@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/25 14:34:25 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/26 14:05:29 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ int	read_map(t_maze *maze)
 			return (1);
 		free(line);
 	}
-	if (maze->map.parsed.rgb_floor == NULL || maze->map.parsed.rgb_ceiling == NULL || maze->map.parsed.NO == NULL || maze->map.parsed.SO == NULL || maze->map.parsed.EA == NULL || maze->map.parsed.WE == NULL)
+	//parsed.C or parsed.F
+	if (maze->map.parsed.F == NULL || maze->map.parsed.C == NULL || maze->map.parsed.NO == NULL || maze->map.parsed.SO == NULL || maze->map.parsed.EA == NULL || maze->map.parsed.WE == NULL)
 		return (ft_putendl_fd("Texture or color could not be loaded", 2), 1);
 	if (track_metadata != 6)
 		return (ft_putendl_fd("Duplicate metadata", 2), 1);

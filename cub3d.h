@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/26 12:47:49 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/26 13:58:53 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 
 # define WIDTH 320 // Means 320 rays to cast.
 # define HEIGHT 200
+
+# define SUCCESS 0
+# define FAILURE 1
 
 typedef struct	s_parse
 {
