@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/26 12:40:31 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/26 12:47:49 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int		ft_digit_check(char *str);
 int		read_map(t_maze *maze);
 int		validate_map(t_maze *maze);
 int 	validate_texture(t_maze *maze);
-void	flood_fill(t_maze *maze, int x, int y);
+// void	flood_fill(t_maze *maze, int x, int y);
+int	flood_fill(t_maze *maze, int  x, int y);
 
 #endif
