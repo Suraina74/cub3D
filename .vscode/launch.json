@@ -13,6 +13,7 @@
             "args": ["testy.cub"],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
+            "preLaunchTask": "make",
             "environment": [],
             "MIMode": "gdb",
             "setupCommands": [

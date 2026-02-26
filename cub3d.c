@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/26 13:39:18 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/26 14:44:36 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	int			len_arg;
-	char		*file_type;
-	t_maze		maze;
+	int				len_arg;
+	char			*file_type;
+	static t_maze	maze;
 
 	if (argc < 2)
 		return (write(2, "Map is not provided!\n", 21), 1);
@@ -31,13 +31,13 @@ int	main(int argc, char **argv)
 	free(file_type);
 	maze.filename = argv[1];
 	if (read_map(&maze))
-		return (1);
-	// int i = 0;
-	// while (maze.map.parsed.map_data[i])
-	// {
-	// 	printf("%s\n", maze.map.parsed.map_data[i]);
-	// 	i++;
-	// }
+		return (FAILURE);
+	int i = 0;
+	while (maze.map.parsed.map_data[i])
+	{
+		printf("%s\n", maze.map.parsed.map_data[i]);
+		i++;
+	}
 	maze.mlx = mlx_init(WIDTH, HEIGHT, "cubed", true);
 	if (!maze.mlx)
 		return(1);

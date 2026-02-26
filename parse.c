@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/26 14:05:29 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/26 14:50:39 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ static int fill_map(t_maze *maze, char *metadata, int fd)
 {
 	size_t	index_end;
 	size_t	map_end;
-	ssize_t tmp;
-	char buff[1024];
+	ssize_t	tmp;
+	char	buff[1024];
 
-	maze->map.parsed.map_data = NULL;
 	ft_strlcpy(buff, metadata, ft_strlen(metadata) + 1);
 	map_end = ft_strlcat(buff, "\n", 1024);
 	tmp = read(fd, buff + ft_strlen(buff), 1024);
@@ -38,8 +37,8 @@ static int fill_map(t_maze *maze, char *metadata, int fd)
 	buff[index_end] = '\0';
 	maze->map.parsed.map_data = ft_split(buff, '\n');
 	if (!maze->map.parsed.map_data)
-		return (1);
-	return (0);
+		return (FAILURE);
+	return (SUCCESS);
 }
 
 static int	fill_metadata(t_maze *maze, char *metadata, int fd, int *track_metadata)
@@ -53,7 +52,7 @@ static int	fill_metadata(t_maze *maze, char *metadata, int fd, int *track_metada
 	{
 		maze->map.parsed.F = split_rgb(floor);
 		if (fill_rgb(maze->map.parsed.F) == NULL)
-			return (1);
+			return (FAILURE);
 		maze->map.parsed.rgb_floor = fill_rgb(maze->map.parsed.F);
 		(*track_metadata)++;
 	}
@@ -61,7 +60,7 @@ static int	fill_metadata(t_maze *maze, char *metadata, int fd, int *track_metada
 	{
 		maze->map.parsed.C = split_rgb(ceiling);
 		if (fill_rgb(maze->map.parsed.C) == NULL)
-			return (1);
+			return (FAILURE);
 		maze->map.parsed.rgb_ceiling = fill_rgb(maze->map.parsed.C);
 		(*track_metadata)++;
 	}
@@ -77,9 +76,9 @@ static int	fill_metadata(t_maze *maze, char *metadata, int fd, int *track_metada
 	else if (metadata[0] != '\n' && metadata[0] != '\0')
 	{
 		if (fill_map(maze, metadata, fd))
-			return (1);
+			return (FAILURE);
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 int	read_map(t_maze *maze)
@@ -96,7 +95,7 @@ int	read_map(t_maze *maze)
 	metadata = NULL;
 	fd = open(maze->filename, O_RDONLY);
 	if (fd == -1)
-		return (1);
+		return (FAILURE);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -104,19 +103,18 @@ int	read_map(t_maze *maze)
 			break ;
 		metadata = ft_strtrim(line, "\n");
 		if (fill_metadata(maze, metadata, fd, &track_metadata))
-			return (1);
+			return (FAILURE);
 		free(line);
 	}
-	//parsed.C or parsed.F
 	if (maze->map.parsed.F == NULL || maze->map.parsed.C == NULL || maze->map.parsed.NO == NULL || maze->map.parsed.SO == NULL || maze->map.parsed.EA == NULL || maze->map.parsed.WE == NULL)
 		return (ft_putendl_fd("Texture or color could not be loaded", 2), 1);
 	if (track_metadata != 6)
 		return (ft_putendl_fd("Duplicate metadata", 2), 1);
 	if (validate_texture(maze))
-		return (1);
+		return (FAILURE);
 	if (validate_rgb(maze))
-		return (1);
+		return (FAILURE);
 	if (validate_map(maze))
-		return (1);
-	return (0);
+		return (FAILURE);
+	return (SUCCESS);
 }

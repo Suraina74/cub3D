@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 10:28:57 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/25 13:45:31 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/26 15:15:08 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	*fill_rgb(char *s)
 {
 	char	**split_comma;
 	int		*arr;
-
+	if (s == NULL)
+		return (ft_putendl_fd("RGB value is empty", 2), NULL);
 	split_comma = ft_split(s, ',');
 	if (!split_comma)
 		return (NULL);
@@ -51,10 +52,10 @@ int	validate_rgb(t_maze *maze)
 	while (i < 3)
 	{
 		if (maze->map.parsed.rgb_floor[i] > 255 || maze->map.parsed.rgb_floor[i] < 0)
-			return (ft_putendl_fd("Error: Floor RGB value not in 0-255 range", 2), 1);
+			return (ft_putendl_fd("Error: Floor RGB value not in 0-255 range", 2), FAILURE);
 		if (maze->map.parsed.rgb_ceiling[i] > 255 || maze->map.parsed.rgb_ceiling[i] < 0)
-			return (ft_putendl_fd("Error: Ceiling RGB value not in 0-255 range", 2), 1);
+			return (ft_putendl_fd("Error: Ceiling RGB value not in 0-255 range", 2), FAILURE);
 		i++;
 	}
-	return (0);
+	return (SUCCESS);
 }
