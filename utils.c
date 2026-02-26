@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:57:18 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/17 15:28:50 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/26 16:18:20 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_d_free(char **arr)
 		free(arr[i++]);
 	free(arr);
 }
-
 
 int	ft_digit_check(char *str)
 {
