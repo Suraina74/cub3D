@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/24 16:57:51 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/26 16:15:36 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/02/27 18:02:54 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	flood_fill(t_maze *maze, int  x, int y)
 {
-	if (y < 0 || y >= maze->map.width || x < 0 || x >= maze->map.height)
+	if (x < 0 || x >= maze->map.height || y < 0 || y >= (int)ft_strlen(maze->map.parsed.map_data[x]))
 		return (FAILURE);
+	if (maze->map.parsed.map_data[x][y] == ' ')
+        return (FAILURE);
 	if (maze->map.parsed.map_data[x][y] == '-' || maze->map.parsed.map_data[x][y] == '1' )
 		return (SUCCESS);
 	maze->map.parsed.map_data[x][y] = '-';
