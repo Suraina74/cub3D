@@ -31,7 +31,7 @@ void	init_projection_plane(t_maze *maze)
 {
 	// maze->projection_plane.width = 320; // Means 320 rays to cast.
 	// maze->projection_plane.length = 200;
-	maze->projection_plane.distance_to_plane = 160 / tan(30); // distance from player to projection plane
+	maze->projection_plane.distance_to_plane = (WIDTH / 2) / tan((maze->player.vof / 2)); // distance from player to projection plane
 }
 
 void    init_raycast_variables(t_maze *maze)
@@ -41,7 +41,7 @@ void    init_raycast_variables(t_maze *maze)
 	
     maze->raycast.ray_degree = 0; // degree of most left ray = viewing angle - vof/2
 	
-    maze->raycast.angle_increment = 60/320; // ray degree wordt dan, ray degree + angle increment.
+    maze->raycast.angle_increment = maze->player.vof/WIDTH; // ray degree wordt dan, ray degree + angle increment.
     maze->raycast.distance_to_wall = 0; // The distance is in units/pixels
     maze->raycast.pixel_x = 0; // x pixel coordinate where the player is at the moment.
     maze->raycast.pixel_y = 0; // y pixel coordinate where the player is at the moment.

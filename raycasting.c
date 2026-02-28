@@ -29,7 +29,7 @@ void raycasting(t_maze *maze)
     pixels_x = grid_x * 64 + 32;
     pixels_y = grid_y * 64 + 32;
     // Degree van eerste ray:
-    first_ray = maze->player.viewing_angle - (maze->player.vof / 2);
+    maze->raycasting.ray_degree = maze->player.viewing_angle - (maze->player.vof / 2);
 
     // Horizontal intersections:
 
@@ -39,7 +39,10 @@ void raycasting(t_maze *maze)
     // Ray is facing up
     if (first_ray >= 180 && first_ray < 360)
     {
-        // Find first intersection point
+        // Find coordinates of first intersection point
+        maze->raycasting.pixel_y = floor(pixels_y/64) * (64) - 1;
+        maze->raycasting->y_grid_intersect = floor(maze->raycasting.pixel_y / 64);
+        maze->raycasting->pixel_x = pixels_x + (pixels_y - maze->raycasting.pixel_y)/tan(maze->raycasting.ray_degree);
         
         // Find Ya
         // Find Xa
