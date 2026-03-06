@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/10/23 22:29:13 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/23 14:43:30 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/03/06 17:42:23 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	ft_strlcpy(trimmed, s1 + start, length + 1);
 	return (trimmed);
 }
-// int main()
-// {
-// 	char *s = ft_strdup
-	
-// 	ft_strtrim("\n", "\n");
-// }

@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/26 14:50:39 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/03/06 17:36:14 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	fill_texture(char *s, char *dir, char **d)
 {
-	char **get_texture;
-	
+	char	**get_texture;
+
 	if (ft_strncmp(s, dir, 2) == 0)
 	{
 		get_texture = ft_split(s, ' ');
@@ -23,7 +23,7 @@ static void	fill_texture(char *s, char *dir, char **d)
 	}
 }
 
-static int fill_map(t_maze *maze, char *metadata, int fd)
+static int	fill_map(t_maze *maze, char *metadata, int fd)
 {
 	size_t	index_end;
 	size_t	map_end;
@@ -41,7 +41,8 @@ static int fill_map(t_maze *maze, char *metadata, int fd)
 	return (SUCCESS);
 }
 
-static int	fill_metadata(t_maze *maze, char *metadata, int fd, int *track_metadata)
+static int	fill_metadata(t_maze *maze, char *metadata,
+	int fd, int *track_metadata)
 {
 	char	*floor;
 	char	*ceiling;
@@ -64,8 +65,10 @@ static int	fill_metadata(t_maze *maze, char *metadata, int fd, int *track_metada
 		maze->map.parsed.rgb_ceiling = fill_rgb(maze->map.parsed.C);
 		(*track_metadata)++;
 	}
-	else if (ft_strncmp(metadata, "NO", 2) == 0 || ft_strncmp(metadata, "SO", 2) == 0 \
-		|| ft_strncmp(metadata, "EA", 2) == 0 || ft_strncmp(metadata, "WE", 2) == 0)
+	else if (ft_strncmp(metadata, "NO", 2) == 0
+		|| ft_strncmp(metadata, "SO", 2) == 0
+		|| ft_strncmp(metadata, "EA", 2) == 0
+		|| ft_strncmp(metadata, "WE", 2) == 0)
 	{
 		fill_texture(metadata, "NO", &maze->map.parsed.NO);
 		fill_texture(metadata, "SO", &maze->map.parsed.SO);
@@ -84,8 +87,8 @@ static int	fill_metadata(t_maze *maze, char *metadata, int fd, int *track_metada
 int	read_map(t_maze *maze)
 {
 	int		fd;
-	char 	*metadata;
-	char 	*line;
+	char	*metadata;
+	char	*line;
 	size_t	map_start;
 	int		track_metadata;
 
@@ -106,7 +109,9 @@ int	read_map(t_maze *maze)
 			return (FAILURE);
 		free(line);
 	}
-	if (maze->map.parsed.F == NULL || maze->map.parsed.C == NULL || maze->map.parsed.NO == NULL || maze->map.parsed.SO == NULL || maze->map.parsed.EA == NULL || maze->map.parsed.WE == NULL)
+	if (maze->map.parsed.F == NULL || maze->map.parsed.C == NULL
+		|| maze->map.parsed.NO == NULL || maze->map.parsed.SO == NULL
+		|| maze->map.parsed.EA == NULL || maze->map.parsed.WE == NULL)
 		return (ft_putendl_fd("Texture or color could not be loaded", 2), 1);
 	if (track_metadata != 6)
 		return (ft_putendl_fd("Duplicate metadata", 2), 1);

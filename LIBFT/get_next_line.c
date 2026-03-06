@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 16:01:18 by schabboe          #+#    #+#             */
-/*   Updated: 2025/05/24 13:26:53 by schabboe         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   get_next_line.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/11/21 16:01:18 by schabboe      #+#    #+#                 */
+/*   Updated: 2026/03/06 17:43:19 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*new_line(char **line)
 	if (new_line_ch != NULL)
 	{
 		newline = gn_substr(*line, 0, (gn_strlen(*line) \
-		- gn_strlen(new_line_ch)) + 1);
+- gn_strlen(new_line_ch)) + 1);
 		remainder = gn_strdup(&new_line_ch[1]);
 		free(*line);
 		*line = NULL;
@@ -52,7 +52,7 @@ static char	*fill_line(int fd, char *buffer, char *line)
 
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if (bytes_read == -1 || (bytes_read == 0 \
-	&& line == NULL) || (bytes_read == 0 && line[0] == '\0'))
+&& line == NULL) || (bytes_read == 0 && line[0] == '\0'))
 	{
 		if (line != NULL)
 			free(line);

@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 10:28:57 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/26 15:15:08 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/03/06 17:01:52 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	*fill_rgb(char *s)
 {
 	char	**split_comma;
 	int		*arr;
+
 	if (s == NULL)
 		return (ft_putendl_fd("RGB value is empty", 2), NULL);
 	split_comma = ft_split(s, ',');
@@ -48,13 +49,23 @@ int	*fill_rgb(char *s)
 
 int	validate_rgb(t_maze *maze)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (i < 3)
 	{
-		if (maze->map.parsed.rgb_floor[i] > 255 || maze->map.parsed.rgb_floor[i] < 0)
-			return (ft_putendl_fd("Error: Floor RGB value not in 0-255 range", 2), FAILURE);
-		if (maze->map.parsed.rgb_ceiling[i] > 255 || maze->map.parsed.rgb_ceiling[i] < 0)
-			return (ft_putendl_fd("Error: Ceiling RGB value not in 0-255 range", 2), FAILURE);
+		if (maze->map.parsed.rgb_floor[i] > 255
+			|| maze->map.parsed.rgb_floor[i] < 0)
+		{
+			ft_putendl_fd("Error: Floor RGB value not in 0-255 range", 2);
+			return (FAILURE);
+		}
+		if (maze->map.parsed.rgb_ceiling[i] > 255
+			|| maze->map.parsed.rgb_ceiling[i] < 0)
+		{
+			ft_putendl_fd("Error: Ceiling RGB value not in 0-255 range", 2);
+			return (FAILURE);
+		}
 		i++;
 	}
 	return (SUCCESS);

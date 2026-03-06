@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   validation.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/13 09:35:36 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/03/06 16:33:15 by schabboe         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   validation.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
+/*   Updated: 2026/03/06 16:57:03 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int validate_texture(t_maze *maze)
+int	validate_texture(t_maze *maze)
 {
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
@@ -34,35 +34,44 @@ int validate_texture(t_maze *maze)
 	return (SUCCESS);
 }
 
+static int	inner_valid_map(t_maze *maze, int *col, int *row, int *p_cnt)
+{
+	char	c;
+
+	while (maze->map.parsed.map_data[*col][*row])
+	{
+		c = maze->map.parsed.map_data[*col][*row];
+		if (c == '0' || c == '1' || c == 'N' || c == 'E' || c == 'W'
+			|| c == 'S' || c == ' ' || c == '\n' || 'c' == '\0')
+		{
+			if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
+			{
+				maze->map.parsed.player = c;
+				maze->player.pos_x = *col;
+				maze->player.pos_y = *row;
+				(*p_cnt)++;
+			}
+			(*row)++;
+		}
+		else
+			return (ft_putendl_fd("Invalid character in map", 2), FAILURE);
+	}
+	return (SUCCESS);
+}
+
 static int	valid_map_character(t_maze *maze)
 {
 	int	row;
 	int	col;
-	int p_cnt;
-	char c;
+	int	p_cnt;
 
 	p_cnt = 0;
 	col = 0;
 	while (maze->map.parsed.map_data[col])
 	{
 		row = 0;
-		while (maze->map.parsed.map_data[col][row])
-		{
-			c = maze->map.parsed.map_data[col][row];
-			if (c == '0' || c == '1' || c == 'N' || c == 'E' || c == 'W' || c == 'S' || c == ' ' || c == '\n' || 'c' == '\0')
-			{
-				if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
-				{
-					maze->map.parsed.player = c;
-					maze->player.pos_x = col;
-					maze->player.pos_y = row;
-					p_cnt++;
-				}
-				row++;
-			}
-			else
-				return (ft_putendl_fd("Invalid character in map", 2), FAILURE);
-		}
+		if (inner_valid_map(maze, &col, &row, &p_cnt))
+			return (FAILURE);
 		col++;
 		maze->map.width = row;
 		maze->map.height = col;
@@ -74,7 +83,7 @@ static int	valid_map_character(t_maze *maze)
 	return (SUCCESS);
 }
 
-int validate_map(t_maze *maze)
+int	validate_map(t_maze *maze)
 {
 	if (valid_map_character(maze))
 		return (FAILURE);
