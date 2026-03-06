@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/03/06 17:36:14 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/03/06 19:19:43 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,9 @@ int	read_map(t_maze *maze)
 	int		fd;
 	char	*metadata;
 	char	*line;
-	size_t	map_start;
 	int		track_metadata;
 
 	track_metadata = 0;
-	map_start = 0;
 	line = NULL;
 	metadata = NULL;
 	fd = open(maze->filename, O_RDONLY);
