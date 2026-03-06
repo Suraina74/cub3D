@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/06 16:33:06 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:47:08 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct	s_raycast
 	double	dist_from_start_y; // The distance the ray has to travel from its start position to the first y-side
 	double	delta_dist_x; // The distance the ray has to travel to go from 1 x-side to the next x-side
 	double	delta_dist_y; // The distance the ray has to travel to go from 1 y-side to the next y-side
+	int		step_x; // Jump a square in x-direction
+	int		step_y; // Jump a square in y-direction
 }						t_raycast;
 
 typedef struct	s_maze
