@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/02/27 17:14:07 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
+/*   Updated: 2026/03/06 16:33:06 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,37 +50,31 @@ typedef struct s_map
 
 typedef struct	s_player 
 {
-	// int	start_grid_x;
-	// int	start_grid_y;
-	// int	start_pixel_x;
-	// int	start_pixel_y;
-	int	grid_pos_x;
-	int	grid_pos_y;
-	int	pixel_pos_x;
-	int	pixel_pos_y;
-	int	vof;
-	int	height;
-	int	viewing_angle;
-}					t_player;
+	double	pos_x; // position vector of player, x component (where player is at)
+	double	pos_y; // position vector of player, y component (where player is at)
+	int		height;
+}				t_player;
+
+typedef struct	s_vector
+{
+	double	dir_x; // direction vector, x component
+	double	dir_y; // direction vector, y component
+	double	ray_dir_x; // ray direction vector, x component
+	double	ray_dir_y; // ray direction vector, y component
+	double	plane_x; // camera plane vector, x component
+	double	plane_y; // camera plane vector, y component
+}					t_vector;
 
 typedef struct	s_raycast
-{
-	int	ray_degree;
-	int	angle_increment;
-	int	distance_to_wall;
-	int	x_grid_intersect;
-	int	y_grid_intersect;
-	int	pixel_x;
-	int	pixel_y;
-}				t_raycast;
-				
-typedef struct	s_projection
-{
-	// int	width;
-	// int	length;
-	// int	half_width;
-	int	distance_to_plane;
-}					t_projection;
+{	
+	double	camera_x; // x-coordinate in camera space
+	int		grid_x; // In welk vakje van de grid we zitten, x component
+	int		grid_y; // In welk vakje van de grid we zitten, y component
+	double	dist_from_start_x; // The distance the ray has to travel from its start position to the first x-side
+	double	dist_from_start_y; // The distance the ray has to travel from its start position to the first y-side
+	double	delta_dist_x; // The distance the ray has to travel to go from 1 x-side to the next x-side
+	double	delta_dist_y; // The distance the ray has to travel to go from 1 y-side to the next y-side
+}						t_raycast;
 
 typedef struct	s_maze
 {
@@ -88,8 +82,8 @@ typedef struct	s_maze
 	t_map			map;
 	mlx_t			*mlx;
 	t_player		player;
+	t_vector		vector;
 	t_raycast		raycast;
-	t_projection	projection_plane;
 }					t_maze;
 
 //UTILS

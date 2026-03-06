@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   validation.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/27 17:58:22 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/13 09:35:36 by ksoedama          #+#    #+#             */
+/*   Updated: 2026/03/06 16:33:15 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static int	valid_map_character(t_maze *maze)
 				if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
 				{
 					maze->map.parsed.player = c;
-					maze->player.grid_pos_x = col;
-					maze->player.grid_pos_y = row;
+					maze->player.pos_x = col;
+					maze->player.pos_y = row;
 					p_cnt++;
 				}
 				row++;
@@ -78,7 +78,7 @@ int validate_map(t_maze *maze)
 {
 	if (valid_map_character(maze))
 		return (FAILURE);
-	if (flood_fill(maze, maze->player.grid_pos_x, maze->player.grid_pos_y))
+	if (flood_fill(maze, maze->player.pos_x, maze->player.pos_y))
 	{
 		ft_putendl_fd("Map is not enclosed", 2);
 		return (FAILURE);
