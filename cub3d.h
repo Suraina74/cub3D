@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/06 17:47:08 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/10 16:28:18 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
+# include <stdbool.h>
 # include "LIBFT/libft.h"
 
 # define WIDTH 320 // Means 320 rays to cast.
@@ -70,12 +71,14 @@ typedef struct	s_raycast
 	double	camera_x; // x-coordinate in camera space
 	int		grid_x; // In welk vakje van de grid we zitten, x component
 	int		grid_y; // In welk vakje van de grid we zitten, y component
-	double	dist_from_start_x; // The distance the ray has to travel from its start position to the first x-side
-	double	dist_from_start_y; // The distance the ray has to travel from its start position to the first y-side
-	double	delta_dist_x; // The distance the ray has to travel to go from 1 x-side to the next x-side
-	double	delta_dist_y; // The distance the ray has to travel to go from 1 y-side to the next y-side
+	double	start_to_intersection_x; // Length of ray from start position to the next x-intersection
+	double	start_to_intersection_y; // Length of ray from start position to the next y-intersection
+	double	delta_dist_x; // Length of ray from 1 x-intersect to the next x-intersect
+	double	delta_dist_y; // Length of ray from 1 y-intersect to the next y-intersect
 	int		step_x; // Jump a square in x-direction
 	int		step_y; // Jump a square in y-direction
+	double	distance_to_wall;
+	int		line_height;
 }						t_raycast;
 
 typedef struct	s_maze
