@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/10 16:28:18 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/10 20:08:39 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,13 @@ int 	validate_texture(t_maze *maze);
 // void	flood_fill(t_maze *maze, int x, int y);
 
 int	flood_fill(t_maze *maze, int  x, int y);
+
+// MLX functions
+void	press_esc(void *param);
+void	movement(void *param);
+
+// Raycasting
+void	raycasting(t_maze *maze);
+void	init_vectors(t_maze *maze);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   validation.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/03/06 16:57:03 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/13 09:35:36 by ksoedama          #+#    #+#             */
+/*   Updated: 2026/03/10 20:01:08 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ static int	inner_valid_map(t_maze *maze, int *col, int *row, int *p_cnt)
 {
 	char	c;
 
-	while (maze->map.parsed.map_data[*col][*row])
+	while (maze->map.parsed.map_data[*row][*col])
 	{
-		c = maze->map.parsed.map_data[*col][*row];
+		c = maze->map.parsed.map_data[*row][*col];
 		if (c == '0' || c == '1' || c == 'N' || c == 'E' || c == 'W'
 			|| c == 'S' || c == ' ' || c == '\n' || 'c' == '\0')
 		{
 			if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
 			{
 				maze->map.parsed.player = c;
-				maze->player.pos_x = *col;
-				maze->player.pos_y = *row;
+				maze->player.pos_x = *row;
+				maze->player.pos_y = *col;
 				(*p_cnt)++;
 			}
-			(*row)++;
+			(*col)++;
 		}
 		else
 			return (ft_putendl_fd("Invalid character in map", 2), FAILURE);
@@ -66,15 +66,15 @@ static int	valid_map_character(t_maze *maze)
 	int	p_cnt;
 
 	p_cnt = 0;
-	col = 0;
-	while (maze->map.parsed.map_data[col])
+	row = 0;
+	while (maze->map.parsed.map_data[row])
 	{
-		row = 0;
+		col = 0;
 		if (inner_valid_map(maze, &col, &row, &p_cnt))
 			return (FAILURE);
-		col++;
-		maze->map.width = row;
-		maze->map.height = col;
+		row++;
+		maze->map.width = col;
+		maze->map.height = row;
 	}
 	if (!maze->map.parsed.player)
 		return (ft_putendl_fd("Map needs to have one player", 2), FAILURE);

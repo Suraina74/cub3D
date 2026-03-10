@@ -10,7 +10,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/cub3D",
-            "args": ["testy.cub"],
+            "args": ["map/tiny.cub"],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "make",

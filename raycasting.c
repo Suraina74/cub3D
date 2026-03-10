@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/10 17:06:42 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/10 20:06:00 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	distance_between_intersections(t_maze *maze)
 		maze->vector.ray_dir_x = 1e30;
 	if (maze->vector.ray_dir_y == 0)
 		maze->vector.ray_dir_y = 1e30;
-    maze->raycast.delta_dist_x = abs(1/maze->vector.ray_dir_x);
-    maze->raycast.delta_dist_y = abs(1/maze->vector.ray_dir_y);
+    maze->raycast.delta_dist_x = fabs(1/maze->vector.ray_dir_x);
+    maze->raycast.delta_dist_y = fabs(1/maze->vector.ray_dir_y);
 }
 
 void	ray_direction(t_maze *maze, int x)
@@ -69,12 +69,14 @@ void	raycasting(t_maze *maze)
 
 	x = 0;
 	side = 0;
-	wall = false;
+	
+	init_vectors(maze);
 	while (x < WIDTH)
 	{
 		ray_direction(maze, x);
 		distance_between_intersections(maze);
 		initial_ray_distance(maze);
+		wall = false;
 		// DDA gaat elke x en y intersection langs en kijkt welke dichterbij is.
 		// Het gaat dan naar de volgende intersectie (x of y) en kijkt dan weer welke dichterbij is.
 		// That’s exactly why it’s often called “DDA for ray-grid traversal”.
@@ -99,8 +101,8 @@ void	raycasting(t_maze *maze)
 				maze->raycast.grid_y += maze->raycast.step_y;
 				side = 1;
 			}
-			if (maze->map.parsed.map_data[maze->raycast.grid_x][maze->raycast.grid_y] == 1)
-				wall == true;
+			if (maze->map.parsed.map_data[maze->raycast.grid_x][maze->raycast.grid_y] == '1')
+				wall = true;
 		}
 		// Als we een muur hebben gevonden dan zijn we 1 delta_dist te ver gegaan.
 		// Daarom subtracten om distance to wall te krijgen.

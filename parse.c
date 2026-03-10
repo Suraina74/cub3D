@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/03/06 19:19:43 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/23 13:58:29 by ksoedama          #+#    #+#             */
+/*   Updated: 2026/03/10 20:10:45 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	read_map(t_maze *maze)
 	metadata = NULL;
 	fd = open(maze->filename, O_RDONLY);
 	if (fd == -1)
-		return (FAILURE);
+		return (ft_putendl_fd("Map doesn't exist", 2), FAILURE);
 	while (1)
 	{
 		line = get_next_line(fd);

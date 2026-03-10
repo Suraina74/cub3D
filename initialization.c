@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:42:35 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/06 15:42:55 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/10 19:46:14 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_vectors(t_maze *maze)
 		maze->vector.plane_y = 0.66;
 	}
 	// If player is facing right
-	else if (maze->map.parsed.player == 'O')
+	else if (maze->map.parsed.player == 'E')
 	{
 		maze->vector.dir_x = 1;
 		maze->vector.dir_y = 0;
