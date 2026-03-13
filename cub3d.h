@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/10 20:08:39 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/13 13:01:39 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
 # define SUCCESS 0
 # define FAILURE 1
 
+typedef struct s_txtrs 
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*east;
+} t_txtrs;
+
 typedef struct	s_parse
 {
 	char	**map_data;
@@ -44,8 +52,8 @@ typedef struct	s_parse
 
 typedef struct s_map
 {
-	int		width;
-	int		height;
+	int			width;
+	int			height;
 	t_parse		parsed;
 }					t_map;
 
@@ -89,6 +97,7 @@ typedef struct	s_maze
 	t_player		player;
 	t_vector		vector;
 	t_raycast		raycast;
+	t_txtrs			txtr;
 }					t_maze;
 
 //UTILS

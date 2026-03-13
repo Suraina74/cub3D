@@ -6,11 +6,59 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/10 20:06:00 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:55:36 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void draw_line(int side, t_maze *maze, int x)
+{
+	(void)side;
+	uint32_t	draw_start;
+	uint32_t	draw_end;
+	// int i = 0;
+	int y = 0;
+
+	draw_start = HEIGHT /2 - maze->raycast.line_height / 2;
+	if(draw_start < 0)
+		draw_start = 0;
+	draw_end = maze->raycast.line_height  / 2 + HEIGHT / 2;
+	// if(draw_end >= HEIGHT)
+	// 	draw_end = HEIGHT - 1;
+
+	double step = 1.0 * maze->txtr.north->height /  maze->raycast.line_height;
+ 	double texPos = (draw_start - HEIGHT / 2 + maze->raycast.line_height / 2) * step;
+
+	mlx_image_t* img = mlx_texture_to_image(maze->mlx, maze->txtr.north);
+
+	int tex_y = 0;
+	int tex_x = 0;
+	
+	uint32_t *get_all_pxls = (uint32_t *)maze->txtr.north->pixels;
+	
+	y = draw_start;
+	while (y < draw_end)
+	{
+		// uint32_t clr = get_all_pxls[tex_y * maze->txtr.north->width + tex_x];
+		uint32_t clr = get_all_pxls[tex_y * maze->txtr.north->height + tex_x];
+		mlx_put_pixel(img, x, y, clr);
+		y++;
+	
+	}
+	// Hoe te weten waar je een bepaalde muur laat zien:
+		// if(side == 0 && maze->vector.ray_dir_x > 0)
+		// {
+			
+		// } //Rechts
+		// // Load image East
+		// if(side == 1 && maze->vector.ray_dir_y < 0) // Onder
+		// // Load image South
+		// if(side == 0 && maze->vector.ray_dir_x < 0) // Boven
+		// // Load image North
+		// if(side == 1 && maze->vector.ray_dir_y < 0) // Links
+		// // Load image West
+}
 
 void	initial_ray_distance(t_maze *maze)
 {
@@ -115,16 +163,7 @@ void	raycasting(t_maze *maze)
 		// Line height is in pixels
 		maze->raycast.line_height = HEIGHT / maze->raycast.distance_to_wall;
 		// Draw line to be drawn with MLX.
-		
-		// Hoe te weten waar je een bepaalde muur laat zien:
-		// if(side == 0 && rayDirX > 0) -> Rechts
-		// Load image East
-		// if(side == 1 && rayDirY < 0) -> Onder
-		// Load image South
-		// if(side == 0 && rayDirX < 0) -> Boven
-		// Load image North
-		// if(side == 1 && rayDirY < 0) -> Links
-		// Load image West
+		draw_line(side, maze, x);
 		x++;
 	}
 }
