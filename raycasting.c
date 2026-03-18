@@ -12,20 +12,31 @@
 
 #include "cub3d.h"
 
-void draw_line(int side, t_maze *maze, int x)
+void	where_ray_hit_tex(t_maze *maze)
 {
-	(void)side;
+	double wall_hit;
+
+	if (maze->raycast.side == 0) // hit a vertical wall. Where on that wall did we hit it?
+		wall_hit = maze->player.pos_y + maze->raycast.line_height * maze->vector.ray_dir_y ;
+	else // hit a horizontal wall. Where on that wall did we hit it?
+		wall_hit = maze->player.pos_x + maze->raycast.line_height * maze->vector.ray_dir_x;
+	wall_hit = wall_hit - floor (wall_hit);
+	maze->raycast.txtr_x = wall_hit * TEX_WIDTH;
+}
+
+void draw_line(t_maze *maze)
+{
 	uint32_t	draw_start;
 	uint32_t	draw_end;
 	// int i = 0;
 	int y = 0;
 
 	draw_start = HEIGHT /2 - maze->raycast.line_height / 2;
-	if(draw_start < 0)
+	if (draw_start < 0)
 		draw_start = 0;
 	draw_end = maze->raycast.line_height  / 2 + HEIGHT / 2;
-	// if(draw_end >= HEIGHT)
-	// 	draw_end = HEIGHT - 1;
+	if (draw_end >= HEIGHT)
+		draw_end = HEIGHT - 1;
 
 	double step = 1.0 * maze->txtr.north->height /  maze->raycast.line_height;
  	double texPos = (draw_start - HEIGHT / 2 + maze->raycast.line_height / 2) * step;
@@ -42,22 +53,19 @@ void draw_line(int side, t_maze *maze, int x)
 	{
 		// uint32_t clr = get_all_pxls[tex_y * maze->txtr.north->width + tex_x];
 		uint32_t clr = get_all_pxls[tex_y * maze->txtr.north->height + tex_x];
-		mlx_put_pixel(img, x, y, clr);
+		// mlx_put_pixel(img, x, y, clr);
 		y++;
 	
 	}
 	// Hoe te weten waar je een bepaalde muur laat zien:
-		// if(side == 0 && maze->vector.ray_dir_x > 0)
-		// {
-			
-		// } //Rechts
+		// if(side == 0 && maze->vector.ray_dir_x > 0) //Rechts
 		// // Load image East
+		// if(side == 1 && maze->vector.ray_dir_y < 0) // Boven
+		// // Load image North
+		// if(side == 0 && maze->vector.ray_dir_x < 0) // Links
+		// // Load image West
 		// if(side == 1 && maze->vector.ray_dir_y < 0) // Onder
 		// // Load image South
-		// if(side == 0 && maze->vector.ray_dir_x < 0) // Boven
-		// // Load image North
-		// if(side == 1 && maze->vector.ray_dir_y < 0) // Links
-		// // Load image West
 }
 
 void	initial_ray_distance(t_maze *maze)
@@ -113,11 +121,8 @@ void	raycasting(t_maze *maze)
 {
 	int		x;
 	bool	wall;
-	int		side;
 
 	x = 0;
-	side = 0;
-	
 	init_vectors(maze);
 	while (x < WIDTH)
 	{
@@ -140,21 +145,21 @@ void	raycasting(t_maze *maze)
 				maze->raycast.start_to_intersection_x += maze->raycast.delta_dist_x;
 				// Een x grid line is part of the block to the right of the line
 				maze->raycast.grid_x += maze->raycast.step_x;
-				side = 0;
+				maze->raycast.side = 0; // hit a vertical grid line
 			}
 			else
 			{
-				// Een y grid line is part of the block above the line
 				maze->raycast.start_to_intersection_y += maze->raycast.delta_dist_y;
+				// Een y grid line is part of the block above the line
 				maze->raycast.grid_y += maze->raycast.step_y;
-				side = 1;
+				maze->raycast.side = 1; // hit a horizontal grid line
 			}
 			if (maze->map.parsed.map_data[maze->raycast.grid_x][maze->raycast.grid_y] == '1')
 				wall = true;
 		}
 		// Als we een muur hebben gevonden dan zijn we 1 delta_dist te ver gegaan.
 		// Daarom subtracten om distance to wall te krijgen.
-		if (side == 0)
+		if (maze->raycast.side == 0)
 			maze->raycast.distance_to_wall = maze->raycast.start_to_intersection_x - maze->raycast.delta_dist_x;
 		else
 			maze->raycast.distance_to_wall = maze->raycast.start_to_intersection_y - maze->raycast.delta_dist_y;
@@ -163,7 +168,7 @@ void	raycasting(t_maze *maze)
 		// Line height is in pixels
 		maze->raycast.line_height = HEIGHT / maze->raycast.distance_to_wall;
 		// Draw line to be drawn with MLX.
-		draw_line(side, maze, x);
+		draw_line(maze);
 		x++;
 	}
 }

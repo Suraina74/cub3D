@@ -24,6 +24,8 @@
 
 # define WIDTH 320 // Means 320 rays to cast.
 # define HEIGHT 200
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -87,6 +89,9 @@ typedef struct	s_raycast
 	int		step_y; // Jump a square in y-direction
 	double	distance_to_wall;
 	int		line_height;
+	int		side;
+	int		txtr_x;
+	int		txtr_y;
 }						t_raycast;
 
 typedef struct	s_maze
