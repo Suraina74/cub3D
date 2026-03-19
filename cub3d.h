@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/13 13:01:39 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:12:10 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdbool.h>
 # include "LIBFT/libft.h"
 
-# define WIDTH 320 // Means 320 rays to cast.
-# define HEIGHT 200
+# define WIDTH 800 // Means 320 rays to cast.
+# define HEIGHT 600
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
@@ -103,6 +103,7 @@ typedef struct	s_maze
 	t_vector		vector;
 	t_raycast		raycast;
 	t_txtrs			txtr;
+	mlx_image_t		*big_img;
 }					t_maze;
 
 //UTILS

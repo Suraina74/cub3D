@@ -6,30 +6,54 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/13 15:55:36 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/19 19:16:44 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 
 void	where_ray_hit_tex(t_maze *maze)
 {
 	double wall_hit;
 
 	if (maze->raycast.side == 0) // hit a vertical wall. Where on that wall did we hit it?
-		wall_hit = maze->player.pos_y + maze->raycast.line_height * maze->vector.ray_dir_y ;
+		wall_hit = maze->player.pos_y + maze->raycast.distance_to_wall * maze->vector.ray_dir_y ;
 	else // hit a horizontal wall. Where on that wall did we hit it?
-		wall_hit = maze->player.pos_x + maze->raycast.line_height * maze->vector.ray_dir_x;
+		wall_hit = maze->player.pos_x + maze->raycast.distance_to_wall * maze->vector.ray_dir_x;
 	wall_hit = wall_hit - floor (wall_hit);
 	maze->raycast.txtr_x = wall_hit * TEX_WIDTH;
+	// if (maze->raycast.side == 0 && maze->vector.ray_dir_x > 0)
+	// 	wall_hit = TEX_WIDTH - wall_hit - 1;
+    // if (maze->raycast.side == 1 && maze->vector.ray_dir_y < 0) 
+	// 	wall_hit = TEX_WIDTH - wall_hit - 1;
+	// return (maze->raycast.txtr_x);
 }
 
-void draw_line(t_maze *maze)
+// Convert to MLX Color
+void	convert_to_mlx_color(t_maze *maze, int tex_y, uint32_t *color, int x)
+{
+	int	index;
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+	uint8_t a;
+
+	index = (tex_y * TEX_WIDTH + maze->raycast.txtr_x) * 4 + x;
+	r = maze->txtr.south->pixels[index + 0];
+	g = maze->txtr.south->pixels[index + 1];
+	b = maze->txtr.south->pixels[index + 2];
+	a = maze->txtr.south->pixels[index + 3];
+	*color = (r << 24) | (g << 16) | (b << 8) | a;
+}
+
+void draw_line(t_maze *maze, int x)
 {
 	uint32_t	draw_start;
 	uint32_t	draw_end;
-	// int i = 0;
-	int y = 0;
+	int			tex_y;
+	uint32_t	y;
+	uint32_t color;
 
 	draw_start = HEIGHT /2 - maze->raycast.line_height / 2;
 	if (draw_start < 0)
@@ -38,24 +62,17 @@ void draw_line(t_maze *maze)
 	if (draw_end >= HEIGHT)
 		draw_end = HEIGHT - 1;
 
-	double step = 1.0 * maze->txtr.north->height /  maze->raycast.line_height;
- 	double texPos = (draw_start - HEIGHT / 2 + maze->raycast.line_height / 2) * step;
-
-	mlx_image_t* img = mlx_texture_to_image(maze->mlx, maze->txtr.north);
-
-	int tex_y = 0;
-	int tex_x = 0;
-	
-	uint32_t *get_all_pxls = (uint32_t *)maze->txtr.north->pixels;
-	
+	double step = 1.0 * TEX_HEIGHT /  maze->raycast.line_height;
+ 	double tex_pos = (draw_start - HEIGHT / 2 + maze->raycast.line_height / 2) * step;
+	where_ray_hit_tex(maze);
 	y = draw_start;
 	while (y < draw_end)
 	{
-		// uint32_t clr = get_all_pxls[tex_y * maze->txtr.north->width + tex_x];
-		uint32_t clr = get_all_pxls[tex_y * maze->txtr.north->height + tex_x];
-		// mlx_put_pixel(img, x, y, clr);
+		tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
+		convert_to_mlx_color(maze, tex_y, &color, x);
+		tex_pos += step;
+		mlx_put_pixel(maze->big_img, x, y, color);
 		y++;
-	
 	}
 	// Hoe te weten waar je een bepaalde muur laat zien:
 		// if(side == 0 && maze->vector.ray_dir_x > 0) //Rechts
@@ -168,7 +185,10 @@ void	raycasting(t_maze *maze)
 		// Line height is in pixels
 		maze->raycast.line_height = HEIGHT / maze->raycast.distance_to_wall;
 		// Draw line to be drawn with MLX.
-		draw_line(maze);
+		draw_line(maze, x);
 		x++;
+		printf("%d\n", x);
+		// if (x == 10)
+		// 	break;
 	}
 }
