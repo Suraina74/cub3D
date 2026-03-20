@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 15:35:41 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/20 15:57:23 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/20 16:47:08 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,34 @@
 
 void	draw_mini_map(t_maze *maze)
 {
-	double x;
-	double y;
-	int step;
+	// int x;
+	// int y;
+	int	i;
+	int	j;
+	// int step;
 
-	x = maze->player.pos_x;
-	y = maze->player.pos_y;
-	step = 1;
-	mlx_put_pixel(maze->mini_map, maze->player.pos_x, maze->player.pos_y, 0xFF0000FF);
-	// maze->raycast.distance_to_wall * maze->vector.ray_dir_y ;
-	while (step < maze->raycast.distance_to_wall)
+	i = 0;
+	while (i < 200)
 	{
-		mlx_put_pixel(maze->mini_map, x, y, 0x00FF00FF);
-		x = step * maze->vector.ray_dir_x;
-		y = step * maze->vector.ray_dir_y;
+		j = 0;
+		while (j < 100)
+		{
+			mlx_put_pixel(maze->mini_map, i, j, 0x80808080);
+			j++;
+		}
+		i++;
 	}
+	// double conv_x = 200/maze->map.width;
+	// double conv_y = 100/maze->map.height;
+	// x = maze->player.pos_x * 64;
+	// y = maze->player.pos_y * 64;
+	// mlx_put_pixel(maze->mini_map, x, y, 0xFF0000FF);
+
+	// // maze->raycast.distance_to_wall * maze->vector.ray_dir_y 
+	// while (step < maze->raycast.distance_to_wall)
+	// {
+	// 	mlx_put_pixel(maze->mini_map, x, y, 0x00FF00FF);
+	// 	x = step * maze->vector.ray_dir_x;
+	// 	y = step * maze->vector.ray_dir_y;
+	// }
 }

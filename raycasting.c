@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/20 15:53:56 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/20 17:20:35 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	where_ray_hit_tex(t_maze *maze)
 }
 
 // Convert to MLX Color
-void	convert_to_mlx_color(t_maze *maze, int tex_y, uint32_t *color, int x)
+void	convert_to_mlx_color(t_maze *maze, int tex_y, uint32_t *color)
 {
 	int	index;
 	uint8_t r;
@@ -47,7 +47,7 @@ void	convert_to_mlx_color(t_maze *maze, int tex_y, uint32_t *color, int x)
 		tex = maze->txtr.south;
 	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y < 0)
 		tex = maze->txtr.north;
-	index = (tex_y * TEX_WIDTH + maze->raycast.txtr_x) * 4 + x;
+	index = (tex_y * TEX_WIDTH + maze->raycast.txtr_x) * 4;
 	r = tex->pixels[index + 0];
 	g = tex->pixels[index + 1];
 	b = tex->pixels[index + 2];
@@ -78,7 +78,7 @@ void draw_line(t_maze *maze, int x)
 	while (y < draw_end)
 	{
 		tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
-		convert_to_mlx_color(maze, tex_y, &color, x);
+		convert_to_mlx_color(maze, tex_y, &color);
 		tex_pos += step;
 		mlx_put_pixel(maze->big_img, x, y, color);
 		y++;
@@ -126,7 +126,7 @@ void	distance_between_intersections(t_maze *maze)
 
 void	ray_direction(t_maze *maze, int x)
 {
-	maze->raycast.camera_x = 2 * x / WIDTH - 1;
+	maze->raycast.camera_x = 2 * x / (double)WIDTH - 1;
 	// ray direction = forward direction + horizontal offset
 	// dir = where the player looks
 	// plane = sideways direction (camera width)

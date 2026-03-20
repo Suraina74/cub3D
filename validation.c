@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 09:35:36 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/03/20 15:27:35 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/20 16:54:54 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static int	inner_valid_map(t_maze *maze, int *col, int *row, int *p_cnt)
 			if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
 			{
 				maze->map.parsed.player = c;
-				maze->player.pos_x = *row + 0.5;
-				maze->player.pos_y = *col + 0.5;
+				maze->player.pos_x = *row;
+				maze->player.pos_y = *col;
 				(*p_cnt)++;
 			}
 			(*col)++;

@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/20 16:02:48 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/20 17:11:40 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdbool.h>
 # include "LIBFT/libft.h"
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1024
+# define HEIGHT 668
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
