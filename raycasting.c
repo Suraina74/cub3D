@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/20 17:44:19 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/20 18:28:35 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	convert_to_mlx_color(t_maze *maze, int tex_y, uint32_t *color)
 	else if (maze->raycast.side == 0 && maze->vector.ray_dir_x < 0)
 		tex = maze->txtr.east;
 	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y > 0)
-		tex = maze->txtr.north;
-	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y < 0)
 		tex = maze->txtr.south;
+	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y < 0)
+		tex = maze->txtr.north;
 	index = (tex_y * TEX_WIDTH + maze->raycast.txtr_x) * 4;
 	r = tex->pixels[index + 0];
 	g = tex->pixels[index + 1];
@@ -101,24 +101,24 @@ void	initial_ray_distance(t_maze *maze)
 	}
 	if (maze->vector.ray_dir_y < 0)
 	{
-		maze->raycast.step_y = -1;
-		maze->raycast.start_to_intersection_y = (maze->player.pos_y - maze->raycast.grid_y) * maze->raycast.delta_dist_y;
+		maze->raycast.step_y = 1;
+		maze->raycast.start_to_intersection_y = (maze->raycast.grid_y + 1.0 - maze->player.pos_y) * maze->raycast.delta_dist_y;
 	}
 	else
 	{
-		maze->raycast.step_y = 1;
-		maze->raycast.start_to_intersection_y = (maze->raycast.grid_y + 1.0 - maze->player.pos_y) * maze->raycast.delta_dist_y;
+		maze->raycast.step_y = -1;
+		maze->raycast.start_to_intersection_y = (maze->player.pos_y - maze->raycast.grid_y) * maze->raycast.delta_dist_y;
 	}
 }
 
 void	distance_between_intersections(t_maze *maze)
 {
 	if (maze->vector.ray_dir_x == 0)
-		maze->vector.ray_dir_x = 1e30;
+		maze->raycast.delta_dist_x = 1e30;
 	else
 		maze->raycast.delta_dist_x = fabs(1/maze->vector.ray_dir_x);
 	if (maze->vector.ray_dir_y == 0)
-		maze->vector.ray_dir_y = 1e30;
+		maze->raycast.delta_dist_y = 1e30;
 	else
 		maze->raycast.delta_dist_y = fabs(1/maze->vector.ray_dir_y);
    
@@ -175,7 +175,7 @@ void	raycasting(t_maze *maze)
 				maze->raycast.grid_y += maze->raycast.step_y;
 				maze->raycast.side = 1; // hit a horizontal grid line
 			}
-			if (maze->map.parsed.map_data[maze->raycast.grid_x][maze->raycast.grid_y] == '1')
+			if (maze->map.parsed.map_data[maze->raycast.grid_y][maze->raycast.grid_x] == '1')
 				wall = true;
 		}
 		// Als we een muur hebben gevonden dan zijn we 1 delta_dist te ver gegaan.
