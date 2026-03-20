@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/20 17:20:35 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/20 17:44:19 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	convert_to_mlx_color(t_maze *maze, int tex_y, uint32_t *color)
 	
 	tex = NULL;
 	if (maze->raycast.side == 0 && maze->vector.ray_dir_x > 0)
-		tex = maze->txtr.east;
-	else if (maze->raycast.side == 0 && maze->vector.ray_dir_x < 0)
 		tex = maze->txtr.west;
+	else if (maze->raycast.side == 0 && maze->vector.ray_dir_x < 0)
+		tex = maze->txtr.east;
 	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y > 0)
-		tex = maze->txtr.south;
-	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y < 0)
 		tex = maze->txtr.north;
+	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y < 0)
+		tex = maze->txtr.south;
 	index = (tex_y * TEX_WIDTH + maze->raycast.txtr_x) * 4;
 	r = tex->pixels[index + 0];
 	g = tex->pixels[index + 1];
@@ -57,8 +57,8 @@ void	convert_to_mlx_color(t_maze *maze, int tex_y, uint32_t *color)
 
 void draw_line(t_maze *maze, int x)
 {
-	uint32_t	draw_start;
-	uint32_t	draw_end;
+	double	draw_start;
+	double	draw_end;
 	int			tex_y;
 	uint32_t	y;
 	uint32_t color;
