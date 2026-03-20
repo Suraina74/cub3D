@@ -1,12 +1,12 @@
 NAME = cub3D
 CC = cc
-CFLAGS = # -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g
 MLX_DIR = ./MLX42
 LIBFT_DIR = ./LIBFT
 
 HEADER = -I $(MLX_DIR)/include -I $(LIBFT_DIR)
 LIBS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
-CFILES = cub3d.c validation.c utils.c parse.c parse_rgb.c flood_fill.c raycasting.c initialization.c key_presses.c 
+CFILES = cub3d.c validation.c utils.c parse.c parse_rgb.c flood_fill.c raycasting.c initialization.c key_presses.c #mini_map.c
 OFILES = $(CFILES:.c=.o)
 
 all: libmlx libft $(NAME)
