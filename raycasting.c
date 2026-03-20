@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/20 18:28:35 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/20 18:40:29 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ void	where_ray_hit_tex(t_maze *maze)
 		wall_hit = maze->player.pos_x + maze->raycast.distance_to_wall * maze->vector.ray_dir_x;
 	wall_hit = wall_hit - floor (wall_hit);
 	maze->raycast.txtr_x = wall_hit * TEX_WIDTH;
-	// if (maze->raycast.side == 0 && maze->vector.ray_dir_x > 0)
-	// 	wall_hit = TEX_WIDTH - wall_hit - 1;
-    // if (maze->raycast.side == 1 && maze->vector.ray_dir_y < 0) 
-	// 	wall_hit = TEX_WIDTH - wall_hit - 1;
 }
 
 // Convert to MLX Color
@@ -44,9 +40,9 @@ void	convert_to_mlx_color(t_maze *maze, int tex_y, uint32_t *color)
 	else if (maze->raycast.side == 0 && maze->vector.ray_dir_x < 0)
 		tex = maze->txtr.east;
 	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y > 0)
-		tex = maze->txtr.south;
-	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y < 0)
 		tex = maze->txtr.north;
+	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y < 0)
+		tex = maze->txtr.south;
 	index = (tex_y * TEX_WIDTH + maze->raycast.txtr_x) * 4;
 	r = tex->pixels[index + 0];
 	g = tex->pixels[index + 1];
@@ -141,7 +137,6 @@ void	raycasting(t_maze *maze)
 {
 	int		x;
 	bool	wall;
-	double	l_h;
 
 	x = 0;
 	init_vectors(maze);
@@ -187,8 +182,7 @@ void	raycasting(t_maze *maze)
 		// Close wall -> small distance to wall -> large line_height -> tall wall on screen.
 		// Far wall -> large distance to wall -> small line_height -> short wall on screen
 		// Line height is in pixels
-		l_h = HEIGHT / maze->raycast.distance_to_wall;
-		maze->raycast.line_height = (int)l_h;
+		maze->raycast.line_height = (int)(HEIGHT / maze->raycast.distance_to_wall);
 		// Draw line to be drawn with MLX.
 		draw_line(maze, x);
 		x++;
