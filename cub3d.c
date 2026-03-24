@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:44:51 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/20 17:11:51 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/24 12:53:20 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	main(int argc, char **argv)
 	maze.mlx = mlx_init(WIDTH, HEIGHT, "cubed", true);
 	if (!maze.mlx)
 		return(1);
-	maze.big_img = mlx_new_image(maze.mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(maze.mlx, maze.big_img, 0, 0);
+	maze.screen = mlx_new_image(maze.mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(maze.mlx, maze.screen, 0, 0);
 	// maze.mini_map = mlx_new_image(maze.mlx, 200, 100);
 	// mlx_image_to_window(maze.mlx, maze.mini_map, 0, 0);
 	raycasting(&maze);

@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/20 17:11:40 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/24 13:49:24 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,23 @@
 # define SUCCESS 0
 # define FAILURE 1
 
-typedef struct s_txtrs 
+typedef struct s_colors
+{
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+	uint8_t	a;
+}			t_colors;
+
+typedef struct s_txtrs
 {
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*east;
-} t_txtrs;
+}					t_txtrs;
 
-typedef struct	s_parse
+typedef struct s_parse
 {
 	char	**map_data;
 	char	*NO;
@@ -59,14 +67,14 @@ typedef struct s_map
 	t_parse		parsed;
 }					t_map;
 
-typedef struct	s_player 
+typedef struct s_player
 {
 	double	pos_x; // position vector of player, x component (where player is at)
 	double	pos_y; // position vector of player, y component (where player is at)
 	int		height;
 }				t_player;
 
-typedef struct	s_vector
+typedef struct s_vector
 {
 	double	dir_x; // direction vector, x component
 	double	dir_y; // direction vector, y component
@@ -76,25 +84,32 @@ typedef struct	s_vector
 	double	plane_y; // camera plane vector, y component
 }					t_vector;
 
-typedef struct	s_raycast
-{	
+typedef struct s_raycast
+{
 	double	camera_x; // x-coordinate in camera space
 	int		grid_x; // In welk vakje van de grid we zitten, x component
 	int		grid_y; // In welk vakje van de grid we zitten, y component
-	double	start_to_intersection_x; // Length of ray from start position to the next x-intersection
-	double	start_to_intersection_y; // Length of ray from start position to the next y-intersection
+	double	ray_len_x; // Length of ray from start position to the next x-intersection
+	double	ray_len_y; // Length of ray from start position to the next y-intersection
 	double	delta_dist_x; // Length of ray from 1 x-intersect to the next x-intersect
 	double	delta_dist_y; // Length of ray from 1 y-intersect to the next y-intersect
 	int		step_x; // Jump a square in x-direction
 	int		step_y; // Jump a square in y-direction
 	double	distance_to_wall;
-	int		line_height;
 	int		side;
-	int		txtr_x;
-	int		txtr_y;
 }						t_raycast;
 
-typedef struct	s_maze
+typedef struct s_draw
+{
+	int			line_height;
+	double		start;
+	double		end;
+	int			tex_x;
+	int			tex_y;
+	uint32_t	color;
+}				t_draw;
+
+typedef struct s_maze
 {
 	char			*filename;
 	t_map			map;
@@ -103,8 +118,10 @@ typedef struct	s_maze
 	t_vector		vector;
 	t_raycast		raycast;
 	t_txtrs			txtr;
-	mlx_image_t		*big_img;
-	mlx_image_t		*mini_map;
+	mlx_image_t		*screen;
+	t_colors		colors;
+	t_draw			draw;
+	// mlx_image_t		*mini_map;
 }					t_maze;
 
 //UTILS
@@ -119,10 +136,10 @@ int		ft_digit_check(char *str);
 //Parse
 int		read_map(t_maze *maze);
 int		validate_map(t_maze *maze);
-int 	validate_texture(t_maze *maze);
+int		validate_texture(t_maze *maze);
 // void	flood_fill(t_maze *maze, int x, int y);
 
-int	flood_fill(t_maze *maze, int  x, int y);
+int		flood_fill(t_maze *maze, int x, int y);
 
 // MLX functions
 void	press_esc(void *param);
@@ -131,6 +148,7 @@ void	movement(void *param);
 // Raycasting
 void	raycasting(t_maze *maze);
 void	init_vectors(t_maze *maze);
+void	draw_line(t_maze *maze, int x);
 // void	draw_mini_map(t_maze *maze);
 
 #endif
