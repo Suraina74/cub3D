@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/24 13:49:24 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/27 18:05:56 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <math.h>
 # include <stdbool.h>
 # include "LIBFT/libft.h"
+# include <sys/time.h>
 
 # define WIDTH 1024
 # define HEIGHT 668
@@ -109,6 +110,15 @@ typedef struct s_draw
 	uint32_t	color;
 }				t_draw;
 
+typedef struct s_frame
+{
+	struct timeval begin_time;
+	struct timeval end_time;
+	double	frame_time;
+	double	begin_sec;
+	double	end_sec;
+}				t_frame;
+
 typedef struct s_maze
 {
 	char			*filename;
@@ -121,6 +131,7 @@ typedef struct s_maze
 	mlx_image_t		*screen;
 	t_colors		colors;
 	t_draw			draw;
+	t_frame			move;
 	// mlx_image_t		*mini_map;
 }					t_maze;
 

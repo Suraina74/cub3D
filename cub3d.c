@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:44:51 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/24 12:53:20 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/27 18:18:18 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,14 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(maze.mlx, maze.screen, 0, 0);
 	// maze.mini_map = mlx_new_image(maze.mlx, 200, 100);
 	// mlx_image_to_window(maze.mlx, maze.mini_map, 0, 0);
+	gettimeofday(&maze.move.begin_time, NULL);
+	maze.move.begin_sec = maze.move.begin_time.tv_sec + maze.move.begin_time.tv_usec/1000000.0;
 	raycasting(&maze);
 	// draw_mini_map(&maze);
+	gettimeofday(&maze.move.end_time, NULL);
+	maze.move.end_sec = maze.move.end_time.tv_sec + maze.move.end_time.tv_usec/1000000.0;
+	maze.move.frame_time = maze.move.end_sec - maze.move.begin_sec;
+	maze.move.begin_sec = maze.move.end_sec;
 	mlx_loop_hook(maze.mlx, &movement, &maze);
 	mlx_loop_hook(maze.mlx, &press_esc, &maze);
 	mlx_loop(maze.mlx);
