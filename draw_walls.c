@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 13:47:42 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/27 13:14:47 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/27 13:21:22 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	convert_to_mlx_color(t_maze *maze, int tex_y, uint32_t *color)
 
 	tex = NULL;
 	if (maze->raycast.side == 0 && maze->vector.ray_dir_x > 0)
-		tex = maze->txtr.west;
-	else if (maze->raycast.side == 0 && maze->vector.ray_dir_x < 0)
 		tex = maze->txtr.east;
+	else if (maze->raycast.side == 0 && maze->vector.ray_dir_x < 0)
+		tex = maze->txtr.west;
 	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y > 0)
 		tex = maze->txtr.south;
 	else if (maze->raycast.side == 1 && maze->vector.ray_dir_y < 0)
