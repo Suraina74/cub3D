@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 09:35:36 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/03/24 12:35:57 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/27 13:13:12 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static int	inner_valid_map(t_maze *maze, int *col, int *row, int *p_cnt)
 			if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
 			{
 				maze->map.parsed.player = c;
-				maze->player.pos_x = *row + 0.5;
-				maze->player.pos_y = *col + 0.5;
+				maze->player.pos_x = *col + 0.5;
+				maze->player.pos_y = *row + 0.5;
 				(*p_cnt)++;
 			}
 			(*col)++;
@@ -82,7 +82,7 @@ int	validate_map(t_maze *maze)
 {
 	if (valid_map_character(maze))
 		return (FAILURE);
-	if (flood_fill(maze, maze->player.pos_x, maze->player.pos_y))
+	if (flood_fill(maze, maze->player.pos_y, maze->player.pos_x))
 	{
 		ft_putendl_fd("Map is not enclosed", 2);
 		return (FAILURE);

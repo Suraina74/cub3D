@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/24 14:17:01 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/03/27 13:13:24 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	find_wall(t_maze *maze)
 			maze->raycast.grid_y += maze->raycast.step_y; // Een y grid line is part of the block above the line
 			maze->raycast.side = 1; // hit a horizontal grid line
 		}
-		if (maze->map.parsed.map_data[maze->raycast.grid_x]\
-[maze->raycast.grid_y] == '1')
+		if (maze->map.parsed.map_data[maze->raycast.grid_y]\
+[maze->raycast.grid_x] == '1')
 			wall = true;
 	}
 }
