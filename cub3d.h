@@ -112,11 +112,11 @@ typedef struct s_draw
 
 typedef struct s_frame
 {
-	struct timeval begin_time;
-	struct timeval end_time;
-	double	frame_time;
-	double	begin_sec;
-	double	end_sec;
+	struct timeval	begin_time;
+	struct timeval	end_time;
+	double			frame_time;
+	double			begin_sec;
+	double			end_sec;
 }				t_frame;
 
 typedef struct s_maze
@@ -132,7 +132,6 @@ typedef struct s_maze
 	t_colors		colors;
 	t_draw			draw;
 	t_frame			move;
-	// mlx_image_t		*mini_map;
 }					t_maze;
 
 //UTILS
@@ -160,6 +159,5 @@ void	movement(void *param);
 void	raycasting(t_maze *maze);
 void	init_vectors(t_maze *maze);
 void	draw_line(t_maze *maze, int x);
-// void	draw_mini_map(t_maze *maze);
 
 #endif

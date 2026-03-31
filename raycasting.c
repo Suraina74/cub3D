@@ -30,15 +30,15 @@ void	initial_ray_length(t_maze *maze)
 	}
 	if (maze->vector.ray_dir_y < 0)
 	{
-		maze->raycast.step_y = 1;
-		maze->raycast.ray_len_y = (maze->raycast.grid_y + 1.0 \
-- maze->player.pos_y) * maze->raycast.delta_dist_y;
-	}
-	else
-	{
 		maze->raycast.step_y = -1;
 		maze->raycast.ray_len_y = (maze->player.pos_y \
 - maze->raycast.grid_y) * maze->raycast.delta_dist_y;
+	}
+	else
+	{
+		maze->raycast.step_y = 1;
+		maze->raycast.ray_len_y = (maze->raycast.grid_y + 1.0 \
+- maze->player.pos_y) * maze->raycast.delta_dist_y;
 	}
 }
 
@@ -109,7 +109,6 @@ void	raycasting(t_maze *maze)
 	int	x;
 
 	x = 0;
-	init_vectors(maze);
 	while (x < WIDTH)
 	{
 		ray_direction(maze, x);

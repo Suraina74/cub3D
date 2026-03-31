@@ -12,19 +12,19 @@
 
 #include "cub3d.h"
 
-int	flood_fill(t_maze *maze, int x, int y)
+int	flood_fill(t_maze *maze, int row, int col)
 {
-	if (x < 0 || x >= maze->map.height || y < 0
-		|| y >= (int)ft_strlen(maze->map.parsed.map_data[x]))
+	if (row < 0 || row >= maze->map.height || col < 0
+		|| col >= (int)ft_strlen(maze->map.parsed.map_data[row]))
 		return (FAILURE);
-	if (maze->map.parsed.map_data[x][y] == ' ')
+	if (maze->map.parsed.map_data[row][col] == ' ')
 		return (FAILURE);
-	if (maze->map.parsed.map_data[x][y] == '-'
-		|| maze->map.parsed.map_data[x][y] == '1' )
+	if (maze->map.parsed.map_data[row][col] == '-'
+		|| maze->map.parsed.map_data[row][col] == '1' )
 		return (SUCCESS);
-	maze->map.parsed.map_data[x][y] = '-';
-	if (flood_fill(maze, x, y +1) || flood_fill(maze, x, y -1)
-		|| flood_fill(maze, x +1, y) || flood_fill(maze, x -1, y))
+	maze->map.parsed.map_data[row][col] = '-';
+	if (flood_fill(maze, row, col +1) || flood_fill(maze, row, col -1)
+		|| flood_fill(maze, row +1, col) || flood_fill(maze, row -1, col))
 		return (FAILURE);
 	return (SUCCESS);
 }

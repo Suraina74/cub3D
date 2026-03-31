@@ -18,16 +18,16 @@ void	init_north_south(t_maze *maze)
 	if (maze->map.parsed.player == 'N')
 	{
 		maze->vector.dir_x = 0;
-		maze->vector.dir_y = 1;
-		maze->vector.plane_x = -0.66;
+		maze->vector.dir_y = -1;
+		maze->vector.plane_x = 0.66;
 		maze->vector.plane_y = 0;
 	}
 	// If player is facing down
 	if (maze->map.parsed.player == 'S')
 	{
 		maze->vector.dir_x = 0;
-		maze->vector.dir_y = -1;
-		maze->vector.plane_x = 0.66;
+		maze->vector.dir_y = 1;
+		maze->vector.plane_x = -0.66;
 		maze->vector.plane_y = 0;
 	}
 }

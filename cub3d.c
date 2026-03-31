@@ -17,6 +17,7 @@ int	main(int argc, char **argv)
 	int				len_arg;
 	char			*file_type;
 	static t_maze	maze;
+	int				i;
 
 	if (argc < 2)
 		return (write(2, "Map is not provided!\n", 21), 1);
@@ -32,7 +33,7 @@ int	main(int argc, char **argv)
 	maze.filename = argv[1];
 	if (read_map(&maze))
 		return (FAILURE);
-	int i = 0;
+	i = 0;
 	while (maze.map.parsed.map_data[i])
 	{
 		printf("%s\n", maze.map.parsed.map_data[i]);
@@ -40,15 +41,14 @@ int	main(int argc, char **argv)
 	}
 	maze.mlx = mlx_init(WIDTH, HEIGHT, "cubed", true);
 	if (!maze.mlx)
-		return(1);
+		return( 1);
 	maze.screen = mlx_new_image(maze.mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(maze.mlx, maze.screen, 0, 0);
-	// maze.mini_map = mlx_new_image(maze.mlx, 200, 100);
-	// mlx_image_to_window(maze.mlx, maze.mini_map, 0, 0);
+	if (!maze.screen || mlx_image_to_window(maze.mlx, maze.screen, 0, 0) < 0)
+		return (write(2, "Error displaying image\n", 23), 1);
 	gettimeofday(&maze.move.begin_time, NULL);
 	maze.move.begin_sec = maze.move.begin_time.tv_sec + maze.move.begin_time.tv_usec/1000000.0;
+	init_vectors(&maze);
 	raycasting(&maze);
-	// draw_mini_map(&maze);
 	gettimeofday(&maze.move.end_time, NULL);
 	maze.move.end_sec = maze.move.end_time.tv_sec + maze.move.end_time.tv_usec/1000000.0;
 	maze.move.frame_time = maze.move.end_sec - maze.move.begin_sec;
