@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   validation.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/13 09:35:36 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/03/27 13:13:12 by schabboe         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   validation.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
+/*   Updated: 2026/04/02 13:27:23 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	validate_texture(t_maze *maze)
 {
-	maze->txtr.north = mlx_load_png(maze->map.parsed.NO);
+	maze->txtr.north = mlx_load_png(maze->map.parsed.no);
 	if (!maze->txtr.north)
 		return (ft_putendl_fd("North texture error", 2), FAILURE);
-	maze->txtr.south = mlx_load_png(maze->map.parsed.SO);
+	maze->txtr.south = mlx_load_png(maze->map.parsed.so);
 	if (!maze->txtr.south)
 		return (ft_putendl_fd("South texture error", 2), FAILURE);
-	maze->txtr.east = mlx_load_png(maze->map.parsed.EA);
+	maze->txtr.east = mlx_load_png(maze->map.parsed.ea);
 	if (!maze->txtr.east)
 		return (ft_putendl_fd("East texture error", 2), FAILURE);
-	maze->txtr.west = mlx_load_png(maze->map.parsed.WE);
+	maze->txtr.west = mlx_load_png(maze->map.parsed.we);
 	if (!maze->txtr.west)
 		return (ft_putendl_fd("West texture error", 2), FAILURE);
 	return (SUCCESS);

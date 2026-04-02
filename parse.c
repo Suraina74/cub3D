@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 13:58:29 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/03/10 20:10:45 by schabboe         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
+/*   Updated: 2026/04/02 13:28:10 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,18 @@ static int	fill_metadata(t_maze *maze, char *metadata,
 	ceiling = ft_strchr(metadata, 'C');
 	if (floor)
 	{
-		maze->map.parsed.F = split_rgb(floor);
-		if (fill_rgb(maze->map.parsed.F) == NULL)
+		maze->map.parsed.f = split_rgb(floor);
+		if (fill_rgb(maze->map.parsed.f) == NULL)
 			return (FAILURE);
-		maze->map.parsed.rgb_floor = fill_rgb(maze->map.parsed.F);
+		maze->map.parsed.rgb_floor = fill_rgb(maze->map.parsed.f);
 		(*track_metadata)++;
 	}
 	else if (ceiling)
 	{
-		maze->map.parsed.C = split_rgb(ceiling);
-		if (fill_rgb(maze->map.parsed.C) == NULL)
+		maze->map.parsed.c = split_rgb(ceiling);
+		if (fill_rgb(maze->map.parsed.c) == NULL)
 			return (FAILURE);
-		maze->map.parsed.rgb_ceiling = fill_rgb(maze->map.parsed.C);
+		maze->map.parsed.rgb_ceiling = fill_rgb(maze->map.parsed.c);
 		(*track_metadata)++;
 	}
 	else if (ft_strncmp(metadata, "NO", 2) == 0
@@ -70,10 +70,10 @@ static int	fill_metadata(t_maze *maze, char *metadata,
 		|| ft_strncmp(metadata, "EA", 2) == 0
 		|| ft_strncmp(metadata, "WE", 2) == 0)
 	{
-		fill_texture(metadata, "NO", &maze->map.parsed.NO);
-		fill_texture(metadata, "SO", &maze->map.parsed.SO);
-		fill_texture(metadata, "WE", &maze->map.parsed.WE);
-		fill_texture(metadata, "EA", &maze->map.parsed.EA);
+		fill_texture(metadata, "NO", &maze->map.parsed.no);
+		fill_texture(metadata, "SO", &maze->map.parsed.so);
+		fill_texture(metadata, "WE", &maze->map.parsed.we);
+		fill_texture(metadata, "EA", &maze->map.parsed.ea);
 		(*track_metadata)++;
 	}
 	else if (metadata[0] != '\n' && metadata[0] != '\0')
@@ -107,9 +107,9 @@ int	read_map(t_maze *maze)
 			return (FAILURE);
 		free(line);
 	}
-	if (maze->map.parsed.F == NULL || maze->map.parsed.C == NULL
-		|| maze->map.parsed.NO == NULL || maze->map.parsed.SO == NULL
-		|| maze->map.parsed.EA == NULL || maze->map.parsed.WE == NULL)
+	if (maze->map.parsed.f == NULL || maze->map.parsed.c == NULL
+		|| maze->map.parsed.no == NULL || maze->map.parsed.so == NULL
+		|| maze->map.parsed.ea == NULL || maze->map.parsed.we == NULL)
 		return (ft_putendl_fd("Texture or color could not be loaded", 2), 1);
 	if (track_metadata != 6)
 		return (ft_putendl_fd("Duplicate metadata", 2), 1);
