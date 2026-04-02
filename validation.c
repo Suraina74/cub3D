@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/02 13:27:23 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/02 15:17:38 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	inner_valid_map(t_maze *maze, int *col, int *row, int *p_cnt)
 {
 	char	c;
 
+	if (maze->map.parsed.map_data[0][0] == '0')
+		return (ft_putendl_fd("Map is not enclosed", 2), FAILURE);
 	while (maze->map.parsed.map_data[*row][*col])
 	{
 		c = maze->map.parsed.map_data[*row][*col];
@@ -51,6 +53,8 @@ static int	inner_valid_map(t_maze *maze, int *col, int *row, int *p_cnt)
 		else
 			return (ft_putendl_fd("Invalid character in map", 2), FAILURE);
 	}
+	if (maze->map.parsed.map_data[*row][*col] == '0' || maze->map.parsed.map_data[*row][0] == '0')
+		return (ft_putendl_fd("Map is not enclosed", 2), FAILURE);
 	return (SUCCESS);
 }
 
