@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 12:44:51 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/27 18:18:18 by schabboe         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3d.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
+/*   Updated: 2026/04/02 14:11:36 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(int argc, char **argv)
 		return (write(2, "Error displaying image\n", 23), 1);
 	gettimeofday(&maze.move.begin_time, NULL);
 	maze.move.begin_sec = maze.move.begin_time.tv_sec + maze.move.begin_time.tv_usec/1000000.0;
+	draw_c_f(&maze);
 	init_vectors(&maze);
 	raycasting(&maze);
 	gettimeofday(&maze.move.end_time, NULL);

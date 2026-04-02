@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   key_presses.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 18:21:29 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/27 18:45:48 by schabboe         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   key_presses.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/03/10 18:21:29 by schabboe      #+#    #+#                 */
+/*   Updated: 2026/04/02 13:34:49 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	movement(void *param)
 		write(2, "Error displaying image\n", 23);
 		exit(1);
 	}
+	draw_c_f(maze);
 	raycasting(maze);
 	gettimeofday(&maze->move.end_time, NULL);
 	maze->move.end_sec = maze->move.end_time.tv_sec + \

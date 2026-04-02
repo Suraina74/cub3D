@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 10:28:57 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/03/06 17:01:52 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/02 14:01:23 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ char	*split_rgb(char *s)
 	return (ft_d_free(split_spaces), result);
 }
 
-int	*fill_rgb(char *s)
+uint8_t	*fill_rgb(char *s)
 {
 	char	**split_comma;
-	int		*arr;
+	uint8_t	*arr;
 
 	if (s == NULL)
 		return (ft_putendl_fd("RGB value is empty", 2), NULL);

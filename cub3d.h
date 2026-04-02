@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/02 13:26:58 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/02 14:01:38 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # include <sys/time.h>
 
 # define WIDTH 1024
-# define HEIGHT 668
+// # define HEIGHT 668
+# define HEIGHT 640
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
@@ -56,8 +57,8 @@ typedef struct s_parse
 	char	*ea;
 	char	*c;
 	char	*f;
-	int		*rgb_floor;
-	int		*rgb_ceiling;
+	uint8_t	*rgb_floor;
+	uint8_t	*rgb_ceiling;
 	char	player;
 }				t_parse;
 
@@ -140,8 +141,9 @@ void	ft_d_free(char **arr);
 //RGB
 int		validate_rgb(t_maze *maze);
 char	*split_rgb(char *s);
-int		*fill_rgb(char *s);
+uint8_t	*fill_rgb(char *s);
 int		ft_digit_check(char *str);
+void	draw_c_f(t_maze *maze);
 
 //Parse
 int		read_map(t_maze *maze);
