@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/02 14:01:38 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/02 14:32:51 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <sys/time.h>
 
 # define WIDTH 1024
-// # define HEIGHT 668
 # define HEIGHT 640
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
