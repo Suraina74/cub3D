@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/10/23 22:29:13 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/02 14:52:32 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 17:14:58 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!s1 || !set)
 		return (NULL);
 	start = 0;
-	end = ft_strlen(s1);
-	while (ft_strchr(set, s1[start]))
+	while (s1[start] && ft_strchr(set, s1[start]))
 		start++;
-	while (ft_strrchr(set, s1[end]))
+	end = ft_strlen(s1);
+	while (end > start && ft_strchr(set, s1[end - 1]))
 		end--;
-	str = ft_substr(s1, start, end - start + 1);
-	if (str == NULL)
+	str = ft_substr(s1, start, end - start);
+	if (!str)
 		return (NULL);
 	return (str);
 }
