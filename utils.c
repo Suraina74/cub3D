@@ -6,27 +6,17 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:57:18 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/02/26 16:18:20 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 16:41:39 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <limits.h>
 
-void	ft_d_free(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i] != NULL)
-		free(arr[i++]);
-	free(arr);
-}
-
-int	ft_digit_check(char *str)
+uint8_t	ft_digit_check(char *str)
 {
 	int		i;
-	long	res;
+	uint8_t	res;
 
 	i = 0;
 	res = 0;

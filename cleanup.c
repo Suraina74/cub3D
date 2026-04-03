@@ -6,11 +6,21 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/03 14:41:41 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/03 15:51:20 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 17:04:04 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_d_free(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i] != NULL)
+		free(arr[i++]);
+	free(arr);
+}
 
 void free_tex(t_maze *maze)
 {
@@ -39,7 +49,7 @@ void	free_rgb(t_maze *maze)
 	if (maze->map.parsed.rgb_ceiling)
 		free(maze->map.parsed.rgb_ceiling);
 }
-
+		
 void delete_tex(t_maze *maze)
 {
 	if (maze->txtr.north)

@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/03 16:04:31 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 17:08:25 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 	if (argc > 2)
 		return (write(2, "Too many arguments!\n", 20), 1);
 	len_arg = ft_strlen(argv[1]);
-
 	file_type = ft_substr(argv[1], (len_arg - 4), 4);
 	if (file_type == NULL)
 		return (1);
@@ -32,7 +31,7 @@ int	main(int argc, char **argv)
 	free(file_type);
 	maze.filename = argv[1];
 	if (read_map(&maze))
-		return (ft_d_free(maze.map.parsed.map_data), delete_tex(&maze), FAILURE);
+		return (free_rgb(&maze), ft_d_free(maze.map.parsed.map_data), delete_tex(&maze), FAILURE);
 	maze.mlx = mlx_init(WIDTH, HEIGHT, "cubed", true);
 	if (!maze.mlx)
 		return( 1);

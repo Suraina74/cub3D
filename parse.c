@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/03 16:03:46 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 17:08:03 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,21 @@ static int	fill_metadata(t_maze *maze, char *metadata,
 	if (floor)
 	{
 		maze->map.parsed.f = split_rgb(floor);
-		if (fill_rgb(maze->map.parsed.f) == NULL)
-			return (FAILURE);
+		if (maze->map.parsed.f == NULL)
+			return (1);
 		maze->map.parsed.rgb_floor = fill_rgb(maze->map.parsed.f);
+		if (maze->map.parsed.rgb_floor == NULL)
+			return (FAILURE);
 		(*track_metadata)++;
 	}
 	else if (ceiling)
 	{
 		maze->map.parsed.c = split_rgb(ceiling);
-		if (fill_rgb(maze->map.parsed.c) == NULL)
-			return (FAILURE);
+		if (maze->map.parsed.c == NULL)
+			return (1);
 		maze->map.parsed.rgb_ceiling = fill_rgb(maze->map.parsed.c);
+		if (maze->map.parsed.rgb_ceiling == NULL)
+			return (FAILURE);
 		(*track_metadata)++;
 	}
 	else if (ft_strncmp(metadata, "NO", 2) == 0
@@ -76,13 +80,13 @@ static int	fill_metadata(t_maze *maze, char *metadata,
 		|| ft_strncmp(metadata, "WE", 2) == 0)
 	{
 		if (fill_texture(metadata, "NO", &maze->map.parsed.no))
-			return (1);
+			return (free_rgb(maze), 1);
 		if (fill_texture(metadata, "SO", &maze->map.parsed.so))
-			return (1);
+			return (free_rgb(maze), 1);
 		if (fill_texture(metadata, "WE", &maze->map.parsed.we))
-			return (1);
+			return (free_rgb(maze), 1);
 		if (fill_texture(metadata, "EA", &maze->map.parsed.ea))
-			return (1);
+			return (free_rgb(maze), 1);
 		(*track_metadata)++;
 	}
 	else if (metadata[0] != '\n' && metadata[0] != '\0')
@@ -115,7 +119,7 @@ int	read_map(t_maze *maze)
 		if (!metadata)
 			return (free(line), FAILURE);
 		if (fill_metadata(maze, metadata, fd, &track_metadata))
-			return (free_rgb(maze), free_tex(maze), free(line), free(metadata), FAILURE);
+			return (free_tex(maze), free(line), free(metadata), FAILURE);
 		free(metadata);
 		free(line);
 	}
