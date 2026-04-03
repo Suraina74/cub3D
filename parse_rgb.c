@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 10:28:57 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/02 14:01:23 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 16:00:06 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ uint8_t	*fill_rgb(char *s)
 	split_comma = ft_split(s, ',');
 	if (!split_comma)
 		return (NULL);
-	arr = malloc(3 * sizeof(int));
+	arr = malloc(3 * sizeof(uint8_t));
 	if (!arr)
 		return (ft_d_free(split_comma), NULL);
 	if (!split_comma[0] || !split_comma[1] || !split_comma[2])
-		return (ft_putendl_fd("RGB: color value missing", 2), NULL);
+		return (ft_d_free(split_comma), free(arr), ft_putendl_fd("RGB: color value missing", 2), NULL);
 	arr[0] = ft_digit_check(split_comma[0]);
 	arr[1] = ft_digit_check(split_comma[1]);
 	arr[2] = ft_digit_check(split_comma[2]);

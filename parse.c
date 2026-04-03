@@ -6,21 +6,26 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/02 13:28:10 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 16:03:46 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	fill_texture(char *s, char *dir, char **d)
+int fill_texture(char *s, char *dir, char **d)
 {
 	char	**get_texture;
 
 	if (ft_strncmp(s, dir, 2) == 0)
 	{
 		get_texture = ft_split(s, ' ');
+		if (!get_texture)
+			return (1);
 		*d = get_texture[1];
+		free(get_texture[0]);
+		free(get_texture);
 	}
+	return (0);
 }
 
 static int	fill_map(t_maze *maze, char *metadata, int fd)
@@ -70,10 +75,14 @@ static int	fill_metadata(t_maze *maze, char *metadata,
 		|| ft_strncmp(metadata, "EA", 2) == 0
 		|| ft_strncmp(metadata, "WE", 2) == 0)
 	{
-		fill_texture(metadata, "NO", &maze->map.parsed.no);
-		fill_texture(metadata, "SO", &maze->map.parsed.so);
-		fill_texture(metadata, "WE", &maze->map.parsed.we);
-		fill_texture(metadata, "EA", &maze->map.parsed.ea);
+		if (fill_texture(metadata, "NO", &maze->map.parsed.no))
+			return (1);
+		if (fill_texture(metadata, "SO", &maze->map.parsed.so))
+			return (1);
+		if (fill_texture(metadata, "WE", &maze->map.parsed.we))
+			return (1);
+		if (fill_texture(metadata, "EA", &maze->map.parsed.ea))
+			return (1);
 		(*track_metadata)++;
 	}
 	else if (metadata[0] != '\n' && metadata[0] != '\0')
@@ -103,8 +112,11 @@ int	read_map(t_maze *maze)
 		if (line == NULL)
 			break ;
 		metadata = ft_strtrim(line, "\n");
+		if (!metadata)
+			return (free(line), FAILURE);
 		if (fill_metadata(maze, metadata, fd, &track_metadata))
-			return (FAILURE);
+			return (free_rgb(maze), free_tex(maze), free(line), free(metadata), FAILURE);
+		free(metadata);
 		free(line);
 	}
 	if (maze->map.parsed.f == NULL || maze->map.parsed.c == NULL

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 14:02:56 by schabboe          #+#    #+#             */
-/*   Updated: 2025/05/24 13:30:30 by schabboe         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   libft.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/10/18 14:02:56 by schabboe      #+#    #+#                 */
+/*   Updated: 2026/04/03 14:37:30 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,12 @@ int		ft_hexadecimal_x(unsigned int number);
 int		ft_hexadecimal(unsigned int number);
 int		ft_pointer(uintptr_t n);
 char	*get_next_line(int fd);
-char	*gn_strjoin(const char *s1, const char *s2);
-size_t	gn_strlen(const char *s);
-char	*gn_strdup(const char *s);
-char	*gn_substr(const char *s, unsigned int start, size_t len);
-char	*gn_strchr(const char *s, int c);
+// char	*gn_strjoin(const char *s1, const char *s2);
+// size_t	gn_strlen(const char *s);
+// char	*gn_strdup(const char *s);
+// char	*gn_substr(const char *s, unsigned int start, size_t len);
+// char	*gn_strchr(const char *s, int c);
+
+char				*gnl_strjoin(char **line, char *buffer);
+char				*get_next_line(int fd);
 #endif

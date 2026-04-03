@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/02 14:32:51 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 15:51:31 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,5 +160,9 @@ void	movement(void *param);
 void	raycasting(t_maze *maze);
 void	init_vectors(t_maze *maze);
 void	draw_line(t_maze *maze, int x);
+void	delete_tex(t_maze *maze);
+void	free_tex(t_maze *maze);
+void	free_c_f(t_maze *maze);
+void	free_rgb(t_maze *maze);
 
 #endif

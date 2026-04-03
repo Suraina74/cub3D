@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/03 12:52:06 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 14:56:15 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	validate_texture(t_maze *maze)
 		return (ft_putendl_fd("East texture error", 2), FAILURE);
 	maze->txtr.west = mlx_load_png(maze->map.parsed.we);
 	if (!maze->txtr.west)
-		return (ft_putendl_fd("West texture error", 2), FAILURE);
+		return (ft_putendl_fd("East texture error", 2), FAILURE);
 	return (SUCCESS);
 }
 

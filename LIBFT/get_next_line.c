@@ -3,89 +3,93 @@
 /*                                                        ::::::::            */
 /*   get_next_line.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/11/21 16:01:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/03/06 17:43:19 by ksoedama      ########   odam.nl         */
+/*   Created: 2026/04/03 14:36:22 by ksoedama      #+#    #+#                 */
+/*   Updated: 2026/04/03 14:36:23 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*new_line(char **line)
+static ssize_t	read_to_line(int fd, char **line)
 {
-	char	*remainder;
-	char	*newline;
-	char	*new_line_ch;
+	char	*buffer;
+	ssize_t	byte_size;
 
-	new_line_ch = gn_strchr(*line, '\n');
-	if (new_line_ch != NULL)
+	byte_size = 0;
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (buffer == NULL)
+		return (-1);
+	byte_size = read(fd, buffer, BUFFER_SIZE);
+	while (byte_size > 0)
 	{
-		newline = gn_substr(*line, 0, (gn_strlen(*line) \
-- gn_strlen(new_line_ch)) + 1);
-		remainder = gn_strdup(&new_line_ch[1]);
-		free(*line);
-		*line = NULL;
-		if (newline == NULL || remainder == NULL)
-			return (free(newline), free(remainder), NULL);
-		*line = remainder;
-		return (newline);
-	}
-	newline = *line;
-	*line = NULL;
-	return (newline);
-}
-
-static char	*join_line(char *line, char *buffer)
-{
-	char	*temp;
-
-	temp = line;
-	line = gn_strjoin(line, buffer);
-	free(temp);
-	return (line);
-}
-
-static char	*fill_line(int fd, char *buffer, char *line)
-{
-	int		bytes_read;
-
-	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	if (bytes_read == -1 || (bytes_read == 0 \
-&& line == NULL) || (bytes_read == 0 && line[0] == '\0'))
-	{
-		if (line != NULL)
-			free(line);
-		return (NULL);
-	}
-	if (line == NULL)
-		line = gn_strdup("");
-	if (line == NULL)
-		return (NULL);
-	while (bytes_read > 0)
-	{
-		buffer[bytes_read] = '\0';
-		line = join_line(line, buffer);
-		if (line == NULL)
-			return (NULL);
-		if (gn_strchr(buffer, '\n') != NULL)
+		buffer[byte_size] = '\0';
+		*line = gnl_strjoin(line, buffer);
+		if (*line == NULL)
+		{
+			free(buffer);
+			return (-1);
+		}
+		if (ft_strchr(*line, '\n'))
 			break ;
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		byte_size = read(fd, buffer, BUFFER_SIZE);
 	}
-	return (line);
+	free(buffer);
+	return (byte_size);
+}
+
+static char	*fn_free_and_return(char **line)
+{
+	free(*line);
+	*line = NULL;
+	return (NULL);
+}
+
+static char	*fn_strtok(char **line, char ch)
+{
+	char	*out_line;
+	char	*nl;
+	size_t	line_len;
+
+	if (*line == NULL)
+		return (NULL);
+	nl = ft_strchr(*line, ch);
+	if (nl)
+	{
+		line_len = ft_strlen(*line);
+		out_line = ft_substr(*line, 0, nl - *line + 1);
+		if (out_line == NULL)
+			return (fn_free_and_return(line));
+		if ((*(*line + (nl - *line + 1)) != '\0'))
+			ft_strlcpy(*line, *line + (nl - *line + 1), line_len + 1);
+		else
+			fn_free_and_return(line);
+	}
+	else
+	{
+		out_line = ft_strdup(*line);
+		fn_free_and_return(line);
+	}
+	return (out_line);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*newline;
 	static char	*line;
-	static char	buffer[BUFFER_SIZE + 1] = {0};
+	ssize_t		byte_read;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	byte_read = 0;
+	if (line == NULL || ft_strchr(line, '\n') == NULL)
+		byte_read = read_to_line(fd, &line);
+	if (byte_read < 0)
+	{
+		if (line != NULL)
+		{
+			free(line);
+			line = NULL;
+		}
 		return (NULL);
-	line = fill_line(fd, buffer, line);
-	if (line == NULL)
-		return (NULL);
-	newline = new_line(&line);
-	return (newline);
+	}
+	return (fn_strtok(&line, '\n'));
 }

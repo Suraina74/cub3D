@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/02 14:33:45 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 16:04:31 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,16 @@ int	main(int argc, char **argv)
 	if (argc > 2)
 		return (write(2, "Too many arguments!\n", 20), 1);
 	len_arg = ft_strlen(argv[1]);
+
 	file_type = ft_substr(argv[1], (len_arg - 4), 4);
 	if (file_type == NULL)
 		return (1);
 	if (ft_strncmp(file_type, ".cub", 4) != 0)
-		return (write(2, "Invalid map!\n", 13), 1);
+		return (free(file_type), write(2, "Invalid map!\n", 13), 1);
 	free(file_type);
 	maze.filename = argv[1];
 	if (read_map(&maze))
-		return (FAILURE);
+		return (ft_d_free(maze.map.parsed.map_data), delete_tex(&maze), FAILURE);
 	maze.mlx = mlx_init(WIDTH, HEIGHT, "cubed", true);
 	if (!maze.mlx)
 		return( 1);
@@ -51,5 +52,10 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(maze.mlx, &press_esc, &maze);
 	mlx_loop(maze.mlx);
 	mlx_terminate(maze.mlx);
+	free_tex(&maze);
+	free_c_f(&maze);
+	free_rgb(&maze);
+	ft_d_free(maze.map.parsed.map_data);
+	delete_tex(&maze);
 	return (0);
 }
