@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/02 13:21:59 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/02 14:22:56 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 10:24:11 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,4 @@ void draw_c_f(t_maze *maze)
 		}
 		i++;
 	}
-	
 }

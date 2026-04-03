@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/02 15:24:33 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/03 12:34:55 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,40 @@ static int	valid_map_character(t_maze *maze)
 	return (SUCCESS);
 }
 
+// top and bottom rows should all be 1's or spaces
+//if spaces keep looking until 1 is found if something else map not enclosed
+
+
+static int	check_enclosed(t_maze *maze)
+{
+	int	i;
+	int	j;
+	int width;
+
+	i = 0;
+	while (i < maze->map.height)
+	{
+		j = 0;
+		width = (int)ft_strlen(maze->map.parsed.map_data[i]) - 1;
+		while (maze->map.parsed.map_data[i][j] != '\0')
+		{
+			if (maze->map.parsed.map_data[i][width] == '0')
+				return (ft_putendl_fd("Map is not enclosed", 2), FAILURE);
+			if (maze->map.parsed.map_data[0][j] == '0')
+				return (ft_putendl_fd("Map is not enclosed", 2), FAILURE);
+			j++;
+		}
+		i++;
+	}
+	return (SUCCESS);
+}
+
 int	validate_map(t_maze *maze)
 {
 	if (valid_map_character(maze))
+		return (FAILURE);
+	//check if MAP enclosed by swalls
+	if (check_enclosed(maze))
 		return (FAILURE);
 	if (flood_fill(maze, maze->player.pos_y, maze->player.pos_x))
 	{
