@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/05 12:52:18 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/03 16:37:56 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
+/*   Updated: 2026/04/04 11:11:32 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,8 @@ void	draw_c_f(t_maze *maze);
 int		read_map(t_maze *maze);
 int		validate_map(t_maze *maze);
 int		validate_texture(t_maze *maze);
-// void	flood_fill(t_maze *maze, int x, int y);
-
+int		alloc_rows(t_maze *maze);
+int		fill_rows(t_maze *maze, char *map_row, int *i);
 int		flood_fill(t_maze *maze, int x, int y);
 
 // MLX functions
