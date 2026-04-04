@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fill_map.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 10:56:43 by schabboe          #+#    #+#             */
-/*   Updated: 2026/04/04 12:07:52 by schabboe         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   fill_map.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/04/04 10:56:43 by schabboe      #+#    #+#                 */
+/*   Updated: 2026/04/04 14:33:59 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	count_rows(t_maze *maze)
 int	alloc_rows(t_maze *maze)
 {
 	if (count_rows(maze) == 1)
+		return (FAILURE);
+	if (maze->map.height == 0)
 		return (FAILURE);
 	maze->map.parsed.map_data = malloc((maze->map.height + 1) * sizeof(char*));
 	if (maze->map.parsed.map_data == NULL)
