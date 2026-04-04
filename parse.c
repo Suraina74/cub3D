@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 13:58:29 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/04 11:59:35 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/04 15:35:38 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,31 @@ int fill_texture(char *s, char *dir, char **d)
 	return (0);
 }
 
+int	check_if_filled(t_maze *maze, char *metadata)
+{
+	if (ft_strncmp(metadata, "NO", 2) == 0)
+	{
+		if (maze->map.parsed.no != NULL)
+			return (ft_putendl_fd("Duplicate N metadata", 2), FAILURE);
+	}
+	if (ft_strncmp(metadata, "SO", 2) == 0)
+	{
+		if (maze->map.parsed.so != NULL)
+			return (ft_putendl_fd("Duplicate S metadata", 2), FAILURE);
+	}
+	if (ft_strncmp(metadata, "WE", 2) == 0)
+	{
+		if (maze->map.parsed.we != NULL)
+			return (ft_putendl_fd("Duplicate W metadata", 2), FAILURE);
+	}
+	if (ft_strncmp(metadata, "EA", 2) == 0)
+	{
+		if (maze->map.parsed.ea != NULL)
+			return (ft_putendl_fd("Duplicate E metadata", 2), FAILURE);
+	}
+	return (SUCCESS);
+}
+
 static int	fill_metadata(t_maze *maze, char *metadata, int *track_metadata, int *i)
 {
 	char	*floor;
@@ -37,9 +62,13 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *track_metadata, int 
 	ceiling = ft_strchr(metadata, 'C');
 	if (floor)
 	{
+		if (maze->map.parsed.f != NULL)
+			return (ft_putendl_fd("Duplicate F metadata", 2), FAILURE);
 		maze->map.parsed.f = split_rgb(floor);
+		if (maze->map.parsed.f == NULL && floor != NULL)
+			return (ft_putendl_fd("Missing RGB Value", 2), FAILURE);
 		if (maze->map.parsed.f == NULL)
-			return (1);
+			return(FAILURE);
 		maze->map.parsed.rgb_floor = fill_rgb(maze->map.parsed.f);
 		if (maze->map.parsed.rgb_floor == NULL)
 			return (FAILURE);
@@ -47,6 +76,8 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *track_metadata, int 
 	}
 	else if (ceiling)
 	{
+		if (maze->map.parsed.c != NULL)
+			return (ft_putendl_fd("Duplicate C metadata", 2), FAILURE);
 		maze->map.parsed.c = split_rgb(ceiling);
 		if (maze->map.parsed.c == NULL)
 			return (1);
@@ -60,6 +91,8 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *track_metadata, int 
 		|| ft_strncmp(metadata, "EA", 2) == 0
 		|| ft_strncmp(metadata, "WE", 2) == 0)
 	{
+		if (check_if_filled(maze, metadata))
+			return (FAILURE);
 		if (fill_texture(metadata, "NO", &maze->map.parsed.no))
 			return (free_rgb(maze), 1);
 		if (fill_texture(metadata, "SO", &maze->map.parsed.so))
@@ -114,8 +147,8 @@ int	read_map(t_maze *maze)
 		|| maze->map.parsed.no == NULL || maze->map.parsed.so == NULL
 		|| maze->map.parsed.ea == NULL || maze->map.parsed.we == NULL)
 		return (ft_putendl_fd("Texture or color could not be loaded", 2), 1);
-	if (track_metadata != 6)
-		return (ft_putendl_fd("Duplicate metadata", 2), 1);
+	// if (track_metadata != 6)
+	// 	return (ft_putendl_fd("Duplicate metadata", 2), 1);
 	if (validate_texture(maze))
 		return (FAILURE);
 	if (validate_rgb(maze))
