@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 13:58:29 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/08 21:20:30 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:44:28 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 			return (ft_putendl_fd("Duplicate F metadata", 2), FAILURE);
 		maze->map.parsed.f = split_rgb(floor);
 		if (maze->map.parsed.f == NULL && floor != NULL)
-			return (ft_putendl_fd("Missing RGB Value", 2), FAILURE);
+			return (ft_putendl_fd("RGB value could not be loaded", 2), FAILURE);
 		if (maze->map.parsed.f == NULL)
 			return(FAILURE);
 		if (fill_rgb(maze->map.parsed.f, &arr) == 1)

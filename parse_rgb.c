@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 10:28:57 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/08 21:37:16 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:48:43 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	fill_rgb(char *s, int **arr)
 	int rgb_cntr = 1;
 	while (split_comma[rgb_cntr])
 		rgb_cntr++;
+	
 	if (rgb_cntr != 3)
 		return (ft_d_free(split_comma),  ft_putendl_fd("Amount of RGB values not correct", 2), 1);
 	if (!split_comma)
