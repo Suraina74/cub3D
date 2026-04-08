@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 10:28:57 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/08 21:48:43 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/08 22:22:16 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,16 @@ char	*split_rgb(char *s)
 {
 	char	**split_spaces;
 	char	*result;
+	int		element_cntr;
 
+	element_cntr = 1;
 	split_spaces = ft_split(s, ' ');
 	if (!split_spaces)
 		return (NULL);
+	while (split_spaces[element_cntr])
+		element_cntr++;
+	if (element_cntr != 2)
+		return (ft_d_free(split_spaces), NULL);
 	if (!split_spaces[1])
 		return (ft_d_free(split_spaces), NULL);
 	result = ft_strdup(split_spaces[1]);
@@ -32,13 +38,21 @@ int	fill_rgb(char *s, int **arr)
 
 	if (s == NULL)
 		return (ft_putendl_fd("RGB value is empty", 2), 1);
+	int i = 0;
+	while (s[i])
+	{
+		if (s[0] == ',')
+			return (ft_putendl_fd("RGB error", 2), 1);
+		if (s[i] == ',' && (!ft_isdigit(s[i + 1]) || !ft_isdigit(s[i - 1])))
+			return (ft_putendl_fd("RGB error", 2), 1);
+		i++;
+	}
 	split_comma = ft_split(s, ',');
 	int rgb_cntr = 1;
 	while (split_comma[rgb_cntr])
 		rgb_cntr++;
-	
 	if (rgb_cntr != 3)
-		return (ft_d_free(split_comma),  ft_putendl_fd("Amount of RGB values not correct", 2), 1);
+		return (ft_d_free(split_comma), ft_putendl_fd("Amount of RGB values not correct", 2), 1);
 	if (!split_comma)
 		return (1);
 	if (!split_comma[0] || !split_comma[1] || !split_comma[2])
