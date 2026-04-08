@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/13 09:57:18 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/03 16:41:39 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/13 09:57:18 by ksoedama          #+#    #+#             */
+/*   Updated: 2026/04/08 21:30:33 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <limits.h>
 
-uint8_t	ft_digit_check(char *str)
+int	ft_digit_check(char *str)
 {
 	int		i;
-	uint8_t	res;
+	int		res;
 
 	i = 0;
 	res = 0;
@@ -24,12 +24,13 @@ uint8_t	ft_digit_check(char *str)
 		|| str[i] == '\f' || str[i] == '\r')
 		i++;
 	if (str[i] == '-')
-		return (-1);
+		return (ft_putendl_fd("Value cannot be negative", 2), -1);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		if (res > (INT_MAX - (str[i] - '0')) / 10)
-			return (-1);
+			return (ft_putendl_fd("Overflow", 2), -1);
 		res = (res * 10) + (str[i++] - '0');
 	}
+	// printf("%d\n", res);
 	return (res);
 }

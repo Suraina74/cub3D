@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 13:58:29 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/04 15:58:59 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:20:30 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 {
 	char	*floor;
 	char	*ceiling;
+	int		*arr;
 	
 	floor = ft_strchr(metadata, 'F');
 	ceiling = ft_strchr(metadata, 'C');
@@ -69,9 +70,9 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 			return (ft_putendl_fd("Missing RGB Value", 2), FAILURE);
 		if (maze->map.parsed.f == NULL)
 			return(FAILURE);
-		maze->map.parsed.rgb_floor = fill_rgb(maze->map.parsed.f);
-		if (maze->map.parsed.rgb_floor == NULL)
+		if (fill_rgb(maze->map.parsed.f, &arr) == 1)
 			return (FAILURE);
+		maze->map.parsed.rgb_floor = arr;
 	}
 	else if (ceiling)
 	{
@@ -80,9 +81,9 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 		maze->map.parsed.c = split_rgb(ceiling);
 		if (maze->map.parsed.c == NULL)
 			return (1);
-		maze->map.parsed.rgb_ceiling = fill_rgb(maze->map.parsed.c);
-		if (maze->map.parsed.rgb_ceiling == NULL)
+		if (fill_rgb(maze->map.parsed.c, &arr) == 1)
 			return (FAILURE);
+		maze->map.parsed.rgb_ceiling = arr;
 	}
 	else if (ft_strncmp(metadata, "NO", 2) == 0
 		|| ft_strncmp(metadata, "SO", 2) == 0

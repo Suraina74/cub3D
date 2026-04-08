@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   draw_c_f.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/04/02 13:21:59 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/03 10:24:11 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   draw_c_f.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/02 13:21:59 by ksoedama          #+#    #+#             */
+/*   Updated: 2026/04/08 21:23:50 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void draw_c_f(t_maze *maze)
 	uint32_t color_ceiling;
 	uint32_t color_floor;
 	
-	maze->colors.r = maze->map.parsed.rgb_ceiling[0];
-	maze->colors.g = maze->map.parsed.rgb_ceiling[1];
-	maze->colors.b = maze->map.parsed.rgb_ceiling[2];
+	maze->colors.r = (uint8_t)maze->map.parsed.rgb_ceiling[0];
+	maze->colors.g = (uint8_t)maze->map.parsed.rgb_ceiling[1];
+	maze->colors.b = (uint8_t)maze->map.parsed.rgb_ceiling[2];
 	maze->colors.a = 255;
 	
 	color_ceiling = (maze->colors.r << 24) | (maze->colors.g << 16) | \
@@ -38,9 +38,9 @@ void draw_c_f(t_maze *maze)
 		}
 		i++;
 	}
-	maze->colors.r = maze->map.parsed.rgb_floor[0];
-	maze->colors.g = maze->map.parsed.rgb_floor[1];
-	maze->colors.b = maze->map.parsed.rgb_floor[2];
+	maze->colors.r = (uint8_t)maze->map.parsed.rgb_floor[0];
+	maze->colors.g = (uint8_t)maze->map.parsed.rgb_floor[1];
+	maze->colors.b = (uint8_t)maze->map.parsed.rgb_floor[2];
 	maze->colors.a = 255;
 	
 	color_floor = (maze->colors.r << 24) | (maze->colors.g << 16) | \
