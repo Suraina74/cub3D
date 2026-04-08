@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 13:58:29 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/08 22:24:33 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/08 22:25:29 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 	
 	floor = ft_strchr(metadata, 'F');
 	ceiling = ft_strchr(metadata, 'C');
-	
 	if (floor)
 	{
 		if (maze->map.parsed.f != NULL)

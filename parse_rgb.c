@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 10:28:57 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/08 22:22:16 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/08 22:29:14 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ char	*split_rgb(char *s)
 	char	**split_spaces;
 	char	*result;
 	int		element_cntr;
+	int		i;
 
+	i = 0;
 	element_cntr = 1;
 	split_spaces = ft_split(s, ' ');
 	if (!split_spaces)
@@ -25,6 +27,8 @@ char	*split_rgb(char *s)
 	while (split_spaces[element_cntr])
 		element_cntr++;
 	if (element_cntr != 2)
+		return (ft_d_free(split_spaces), NULL);
+	if (ft_strlen(split_spaces[0]) != 1)
 		return (ft_d_free(split_spaces), NULL);
 	if (!split_spaces[1])
 		return (ft_d_free(split_spaces), NULL);
