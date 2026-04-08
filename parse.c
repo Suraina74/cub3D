@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 13:58:29 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/08 22:25:29 by schabboe         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
+/*   Updated: 2026/04/08 22:35:23 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int fill_texture(char *s, char *dir, char **d)
 		get_texture = ft_split(s, ' ');
 		if (!get_texture)
 			return (1);
+		if (ft_strlen(get_texture[0]) != 2)
+			return (free(get_texture), ft_putendl_fd("Texture error", 2), 1);
 		*d = get_texture[1];
 		free(get_texture[0]);
 		free(get_texture);
