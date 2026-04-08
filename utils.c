@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 09:57:18 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/08 21:30:33 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:32:21 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int	ft_digit_check(char *str)
 			return (ft_putendl_fd("Overflow", 2), -1);
 		res = (res * 10) + (str[i++] - '0');
 	}
-	// printf("%d\n", res);
 	return (res);
 }

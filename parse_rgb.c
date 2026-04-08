@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 10:28:57 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/08 21:26:36 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:37:16 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	fill_rgb(char *s, int **arr)
 	if (s == NULL)
 		return (ft_putendl_fd("RGB value is empty", 2), 1);
 	split_comma = ft_split(s, ',');
+	int rgb_cntr = 1;
+	while (split_comma[rgb_cntr])
+		rgb_cntr++;
+	if (rgb_cntr != 3)
+		return (ft_d_free(split_comma),  ft_putendl_fd("Amount of RGB values not correct", 2), 1);
 	if (!split_comma)
 		return (1);
 	if (!split_comma[0] || !split_comma[1] || !split_comma[2])
@@ -44,7 +49,7 @@ int	fill_rgb(char *s, int **arr)
 	(*arr)[1] = ft_digit_check(split_comma[1]);
 	(*arr)[2] = ft_digit_check(split_comma[2]);
 	if((*arr)[0] == -1 || (*arr)[1] == -1 || (*arr)[2] == -1)
-		return (1);		
+		return (1);
 	return (ft_d_free(split_comma), 0);
 }
 
