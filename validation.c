@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/09 20:22:35 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/09 22:00:34 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	check_enclosed(t_maze *maze)
 		{
 			if (maze->map.parsed.map_data[i][0] == '0' || maze->map.parsed.map_data[i][width - 1] == '0')
 				return (ft_putendl_fd("Map is not enclosed", 2), FAILURE);
-			if (maze->map.parsed.map_data[0][j] == '0')
+			if (i == 0 && maze->map.parsed.map_data[i][j] == '0')
 				return (ft_putendl_fd("Map is not enclosed", 2), FAILURE);
 			if (i == (maze->map.height - 1) && maze->map.parsed.map_data[i][j] == '0')
 				printf("%zu\n", ft_strlen(maze->map.parsed.map_data[i]));

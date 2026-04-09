@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/cub3D",
             "args": [
-                "./map/hole.cub"
+                "./map/cube.cub"
             ],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
