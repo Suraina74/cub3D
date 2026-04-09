@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/09 18:32:05 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/09 19:13:33 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,14 @@ int	check_if_filled(t_maze *maze, char *metadata)
 
 static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 {
-	char	*floor;
-	char	*ceiling;
 	int		*arr;
-	
-	floor = ft_strchr(metadata, 'F');
-	ceiling = ft_strchr(metadata, 'C');
-	if (floor)
+
+	if (ft_strncmp(metadata, "F", 1) == 0)
 	{
 		if (maze->map.parsed.f != NULL)
 			return (ft_putendl_fd("Duplicate F metadata", 2), FAILURE);
-		maze->map.parsed.f = split_rgb(floor);
-		if (maze->map.parsed.f == NULL && floor != NULL)
+		maze->map.parsed.f = split_rgb(metadata);
+		if (maze->map.parsed.f == NULL)
 			return (ft_putendl_fd("RGB value could not be loaded", 2), FAILURE);
 		if (maze->map.parsed.f == NULL)
 			return(FAILURE);
@@ -76,13 +72,13 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 			return (FAILURE);
 		maze->map.parsed.rgb_floor = arr;
 	}
-	else if (ceiling)
+	else if (ft_strncmp(metadata, "C", 1) == 0)
 	{
 		if (maze->map.parsed.c != NULL)
 			return (ft_putendl_fd("Duplicate C metadata", 2), FAILURE);
-		maze->map.parsed.c = split_rgb(ceiling);
+		maze->map.parsed.c = split_rgb(metadata);
 		if (maze->map.parsed.c == NULL)
-			return (1);
+			return (ft_putendl_fd("RGB value could not be loaded", 2), FAILURE);
 		if (fill_rgb(maze->map.parsed.c, &arr) == 1)
 			return (FAILURE);
 		maze->map.parsed.rgb_ceiling = arr;
