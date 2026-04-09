@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/10 18:21:29 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/02 13:34:49 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/09 22:05:10 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	rotate(t_maze *maze, double rotate_speed)
 	double	old_dir_x;
 	double	old_plane_x;
 
-	if (mlx_is_key_down(maze->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(maze->mlx, MLX_KEY_LEFT))
 	{
 		old_dir_x = maze->vector.dir_x;
 		maze->vector.dir_x = maze->vector.dir_x * cos(-rotate_speed) - \
@@ -83,7 +83,7 @@ maze->vector.plane_y * sin(-rotate_speed);
 		maze->vector.plane_y = old_plane_x * sin(-rotate_speed) + \
 maze->vector.plane_y * cos(-rotate_speed);
 	}
-	else if (mlx_is_key_down(maze->mlx, MLX_KEY_LEFT))
+	else if (mlx_is_key_down(maze->mlx, MLX_KEY_RIGHT))
 	{
 		old_dir_x = maze->vector.dir_x;
 		maze->vector.dir_x = maze->vector.dir_x * cos(rotate_speed) - \

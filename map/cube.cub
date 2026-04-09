@@ -3,9 +3,8 @@ SO textures/path_to_the_south_texture.png
 WE textures/path_to_the_west_texture.png
 EA textures/path_to_the_east_texture.png
 
-
-F 0,0,0
-C 225,30,0
+F 255,255,255
+C 0,0,0
 
 111
 1W1
