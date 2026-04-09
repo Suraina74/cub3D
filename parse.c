@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/08 22:35:23 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/09 18:32:05 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,10 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 	}
 	else if (metadata[0] != '\n' && metadata[0] != '\0')
 	{
+		if (maze->map.parsed.f == NULL || maze->map.parsed.c == NULL
+		|| maze->map.parsed.no == NULL || maze->map.parsed.so == NULL
+		|| maze->map.parsed.ea == NULL || maze->map.parsed.we == NULL)
+			return (ft_putendl_fd("Texture or color could not be loaded", 2), 1);
 		if (fill_rows(maze, metadata, i) == 1)
 			return (FAILURE);
 		(*i)++;
@@ -141,10 +145,6 @@ int	read_map(t_maze *maze)
 		free(line);
 	}
 	close (fd);
-	if (maze->map.parsed.f == NULL || maze->map.parsed.c == NULL
-		|| maze->map.parsed.no == NULL || maze->map.parsed.so == NULL
-		|| maze->map.parsed.ea == NULL || maze->map.parsed.we == NULL)
-		return (ft_putendl_fd("Texture or color could not be loaded", 2), 1);
 	if (validate_texture(maze))
 		return (FAILURE);
 	if (validate_rgb(maze))
