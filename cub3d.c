@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/09 22:10:58 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/09 22:18:52 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	main(int argc, char **argv)
 		return (free_c_f(&maze), free_rgb(&maze), free_tex(&maze), ft_d_free(maze.map.parsed.map_data), delete_tex(&maze), FAILURE);
 	maze.screen = mlx_new_image(maze.mlx, WIDTH, HEIGHT);
 	if (!maze.screen || mlx_image_to_window(maze.mlx, maze.screen, 0, 0) < 0)
-		return (write(2, "Error displaying image\n", 23), 1);
+		return (mlx_terminate(maze.mlx), free_c_f(&maze), free_rgb(&maze), free_tex(&maze), \
+ft_d_free(maze.map.parsed.map_data), delete_tex(&maze), write(2, "Error displaying image\n", 23), FAILURE);
 	gettimeofday(&maze.move.begin_time, NULL);
 	maze.move.begin_sec = maze.move.begin_time.tv_sec + maze.move.begin_time.tv_usec/1000000.0;
 	draw_c_f(&maze);

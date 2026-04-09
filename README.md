@@ -3,15 +3,21 @@ of the 42 curriculum by ksoedama, schabboe
 
 # Description
 
-Its a cube in 3d but actually its 2D and not really 3D.
+In this project the goal was to make a 3D maze using raycasting.
+We created a game with a dynamic view inside a maze, where you have to find your way.
+We got to explore windows, colors, events and textures in MLX42.
 
 # Instructions
 
+clone this project, then:
+
 ``` make ```
-./cub3D map/file.cub
+To execute the program:
+
+```./cub3D map/file.cub```
 
 # Resources
 
 - Flood fill for the map validation
 - Vectors for raycasting
-vul dit later aan aub someone anyone...ai???
+
