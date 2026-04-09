@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/10 18:21:29 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/09 22:05:10 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/09 22:16:00 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,12 @@ void	movement(void *param)
 	if (!maze->screen || mlx_image_to_window(maze->mlx, maze->screen, 0, 0) < 0)
 	{
 		write(2, "Error displaying image\n", 23);
-		exit(1);
+		free_c_f(maze);
+		free_rgb(maze);
+		free_tex(maze);
+		ft_d_free(maze->map.parsed.map_data);
+		delete_tex(maze);
+		exit (1);
 	}
 	draw_c_f(maze);
 	raycasting(maze);

@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 12:44:51 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/09 22:01:32 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/09 22:10:58 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,9 @@ int	main(int argc, char **argv)
 	maze.filename = argv[1];
 	if (read_map(&maze))
 		return (free_rgb(&maze), delete_tex(&maze), FAILURE);
-	int i = 0;
-	while (maze.map.parsed.map_data[i])
-	{
-		printf("%s\n", maze.map.parsed.map_data[i]);
-		i++;
-	}
 	maze.mlx = mlx_init(WIDTH, HEIGHT, "cubed", true);
 	if (!maze.mlx)
-		return( 1);
+		return (free_c_f(&maze), free_rgb(&maze), free_tex(&maze), ft_d_free(maze.map.parsed.map_data), delete_tex(&maze), FAILURE);
 	maze.screen = mlx_new_image(maze.mlx, WIDTH, HEIGHT);
 	if (!maze.screen || mlx_image_to_window(maze.mlx, maze.screen, 0, 0) < 0)
 		return (write(2, "Error displaying image\n", 23), 1);
