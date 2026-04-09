@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/13 10:28:57 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/09 19:58:55 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/09 20:52:14 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,14 @@ int	fill_rgb(char *s, int **arr)
 	if (!(*arr))
 		return (ft_d_free(split_comma), 1);
 	(*arr)[0] = ft_digit_check(split_comma[0]);
+	if((*arr)[0] == -1)
+		return (free(*arr), ft_d_free(split_comma), 1);
 	(*arr)[1] = ft_digit_check(split_comma[1]);
+	if((*arr)[1] == -1)
+		return (free(*arr), ft_d_free(split_comma), 1);
 	(*arr)[2] = ft_digit_check(split_comma[2]);
-	if((*arr)[0] == -1 || (*arr)[1] == -1 || (*arr)[2] == -1)
-		return (1);
+	if((*arr)[2] == -1)
+		return (free(*arr), ft_d_free(split_comma), 1);
 	return (ft_d_free(split_comma), 0);
 }
 

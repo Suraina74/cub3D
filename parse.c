@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/09 20:34:21 by ksoedama      ########   odam.nl         */
+/*   Updated: 2026/04/09 20:40:37 by ksoedama      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 		if (maze->map.parsed.f == NULL)
 			return(FAILURE);
 		if (fill_rgb(maze->map.parsed.f, &arr) == 1)
-			return (FAILURE);
+			return(free_c_f(maze), free(maze->map.parsed.map_data), FAILURE);
 		maze->map.parsed.rgb_floor = arr;
 	}
 	else if (ft_strncmp(metadata, "C", 1) == 0)
@@ -80,7 +80,7 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 		if (maze->map.parsed.c == NULL)
 			return (free(maze->map.parsed.map_data), ft_putendl_fd("RGB value could not be loaded", 2), FAILURE);
 		if (fill_rgb(maze->map.parsed.c, &arr) == 1)
-			return (FAILURE);
+			return(free_c_f(maze), free(maze->map.parsed.map_data), FAILURE);
 		maze->map.parsed.rgb_ceiling = arr;
 	}
 	else if (ft_strncmp(metadata, "NO", 2) == 0
@@ -104,7 +104,7 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 		if (maze->map.parsed.f == NULL || maze->map.parsed.c == NULL
 		|| maze->map.parsed.no == NULL || maze->map.parsed.so == NULL
 		|| maze->map.parsed.ea == NULL || maze->map.parsed.we == NULL)
-			return (ft_putendl_fd("Texture or color could not be loaded", 2), 1);
+			return (free(maze->map.parsed.map_data), free_c_f(maze), ft_putendl_fd("Texture or color could not be loaded", 2), 1);
 		if (fill_rows(maze, metadata, i) == 1)
 			return (FAILURE);
 		(*i)++;
@@ -144,7 +144,7 @@ int	read_map(t_maze *maze)
 	if (validate_texture(maze))
 		return (ft_d_free(maze->map.parsed.map_data), free_c_f(maze), free_tex(maze), FAILURE);
 	if (validate_rgb(maze))
-		return (FAILURE);
+		return (ft_d_free(maze->map.parsed.map_data), free_c_f(maze), free_tex(maze), FAILURE);
 	if (validate_map(maze))
 		return (ft_d_free(maze->map.parsed.map_data), free_c_f(maze), free_tex(maze), FAILURE);
 	return (SUCCESS);
