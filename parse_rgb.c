@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_rgb.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/13 10:28:57 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/09 20:52:14 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_rgb.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/13 10:28:57 by ksoedama          #+#    #+#             */
+/*   Updated: 2026/04/10 18:03:57 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ char	*split_rgb(char *s)
 int	fill_rgb(char *s, int **arr)
 {
 	char	**split_comma;
+	int		i;
+	int		rgb_cntr;
 
 	if (s == NULL)
 		return (ft_putendl_fd("RGB value is empty", 2), 1);
-	int i = 0;
+	i = 0;
 	while (s[i])
 	{
 		if (s[0] == ',')
@@ -52,26 +54,28 @@ int	fill_rgb(char *s, int **arr)
 		i++;
 	}
 	split_comma = ft_split(s, ',');
-	int rgb_cntr = 1;
+	rgb_cntr = 1;
 	while (split_comma[rgb_cntr])
 		rgb_cntr++;
 	if (rgb_cntr != 3)
-		return (ft_d_free(split_comma), ft_putendl_fd("Amount of RGB values not correct", 2), 1);
+		return (ft_d_free(split_comma), \
+ft_putendl_fd("Amount of RGB values not correct", 2), 1);
 	if (!split_comma)
 		return (1);
 	if (!split_comma[0] || !split_comma[1] || !split_comma[2])
-		return (ft_d_free(split_comma), ft_putendl_fd("RGB: color value missing", 2), 1);
+		return (ft_d_free(split_comma), \
+ft_putendl_fd("RGB: color value missing", 2), 1);
 	*arr = malloc(3 * sizeof(int));
 	if (!(*arr))
 		return (ft_d_free(split_comma), 1);
 	(*arr)[0] = ft_digit_check(split_comma[0]);
-	if((*arr)[0] == -1)
+	if ((*arr)[0] == -1)
 		return (free(*arr), ft_d_free(split_comma), 1);
 	(*arr)[1] = ft_digit_check(split_comma[1]);
-	if((*arr)[1] == -1)
+	if ((*arr)[1] == -1)
 		return (free(*arr), ft_d_free(split_comma), 1);
 	(*arr)[2] = ft_digit_check(split_comma[2]);
-	if((*arr)[2] == -1)
+	if ((*arr)[2] == -1)
 		return (free(*arr), ft_d_free(split_comma), 1);
 	return (ft_d_free(split_comma), 0);
 }

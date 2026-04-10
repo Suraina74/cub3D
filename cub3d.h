@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/04/08 21:21:04 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 17:57:40 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,32 +70,32 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	double	pos_x; // position vector of player, x component (where player is at)
-	double	pos_y; // position vector of player, y component (where player is at)
+	double	pos_x;
+	double	pos_y;
 	int		height;
 }				t_player;
 
 typedef struct s_vector
 {
-	double	dir_x; // direction vector, x component
-	double	dir_y; // direction vector, y component
-	double	ray_dir_x; // ray direction vector, x component
-	double	ray_dir_y; // ray direction vector, y component
-	double	plane_x; // camera plane vector, x component
-	double	plane_y; // camera plane vector, y component
+	double	dir_x;
+	double	dir_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	plane_x;
+	double	plane_y;
 }					t_vector;
 
 typedef struct s_raycast
 {
-	double	camera_x; // x-coordinate in camera space
-	int		grid_x; // In welk vakje van de grid we zitten, x component
-	int		grid_y; // In welk vakje van de grid we zitten, y component
-	double	ray_len_x; // Length of ray from start position to the next x-intersection
-	double	ray_len_y; // Length of ray from start position to the next y-intersection
-	double	delta_dist_x; // Length of ray from 1 x-intersect to the next x-intersect
-	double	delta_dist_y; // Length of ray from 1 y-intersect to the next y-intersect
-	int		step_x; // Jump a square in x-direction
-	int		step_y; // Jump a square in y-direction
+	double	camera_x;
+	int		grid_x;
+	int		grid_y;
+	double	ray_len_x;
+	double	ray_len_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
 	double	distance_to_wall;
 	int		side;
 }						t_raycast;
@@ -160,6 +160,8 @@ void	movement(void *param);
 void	raycasting(t_maze *maze);
 void	init_vectors(t_maze *maze);
 void	draw_line(t_maze *maze, int x);
+
+// Cleanup
 void	delete_tex(t_maze *maze);
 void	free_tex(t_maze *maze);
 void	free_c_f(t_maze *maze);

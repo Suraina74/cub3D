@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 13:47:42 by schabboe          #+#    #+#             */
-/*   Updated: 2026/03/27 13:21:22 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:00:57 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	where_ray_hit_tex(t_maze *maze)
 {
 	double	wall_hit;
 
-	if (maze->raycast.side == 0) // hit a vertical wall. Where on that wall did we hit it?
+	if (maze->raycast.side == 0)
 		wall_hit = maze->player.pos_y + maze->raycast.distance_to_wall \
 * maze->vector.ray_dir_y;
-	else // hit a horizontal wall. Where on that wall did we hit it?
+	else
 		wall_hit = maze->player.pos_x + maze->raycast.distance_to_wall \
 * maze->vector.ray_dir_x;
 	wall_hit = wall_hit - floor (wall_hit);
