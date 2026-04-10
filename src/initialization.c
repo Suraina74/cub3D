@@ -6,11 +6,11 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:42:35 by schabboe          #+#    #+#             */
-/*   Updated: 2026/04/10 18:01:55 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:27:21 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	init_north_south(t_maze *maze)
 {

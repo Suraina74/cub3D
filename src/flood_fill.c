@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   flood_fill.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ksoedama <ksoedama@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/24 16:57:51 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/03/06 17:05:30 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   flood_fill.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/24 16:57:51 by ksoedama          #+#    #+#             */
+/*   Updated: 2026/04/10 18:27:24 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	flood_fill(t_maze *maze, int row, int col)
 {

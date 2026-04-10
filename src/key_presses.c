@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   key_presses.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/03/10 18:21:29 by schabboe      #+#    #+#                 */
-/*   Updated: 2026/04/09 22:19:09 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   key_presses.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/10 18:21:29 by schabboe          #+#    #+#             */
+/*   Updated: 2026/04/10 18:33:41 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	press_esc(void *param)
 {
@@ -115,12 +115,7 @@ void	movement(void *param)
 	if (!maze->screen || mlx_image_to_window(maze->mlx, maze->screen, 0, 0) < 0)
 	{
 		write(2, "Error displaying image\n", 23);
-		free_c_f(maze);
-		free_rgb(maze);
-		free_tex(maze);
-		ft_d_free(maze->map.parsed.map_data);
-		delete_tex(maze);
-		mlx_terminate(maze->mlx);
+		free_everything(maze);
 		exit (1);
 	}
 	draw_c_f(maze);

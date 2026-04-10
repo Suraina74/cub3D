@@ -6,12 +6,11 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 09:57:18 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/08 22:04:16 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:27:05 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <limits.h>
+#include "../cub3d.h"
 
 int	ft_digit_check(char *str)
 {

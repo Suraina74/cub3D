@@ -6,11 +6,11 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 10:28:57 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/10 18:03:57 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:46:56 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 char	*split_rgb(char *s)
 {
@@ -36,12 +36,12 @@ char	*split_rgb(char *s)
 	return (ft_d_free(split_spaces), result);
 }
 
-int	fill_rgb(char *s, int **arr)
+int	comma_check_split(char *s, char ***split_comma)
 {
-	char	**split_comma;
-	int		i;
 	int		rgb_cntr;
+	int		i;
 
+	rgb_cntr = 1;
 	if (s == NULL)
 		return (ft_putendl_fd("RGB value is empty", 2), 1);
 	i = 0;
@@ -53,18 +53,26 @@ int	fill_rgb(char *s, int **arr)
 			return (ft_putendl_fd("RGB error", 2), 1);
 		i++;
 	}
-	split_comma = ft_split(s, ',');
-	rgb_cntr = 1;
-	while (split_comma[rgb_cntr])
+	*split_comma = ft_split(s, ',');
+	while ((*split_comma)[rgb_cntr])
 		rgb_cntr++;
 	if (rgb_cntr != 3)
-		return (ft_d_free(split_comma), \
+		return (ft_d_free(*split_comma), \
 ft_putendl_fd("Amount of RGB values not correct", 2), 1);
-	if (!split_comma)
+	if (!(*split_comma))
 		return (1);
-	if (!split_comma[0] || !split_comma[1] || !split_comma[2])
-		return (ft_d_free(split_comma), \
+	if (!(*split_comma)[0] || !(*split_comma)[1] || !(*split_comma)[2])
+		return (ft_d_free(*split_comma), \
 ft_putendl_fd("RGB: color value missing", 2), 1);
+	return (SUCCESS);
+}
+
+int	fill_rgb(char *s, int **arr)
+{
+	char	**split_comma;
+
+	if (comma_check_split(s, &split_comma))
+		return (1);
 	*arr = malloc(3 * sizeof(int));
 	if (!(*arr))
 		return (ft_d_free(split_comma), 1);

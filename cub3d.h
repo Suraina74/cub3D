@@ -6,7 +6,7 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:52:18 by schabboe          #+#    #+#             */
-/*   Updated: 2026/04/10 17:57:40 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 19:12:43 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdbool.h>
 # include "LIBFT/libft.h"
 # include <sys/time.h>
+#include <limits.h>
 
 # define WIDTH 1024
 # define HEIGHT 640
@@ -151,6 +152,12 @@ int		validate_texture(t_maze *maze);
 int		alloc_rows(t_maze *maze);
 int		fill_rows(t_maze *maze, char *map_row, int *i);
 int		flood_fill(t_maze *maze, int x, int y);
+int		fill_metadata_tex(t_maze *maze, char *metadata);
+int		fill_metadata_floor(t_maze *maze, char *metadata);
+int		fill_metadata_ceiling(t_maze *maze, char *metadata);
+int		fill_metadata_map(t_maze *maze, char *metadata, int *i);
+int		fill_texture(char *s, char *dir, char **d);
+int		check_if_filled(t_maze *maze, char *metadata);
 
 // MLX functions
 void	press_esc(void *param);
@@ -166,5 +173,6 @@ void	delete_tex(t_maze *maze);
 void	free_tex(t_maze *maze);
 void	free_c_f(t_maze *maze);
 void	free_rgb(t_maze *maze);
+void	free_everything(t_maze *maze);
 
 #endif

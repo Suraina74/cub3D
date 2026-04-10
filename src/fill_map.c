@@ -6,11 +6,11 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 10:56:43 by schabboe          #+#    #+#             */
-/*   Updated: 2026/04/10 18:01:35 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:27:28 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	skip_top(char *line)
 {

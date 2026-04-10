@@ -6,11 +6,11 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:45:20 by schabboe          #+#    #+#             */
-/*   Updated: 2026/04/10 18:08:22 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:26:58 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	initial_ray_length(t_maze *maze)
 {

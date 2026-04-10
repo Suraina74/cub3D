@@ -6,11 +6,11 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:44:51 by schabboe          #+#    #+#             */
-/*   Updated: 2026/04/10 18:19:52 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:26:25 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	ft_mlx(t_maze *maze)
 {

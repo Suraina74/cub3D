@@ -6,11 +6,11 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 13:47:42 by schabboe          #+#    #+#             */
-/*   Updated: 2026/04/10 18:00:57 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:27:32 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	where_ray_hit_tex(t_maze *maze)
 {

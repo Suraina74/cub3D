@@ -6,11 +6,11 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 14:41:41 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/10 17:55:52 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:35:01 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	ft_d_free(char **arr)
 {

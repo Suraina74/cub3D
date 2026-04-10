@@ -6,7 +6,8 @@ LIBFT_DIR = ./LIBFT
 
 HEADER = -I $(MLX_DIR)/include -I $(LIBFT_DIR)
 LIBS = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
-CFILES = cub3d.c validation.c utils.c parse.c fill_map.c parse_rgb.c flood_fill.c cleanup.c key_presses.c draw_c_f.c raycasting.c draw_walls.c initialization.c
+CFILES = src/cub3d.c src/validation.c src/utils.c src/parse.c src/fill_map.c src/parse_rgb.c src/flood_fill.c src/cleanup.c src/cleanup_two.c \
+src/key_presses.c src/draw_c_f.c src/raycasting.c src/draw_walls.c src/initialization.c src/fill_metadata.c
 OFILES = $(CFILES:.c=.o)
 
 all: libmlx libft $(NAME)

@@ -6,11 +6,11 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 09:35:36 by ksoedama          #+#    #+#             */
-/*   Updated: 2026/04/10 18:07:52 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:26:37 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	validate_texture(t_maze *maze)
 {
