@@ -6,11 +6,40 @@
 /*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:44:51 by schabboe          #+#    #+#             */
-/*   Updated: 2026/04/10 17:56:04 by schabboe         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:19:52 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	ft_mlx(t_maze *maze)
+{
+	maze->mlx = mlx_init(WIDTH, HEIGHT, "cubed", true);
+	if (!maze->mlx)
+		return (free_c_f(maze), free_rgb(maze), free_tex(maze), \
+ft_d_free(maze->map.parsed.map_data), delete_tex(maze), FAILURE);
+	maze->screen = mlx_new_image(maze->mlx, WIDTH, HEIGHT);
+	if (!maze->screen || mlx_image_to_window(maze->mlx, maze->screen, 0, 0) < 0)
+		return (mlx_terminate(maze->mlx), free_c_f(maze), free_rgb(maze), \
+free_tex(maze), ft_d_free(maze->map.parsed.map_data), delete_tex(maze), \
+write(2, "Error displaying image\n", 23), FAILURE);
+	gettimeofday(&maze->move.begin_time, NULL);
+	maze->move.begin_sec = maze->move.begin_time.tv_sec \
++ maze->move.begin_time.tv_usec / 1000000.0;
+	draw_c_f(maze);
+	init_vectors(maze);
+	raycasting(maze);
+	gettimeofday(&maze->move.end_time, NULL);
+	maze->move.end_sec = maze->move.end_time.tv_sec + \
+maze->move.end_time.tv_usec / 1000000.0;
+	maze->move.frame_time = maze->move.end_sec - maze->move.begin_sec;
+	maze->move.begin_sec = maze->move.end_sec;
+	mlx_loop_hook(maze->mlx, &movement, maze);
+	mlx_loop_hook(maze->mlx, &press_esc, maze);
+	mlx_loop(maze->mlx);
+	mlx_terminate(maze->mlx);
+	return (SUCCESS);
+}
 
 int	main(int argc, char **argv)
 {
@@ -32,30 +61,11 @@ int	main(int argc, char **argv)
 	maze.filename = argv[1];
 	if (read_map(&maze))
 		return (free_rgb(&maze), delete_tex(&maze), FAILURE);
-	maze.mlx = mlx_init(WIDTH, HEIGHT, "cubed", true);
-	if (!maze.mlx)
-		return (free_c_f(&maze), free_rgb(&maze), free_tex(&maze), ft_d_free(maze.map.parsed.map_data), delete_tex(&maze), FAILURE);
-	maze.screen = mlx_new_image(maze.mlx, WIDTH, HEIGHT);
-	if (!maze.screen || mlx_image_to_window(maze.mlx, maze.screen, 0, 0) < 0)
-		return (mlx_terminate(maze.mlx), free_c_f(&maze), free_rgb(&maze), free_tex(&maze), \
-ft_d_free(maze.map.parsed.map_data), delete_tex(&maze), write(2, "Error displaying image\n", 23), FAILURE);
-	gettimeofday(&maze.move.begin_time, NULL);
-	maze.move.begin_sec = maze.move.begin_time.tv_sec + maze.move.begin_time.tv_usec/1000000.0;
-	draw_c_f(&maze);
-	init_vectors(&maze);
-	raycasting(&maze);
-	gettimeofday(&maze.move.end_time, NULL);
-	maze.move.end_sec = maze.move.end_time.tv_sec + maze.move.end_time.tv_usec/1000000.0;
-	maze.move.frame_time = maze.move.end_sec - maze.move.begin_sec;
-	maze.move.begin_sec = maze.move.end_sec;
-	mlx_loop_hook(maze.mlx, &movement, &maze);
-	mlx_loop_hook(maze.mlx, &press_esc, &maze);
-	mlx_loop(maze.mlx);
-	mlx_terminate(maze.mlx);
+	if (ft_mlx(&maze) == 1)
+		return (FAILURE);
 	free_tex(&maze);
 	free_c_f(&maze);
 	free_rgb(&maze);
 	ft_d_free(maze.map.parsed.map_data);
-	delete_tex(&maze);
-	return (0);
+	return (delete_tex(&maze), 0);
 }
