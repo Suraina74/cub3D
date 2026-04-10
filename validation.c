@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   validation.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/13 09:35:36 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/09 22:00:34 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/13 09:35:36 by ksoedama          #+#    #+#             */
+/*   Updated: 2026/04/10 17:39:21 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,10 @@ int	check_enclosed(t_maze *maze)
 				return (ft_putendl_fd("Map is not enclosed", 2), FAILURE);
 			if (i == 0 && maze->map.parsed.map_data[i][j] == '0')
 				return (ft_putendl_fd("Map is not enclosed", 2), FAILURE);
-			if (i == (maze->map.height - 1) && maze->map.parsed.map_data[i][j] == '0')
-				printf("%zu\n", ft_strlen(maze->map.parsed.map_data[i]));
-			if (j != 0)
+			if (i == maze->map.height - 1)
 			{
-				if (maze->map.parsed.map_data[i][j] == ' ' && (maze->map.parsed.map_data[i][j + 1] == '0' || maze->map.parsed.map_data[i][j - 1] == '0'))
+				// if (maze->map.parsed.map_data[i][j] == ' ' && (maze->map.parsed.map_data[i][j + 1] == '0' || maze->map.parsed.map_data[i][j - 1] == '0'))
+				if (maze->map.parsed.map_data[i][j] == '0')
 					return (ft_putendl_fd("Map is not enclosed", 2), FAILURE);
 			}
 			j++;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: schabboe <schabboe@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/02/23 13:58:29 by ksoedama      #+#    #+#                 */
-/*   Updated: 2026/04/09 21:28:53 by ksoedama      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: schabboe <schabboe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/23 13:58:29 by ksoedama          #+#    #+#             */
+/*   Updated: 2026/04/10 17:51:43 by schabboe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 			return (free_c_f(maze), free(maze->map.parsed.map_data), ft_putendl_fd("Duplicate F metadata", 2), FAILURE);
 		maze->map.parsed.f = split_rgb(metadata);
 		if (maze->map.parsed.f == NULL)
-			return (free(maze->map.parsed.map_data), ft_putendl_fd("RGB value could not be loaded", 2), FAILURE);
+			return (free_c_f(maze), free(maze->map.parsed.map_data), ft_putendl_fd("RGB value could not be loaded", 2), FAILURE);
 		if (maze->map.parsed.f == NULL)
 			return(FAILURE);
 		if (fill_rgb(maze->map.parsed.f, &arr) == 1)
@@ -78,7 +78,7 @@ static int	fill_metadata(t_maze *maze, char *metadata, int *i)
 			return (free_c_f(maze), free(maze->map.parsed.map_data), ft_putendl_fd("Duplicate C metadata", 2), FAILURE);
 		maze->map.parsed.c = split_rgb(metadata);
 		if (maze->map.parsed.c == NULL)
-			return (free(maze->map.parsed.map_data), ft_putendl_fd("RGB value could not be loaded", 2), FAILURE);
+			return (free_c_f(maze), free(maze->map.parsed.map_data), ft_putendl_fd("RGB value could not be loaded", 2), FAILURE);
 		if (fill_rgb(maze->map.parsed.c, &arr) == 1)
 			return(free_c_f(maze), free(maze->map.parsed.map_data), FAILURE);
 		maze->map.parsed.rgb_ceiling = arr;
